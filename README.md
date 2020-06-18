@@ -25,12 +25,12 @@
 |name|string|null: false, index: true|
 |explanation|text|null: false|
 |brand|string|index: true|
-|condition|string|null: false|    ※active_hash
-|delivery_fee|string|null: false|    ※active_hash
-|area|string|null: false|    ※active_hash
-|day|string|null: false|    ※active_hash
-|size|string|    ※active_hash
-|delivery_method|string|null: false|    ※active_hash
+|condition|string|null: false, **active_hash**|
+|delivery_fee|string|null: false,  **active_hash**|
+|area|string|null: false, **active_hash**|
+|day|string|null: false, **active_hash**|
+|size|string, **active_hash**|
+|delivery_method|string|null: false, **active_hash**|
 |price|integer|null: false, index: true|
 |seller|integer|null: false, foreign_key: true|
 |buyer|integer|foreign_key: true|
@@ -87,7 +87,7 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|name|string|null: false, index: true|    ※active_hash
+|name|string|null: false, index: true, **active_hash**|
 |ancestry|string|index: true|
 ### Association
 - has_many :items
@@ -99,7 +99,7 @@
 |destination_name|string|null: false|
 |destination_name_kana|string|null: false|
 |postal_code|string|null: false|
-|prefecture|string|null: false|    ※active_hash
+|prefecture|string|null: false, **active_hash**|
 |city|string|null: false|
 |address|string|null: false|
 |after_adress|string|
