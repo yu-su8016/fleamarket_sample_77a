@@ -25,12 +25,12 @@
 |name|string|null: false, index: true|
 |explanation|text|null: false|
 |brand|string|index: true|
-|condition|string|null: false, **active_hash**|
-|delivery_fee|string|null: false,  **active_hash**|
-|area|string|null: false, **active_hash**|
-|day|string|null: false, **active_hash**|
-|size|string, **active_hash**|
-|delivery_method|string|null: false, **active_hash**|
+|condition(active_hash)|string|null: false|
+|delivery_fee(active_hash)|string|null: false|
+|prefecture(active_hash)|string|null: false|
+|day(active_hash)|string|null: false|
+|size(active_hash)|string|
+|delivery_method(active_hash)|string|null: false|
 |price|integer|null: false, index: true|
 |seller|integer|null: false, foreign_key: true|
 |buyer|integer|foreign_key: true|
@@ -87,7 +87,7 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|name|string|null: false, index: true, **active_hash**|
+|name|string(active_hash)|null: false, index: true|
 |ancestry|string|index: true|
 ### Association
 - has_many :items
@@ -96,10 +96,10 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|destination_name|string|null: false|
-|destination_name_kana|string|null: false|
+|name|string|null: false|
+|name_kana|string|null: false|
 |postal_code|string|null: false|
-|prefecture|string|null: false, **active_hash**|
+|prefecture(active_hash)|string|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |after_adress|string|
