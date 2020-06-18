@@ -1,26 +1,103 @@
-# README
+# fleamarket DB設計
+## usersテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|email|string|null: false, unique: true, index: true|
+|password|string|null: false|
+|nickname|string|null: false, index: true|
+|name|string|null: false|
+|name_kana|string|null: false|
+|birthday|date|null: false|
+|destination_name|string|null: false|
+|destination_name_kana|string|null: false|
+|postal_code|string|null: false|
+|prefecture|string|null: false|
+|city|string|null: false|
+|address|string|null: false|
+|after_adress|string|
+|phone|string|
+### Association
+- has_many :items
+- has_many :cards
+- has_many :likes
+- has_many :comments
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## itemsテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|name|string|null: false, index: true|
+|explanation|text|null: false|
+|brand|string|index: true|
+|condition|string|null: false|
+|delivery_fee|string|null: false|
+|area|string|null: false|
+|day|string|null: false|
+|size|string|
+|delivery_method|string|null: false|
+|price|integer|null: false, index: true|
+|seller|integer|null: false, foreign_key: true|
+|buyer|integer|foreign_key: true|
+|category_id|integer|null: false, foreign_key: true|
+### Association
+- has_many :images
+- has_many :likes
+- has_many :comments
+- belongs_to :user
+- belongs_to :category
 
-* Ruby version
 
-* System dependencies
+## cardsテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|number|integer|null: false|
+|limit|integer|null: false|
+|security_code|integer|null: false|
+|user_id|integer|null: false, foreign_key: true|
+### Association
+- belongs_to :user
 
-* Configuration
 
-* Database creation
+## imagesテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|image|string|null: false|
+|item_id|integer|null: false, foreign_key: true|
+### Association
+- belongs_to :item
 
-* Database initialization
 
-* How to run the test suite
+## likesテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|user_id|integer|null: false, foreign_key: true|
+|item_id|integer|null: false, foreign_key: true|
+### Association
+- belongs_to :user
+- belongs_to :item
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## commentsテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|user_id|integer|null: false, foreign_key: true|
+|item_id|integer|null: false, foreign_key: true|
+|comment|text|null: false|
+### Association
+- belongs_to :user
+- belongs_to :item
 
-* ...
 
-test
+## categoriesテーブル
+|Column|Type|Option|
+|------|----|------|
+|id|integer|
+|name|string|null: false, index: true|
+### Association
+- has_many :items
