@@ -82,12 +82,12 @@
         -# = form.collection_select(:delivery_fee, @delivery_fee, :name, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
         = form.select :delivery_fee, [ "出品者負担(送料込み)", "購入者負担(送料別)" ], {prompt: "選択してください"}, {class: 'input-delivery-fee__select'}
 
-      .input-delivery-area
-        .input-delivery-area__headline
-          = form.label :area, "配送元の地域", class: 'input-delivery-area__headline--label'
-          %span.input-delivery-area__headline--required 必須
-        -# = form.collection_select(:area, @prefectures, :id, :naem, {prompt: "選択してください"}, {class: 'input-delivery-area__select'})
-        = form.select :area, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'input-delivery-area__select'}
+      .input-delivery-prefecture
+        .input-delivery-prefecture__headline
+          = form.label :prefecture, "配送元の地域", class: 'input-delivery-prefecture__headline--label'
+          %span.input-delivery-prefecture__headline--required 必須
+        -# = form.collection_select(:prefecture, @prefectures, :id, :naem, {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'})
+        = form.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'}
 
       .input-delivery-days
         .input-delivery-days__headline
