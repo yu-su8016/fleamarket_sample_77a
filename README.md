@@ -46,9 +46,9 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|number|integer|null: false|
-|limit|integer|null: false|
-|security_code|integer|null: false|
+|number|string|null: false|
+|limit|string|null: false|
+|security_code|string|null: false|
 |user_id|integer|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
@@ -102,7 +102,7 @@
 |prefecture(active_hash)|string|null: false|
 |city|string|null: false|
 |address|string|null: false|
-|after_adress|string|
+|after_address|string|
 |phone|string|
 ### Association
 - belongs_to :user
