@@ -27,7 +27,7 @@
 |brand|string|index: true|
 |condition(active_hash)|string|null: false|
 |delivery_fee(active_hash)|string|null: false|
-|prefecture(active_hash)|string|null: false|
+|prefecture(active_hash)|integer|null: false|
 |day(active_hash)|string|null: false|
 |size(active_hash)|string|
 |delivery_method(active_hash)|string|null: false|
@@ -96,10 +96,12 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|name|string|null: false|
-|name_kana|string|null: false|
+|family_name|string|null: false|
+|first_name|string|null: false|
+|family_name_kana|string|null: false|
+|first_name_kana|string|null: false|
 |postal_code|string|null: false|
-|prefecture(active_hash)|string|null: false|
+|prefecture(active_hash)|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |after_address|string|

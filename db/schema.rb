@@ -42,10 +42,12 @@ ActiveRecord::Schema.define(version: 2020_06_19_110307) do
   end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "name_kana", null: false
+    t.string "family_name", null: false
+    t.string "first_name", null: false
+    t.string "family_name_kana", null: false
+    t.string "first_name_kana", null: false
     t.string "postal_code", null: false
-    t.string "prefecture", null: false
+    t.integer "prefecture", null: false
     t.string "city", null: false
     t.string "address", null: false
     t.string "after_address"
@@ -70,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_110307) do
     t.string "brand"
     t.string "condition", null: false
     t.string "delivery_fee", null: false
-    t.string "prefecture", null: false
+    t.integer "prefecture", null: false
     t.string "day", null: false
     t.integer "price", null: false
     t.string "size"
