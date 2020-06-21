@@ -1,44 +1,44 @@
-
-.header__lists
-  .header__lists__upper
-    .header__lists__upper__name
-      %h1
-      = image_tag "logo/logo.png", size: '140x42';
-    .header__lists__upper__search
-      .header__lists__upper__search__input
-        = form_with model: @item do |form|
-          = form.text_field :name, class: 'header__lists__upper__search__input__keyword',placeholder: "キーワードから探す"
-      .header__lists__upper__search__btn
-        = image_tag "icon/icon-search 1.png", size: '20x20';
-  .header__lists__low
-    %ul.header__lists__low__select
-      %li.header__lists__low__select__category
-        = link_to "カテゴリー"
-        .header__lists__low__select__category__list
-          %ul.lists 
-            %li Tシャツ/カットソー(半袖/袖なし)
-            %li Tシャツ/カットソー(七分/長袖)
-            %li シャツ/ブラウス(半袖/袖なし)
-            %li シャツ/ブラウス(七分/長袖)
-            %li ポロシャツ
-            %li キャミソール
-            %li タンクトップ
-            %li ホルターネック
-            %li ニット
-            %li セーター
-            %li チュニック
-            %li カーディガン/ボレロ
-            %li アンサンブル
-            %li ベスト/ジレ
-            %li パーカー
-            %li トレーナー/スウェット
-            %li ベアトップ/チューブトップ
-            %li ジャージ
-            %li その他
-      %ul.header__lists__low__select__brand
-        =link_to 'ブランド'
-    .header__lists__low__user
-      .header__lists__low__user__login
-        = link_to "ログイン"
-      .header__lists__low__user__register
-        = link_to "新規会員登録"
+.header
+  .header__lists
+    .header__lists__upper
+      .header__lists__upper__name
+        %h1
+        = image_tag "logo/logo.png", size: '140x42';
+      .header__lists__upper__search
+        .header__lists__upper__search__input
+          = form_with model: @item do |form|
+            = form.text_field :name, class: 'header__lists__upper__search__input__keyword',placeholder: "キーワードから探す"
+        .header__lists__upper__search__btn
+          = image_tag "icon/icon-search 1.png", size: '20x20';
+    .header__lists__low
+      %ul.header__lists__low__select
+        %li.header__lists__low__select__category
+          = link_to "カテゴリー"
+          .header__lists__low__select__category__list
+            %ul.lists 
+              %li Tシャツ/カットソー(半袖/袖なし)
+              %li Tシャツ/カットソー(七分/長袖)
+              %li シャツ/ブラウス(半袖/袖なし)
+              %li シャツ/ブラウス(七分/長袖)
+              %li ポロシャツ
+              %li キャミソール
+              %li タンクトップ
+              %li ホルターネック
+              %li ニット
+              %li セーター
+              %li チュニック
+              %li カーディガン/ボレロ
+              %li アンサンブル
+              %li ベスト/ジレ
+              %li パーカー
+              %li トレーナー/スウェット
+              %li ベアトップ/チューブトップ
+              %li ジャージ
+              %li その他
+        %ul.header__lists__low__select__brand
+          =link_to 'ブランド'
+      .header__lists__low__user
+        .header__lists__low__user__login
+          = link_to "ログイン"
+        .header__lists__low__user__register
+          = link_to "新規会員登録"
