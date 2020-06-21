@@ -32,6 +32,11 @@ $white: #fff;
   color: black;
 }
 
+@mixin effect{
+  cursor : pointer;
+  opacity: 0.5;
+}
+
 .header{
   padding: 0 60px;
   &__lists{
@@ -365,6 +370,12 @@ $white: #fff;
   border-radius: 10px;
   margin-right: 10px;
 }
+.image-icon:hover{
+  @include effect
+}
+.main__contents5__category__lists__list:hover{
+  @include effect
+}
 
 .footer{
   padding: 60px 0;
@@ -421,4 +432,7 @@ $white: #fff;
   &--image{
     vertical-align: bottom;
   }
+}
+.exhibit:hover{
+  @include effect
 }

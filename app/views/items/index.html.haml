@@ -1,47 +1,5 @@
 .header
-  .header__lists
-    .header__lists__upper
-      .header__lists__upper__name
-        %h1
-        = image_tag "logo/logo.png", size: '140x42';
-      .header__lists__upper__search
-        .header__lists__upper__search__input
-          = form_with model: @item do |form|
-            = form.text_field :name, class: 'header__lists__upper__search__input__keyword',placeholder: "キーワードから探す"
-        .header__lists__upper__search__btn
-          = image_tag "icon/icon-search 1.png", size: '20x20';
-    .header__lists__low
-      %ul.header__lists__low__select
-        %li.header__lists__low__select__category
-          %a{ href: '#'} カテゴリー
-          .header__lists__low__select__category__list
-            %ul.lists 
-              %li Tシャツ/カットソー(半袖/袖なし)
-              %li Tシャツ/カットソー(七分/長袖)
-              %li シャツ/ブラウス(半袖/袖なし)
-              %li シャツ/ブラウス(七分/長袖)
-              %li ポロシャツ
-              %li キャミソール
-              %li タンクトップ
-              %li ホルターネック
-              %li ニット
-              %li セーター
-              %li チュニック
-              %li カーディガン/ボレロ
-              %li アンサンブル
-              %li ベスト/ジレ
-              %li パーカー
-              %li トレーナー/スウェット
-              %li ベアトップ/チューブトップ
-              %li ジャージ
-              %li その他
-        %ul.header__lists__low__select__brand
-          %a{ href: '#'} ブランド
-      .header__lists__low__user
-        .header__lists__low__user__login
-          = link_to "ログイン"
-        .header__lists__low__user__register
-          = link_to "新規会員登録"
+  = render "header"
 
 .main
   .main__contents1
@@ -139,7 +97,7 @@
       .main__contents5__category__lists
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -149,7 +107,7 @@
             %p.main__contents5__category__lists__list__detail__tax (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -159,7 +117,7 @@
             %p.main__contents5__category__lists__list__detail__tax (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -169,7 +127,7 @@
             %p.main__contents5__category__lists__list__detail__tax (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -187,7 +145,7 @@
       .main__contents5__category__lists
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -198,7 +156,7 @@
               (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -209,7 +167,7 @@
               (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -220,7 +178,7 @@
               (税込)
         .main__contents5__category__lists__list
           .main__contents5__category__lists__list__image
-            %a{ href: '#' }
+            = link_to "#"
           .main__contents5__category__lists__list__detail
             %h8.main__contents5__category__lists__list__detail__name
               ee
@@ -242,27 +200,7 @@
         = image_tag "logo/google.png", class: 'image-icon', width: "180px";
 
 .footer
-  .footer__upper
-    .footer__upper__about
-      %ul.footer__upper__about--title FURIMAについて
-      %li.footer__upper__about--list 会社概要(運営会社)
-      %li.footer__upper__about--list プライバシーポリシー
-      %li.footer__upper__about--list FURIMA規約
-      %li.footer__upper__about--list ポイントに関する特約
-    .footer__upper__about
-      %ul.footer__upper__about--title FURIMAを見る
-      %li.footer__upper__about--list カテゴリー一覧
-      %li.footer__upper__about--list ブランド一覧
-    .footer__upper__about
-      %ul.footer__upper__about--title FURIMAガイド
-      %li.footer__upper__about--list FURIMAガイド
-      %li.footer__upper__about--list FURIMAロゴ利用ガイドライン
-      %li.footer__upper__about--list お知らせ
-
-  .footer__low
-    .footer__low__logo
-    = image_tag "logo/logo-white.png", width: "160px";
-    %p.footer__low--copyright ©️FURIMA
+  = render "footer"
   
   .exhibit
     %p.exhibit--text 出品する
