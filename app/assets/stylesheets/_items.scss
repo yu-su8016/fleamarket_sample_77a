@@ -1,3 +1,8 @@
+@mixin sub-image {
+  object-fit: contain;
+  height: 87px;
+}
+
 .item-details {
   background-color: #f8f8f8;
   height: 100%;
@@ -17,14 +22,14 @@
       }
       .main{
         &__image{
-          margin: 0 auto;
           width: 560px;
+          margin: 0 auto;
           &__principal{
             display: flex;
             .image{
-            margin: 0 auto;
-            object-fit: cover;
             height: 346px;
+            margin: 0 auto;
+            object-fit: contain;
             }
           }
           &__sub{
@@ -35,29 +40,25 @@
               &__one{
                 width: 25%;
                 .image{
-                  object-fit: cover;
-                  height: 87px;
+                  @include sub-image;
                 }
               }
               &__two{
                 width: 25%;
                 .image{
-                  object-fit: cover;
-                  height: 87px;
+                  @include sub-image;
                 }
               }
               &__three{
                 width: 25%;
                 .image{
-                  object-fit: cover;
-                  height: 87px;
+                  @include sub-image;
                 }
               }
               &__four{
                 width: 25%;
                 .image{
-                  object-fit: cover;
-                  height: 87px;
+                  @include sub-image;
                 }
               }
             }
@@ -65,10 +66,8 @@
         }
       }
       .price {
-        margin: 24px 0 24px;
+        margin: 24px 0;
         text-align: center;
-        display: flex;
-        flex-direction: column;
         .price-content {
           margin: 0 auto;
           display: flex;
@@ -110,14 +109,12 @@
         &__table{
           width: 100%;
           height: 375px;
-          border-collapse: collapse;
-          border: 1px solid #f8f8f8;
           &__line{
           border: 1px solid;
           box-sizing: border-box;
             .title {
-              width: 20%;
               background-color: #eee;
+              width: 20%;
               font-weight: 400;
               padding: 8px;
               border: 1px solid #dedede;
@@ -142,7 +139,7 @@
         justify-content: space-between;
         &__click{
           display: flex;
-          margin: 10px 0 0;
+          margin-top: 10px;
           padding: 6px 10px;
           border-radius: 40px;
           color: #3CCACE;
@@ -151,7 +148,6 @@
             display: inline-block;
             font-size: inherit;
             text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
           }
           &__letter{
             margin-left: 5px;
@@ -159,7 +155,7 @@
         }
         &__arart{
           display: flex;
-          margin: 10px 0 0;
+          margin-top: 10px;
           font-size: 14px;
           padding: 6px 10px;
           border-radius: 4px;
@@ -171,7 +167,6 @@
             display: inline-block;
             font-size: inherit;
             text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
           }
           &__letter{
             margin-left: 5px;
@@ -185,10 +180,7 @@
     .contents2 {
       background: #ea352d;
       display: block;
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 20px;
+      margin: 20px auto;
       width: 700px;
       .purchase{
         color: #fff;
@@ -214,10 +206,10 @@
         }
       }
       .caution{
-        padding: 8px;
-        font-size: 14px;
         background-color: #f8f8f8;
+        font-size: 14px;
         margin: 10px 0;
+        padding: 8px;
         text-align: left;
       }
       .comment{
@@ -255,7 +247,7 @@
       display: flex;
       justify-content: space-between;
       width: 780px;
-      margin: 10px auto 0 auto;
+      margin: 10px auto 0;
       a{
         text-decoration: none;
         .previous{
@@ -265,7 +257,7 @@
           &__icon{
             margin-right: 3px;
           }
-          &__content{          
+          &__content{
           }
         }
         .next{
@@ -281,18 +273,15 @@
       }
     }
     .contents5 {
-      margin: 24px 0 8px;
       width: 780px;
-      margin: 24px auto 8px auto;
-      .category-more{
-        a{
+      margin: 24px auto 8px;
+      .category-more a{
           display: block;
           margin: 24px 0 8px;
           color: #3CCACE;
           text-decoration: none;
           font-weight: bold;
           font-size: 22px;
-        }
       }
       .category-items{
         display: flex;
@@ -315,12 +304,12 @@
                 text-align: center;
                 .image{
                   height: 150px;
-                  object-fit: cover;
+                  object-fit: contain;
                 }
               }
               .item-content{
                 padding: 16px;
-                margin: 15px 0 15px 0;
+                margin: 15px 0 15px;
                 &__name{
                   font-size: 16px;
                 }
