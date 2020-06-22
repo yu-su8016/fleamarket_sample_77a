@@ -1,0 +1,55 @@
+.footer{
+  height: 220px;
+  width: 456px;
+  margin: 0 auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 40px 0;
+  text-align: center;
+  &__contents1{
+    margin: auto;
+    padding: auto;
+    &__rule{
+      a{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+      }
+      a:hover{
+        opacity: 0.5;
+      }
+      &__num1{
+        margin: 0;
+        display: inline-block;
+        font-size: 12px;
+      }
+      &__num2{
+        display: inline-block;
+        margin: 0 0 0 16px;
+        font-size: 12px;
+      }
+      &__num3{
+        display: inline-block;
+        margin: 0 0 0 16px;
+        font-size: 12px;
+      }
+    }
+  }
+  &__contents2{
+    &:hover{
+      opacity: 0.5;
+    }
+    &__footerlogo{
+    display: block;
+    margin: 40px auto 0;
+    height: 65px;
+    cursor: pointer;
+    }
+  }
+  &__contents3{
+    font-size: 13px;
+    color: black;
+  }
+}

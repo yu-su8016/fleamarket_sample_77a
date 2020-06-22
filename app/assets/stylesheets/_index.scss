@@ -1,0 +1,109 @@
+@mixin snsbtn {
+  display: block;
+  width: 100%;
+  line-height: 48px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+}
+
+@mixin input {
+  height: 28px;
+  padding: 10px 16px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;  
+}
+
+@mixin btn {
+  border: 1px solid #3CCACE;
+  background: #3CCACE;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 48px;
+}
+
+.body{
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 100%;
+}
+
+.main{
+  .main__form{
+    max-width: none;
+    width: 456px;
+    margin: 0 auto;
+    background: #fff;
+    &__contents1{
+      padding: 40px 64px;
+      text-align: center;
+      &__message{
+        font-size: 14px;
+      }
+      &__btn{
+        margin: 8px 0 0;
+        @include btn;
+        a{
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+    }
+    &__contents2{
+      padding: 32px 64px;
+      border-top: 1px solid #eee;
+      &__btn1{
+        @include snsbtn;
+        margin: 16px 0 0;
+        background: #fff;
+        border: #979797 solid 1px;
+        color: #333;
+      }
+      &__btn2{
+        margin: 16px 0 0;
+        background: #385185;
+        color: #fff;
+        @include snsbtn;
+      }
+      &__btn3{
+        margin: 16px 0 0;
+        background: #000;
+        color: #fff;
+        @include snsbtn;
+      }
+    }
+    &__contents3{
+      &__box{
+        padding: 24px 64px 32px;
+        &__mail-title{
+          font-size: 14px;
+        }
+        &__mail-form{
+          margin: 0 0 24px;
+          width: 290px;
+          @include input;
+        }
+        &__password-title{
+          font-size: 14px;
+        }
+        &__password-form{
+          margin: auto;
+          width: 290px;
+          @include input;
+        }
+        &__btn{
+          margin: 24px 0 24px;
+          width: 100%;
+          font-size: 14px;
+          text-align: center;
+          @include btn;
+        }
+      }
+    }
+  }
+}
