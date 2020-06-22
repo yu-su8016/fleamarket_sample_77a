@@ -47,7 +47,8 @@
 |------|----|------|
 |id|integer|
 |number|string|null: false|
-|limit|string|null: false|
+|limit_month|string|null: false|
+|limit_year|string|null: false|
 |security_code|string|null: false|
 |user_id|integer|null: false, foreign_key: true|
 ### Association
