@@ -1,6 +1,4 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
 @mixin title {
   margin: 24px 0 0;
   font-size: 18px;
@@ -54,12 +52,13 @@
 
 @mixin birthdaybox {
   width: 76PX;
-  height: 38px;
+  height: 46px;
   display: inline-block;
   margin: 8px 0 0;
   position: relative;
   background: #fff;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 
@@ -69,7 +68,7 @@
   height: 100%;
 }
 
-
+//ヘッダー 仮置きで削除予定
 .header{
   height: 128px;
   text-align: center;
@@ -201,37 +200,19 @@
 
         display: flex;
         &__year1{
-          width: 76PX;
-          height: 38px;
-          display: inline-block;
-          margin: 8px 0 0;
-          position: relative;
-          background: #fff;
-          border: 1px solid #ccc;
+          @include birthdaybox;;
         }
         &__year2{
           margin: 18px 10px;
         }
         &__month1{
-          width: 76PX;
-          height: 38px;
-          display: inline-block;
-          margin: 8px 0 0;
-          position: relative;
-          background: #fff;
-          border: 1px solid #ccc;
+          @include birthdaybox;
         }
         &__month2{
           margin: 18px 10px;
         }
         &__day1{
-          width: 76PX;
-          height: 38px;
-          display: inline-block;
-          margin: 8px 0 0;
-          position: relative;
-          background: #fff;
-          border: 1px solid #ccc;
+          @include birthdaybox;
         }
         &__day2{
           margin: 18px 10px;
@@ -378,6 +359,7 @@
   }
 }
 
+// フッターが仮置きで削除予定
 .footer{
   height: 220px;
 
