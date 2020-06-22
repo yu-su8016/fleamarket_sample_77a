@@ -61,6 +61,11 @@
   border-radius: 4px;
 }
 
+@mixin effect{
+  cursor : pointer;
+  opacity: 0.5;
+}
+
 
 .body{
   background-color: #f5f5f5;
@@ -68,15 +73,7 @@
   height: 100%;
 }
 
-//ヘッダー 仮置きで削除予定
-.header{
-  height: 128px;
-  text-align: center;
-  .header-logo{
-    width: 200px;
-    margin-top: 30px;
-  }
-}
+
 
 .form{
   width: 700px;
@@ -359,9 +356,11 @@
   }
 }
 
-// フッターが仮置きで削除予定
-.footer{
-  height: 220px;
 
- 
-}
+
+
+
+
+
+
+

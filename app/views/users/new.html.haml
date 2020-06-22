@@ -1,8 +1,6 @@
 .body
-  -# ヘッダー部分テンプレート使用します。仮置きです。
-  .header 
-    %a{ herf: '#', id: 'logo' }
-      = image_tag "logo/logo.png", class: 'header-logo'
+  
+  = render "header"
 
   .form
     = form_with model: @user do |form|
@@ -149,8 +147,8 @@
         
         = form.submit "登録", class: 'form__main__btn'
          
+  = render "footer"
 
-  .footer
-  -# フッター部分テンプレートで使用します。仮置きです。
+ 
 
 
