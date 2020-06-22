@@ -2,7 +2,6 @@
 
 .wrapper
   = render "users/left-content"
-
   .card
     .card-content1
       .card-content1__head
@@ -39,8 +38,6 @@
               必須
             .card-content1__security-code--form
               = f.text_field :security_code, class: 'security_code'
-
-
             .card-content1__security-code--info
               %span.card-content1__security-code--info--question
                 ？
@@ -65,5 +62,5 @@
               -# = card.limit_month / card.limit_year
               09 / 23
         -# - end
-
+        
 -# = render "footer" 

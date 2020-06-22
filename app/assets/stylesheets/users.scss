@@ -1,3 +1,7 @@
+$white: #fff;
+$gray1: #eee;
+$gray2: #ccc;
+
 @mixin arrow-icon($color) {
   color: $color;
   right: 1px;
@@ -31,7 +35,7 @@
     width: 280px;
     margin-right: 40px;
     .arrow-right.icon {
-      @include arrow-icon(#ccc)
+      @include arrow-icon($gray2)
     }
     .arrow-right.icon-black {
       @include arrow-icon(#000)
@@ -44,18 +48,18 @@
         justify-content: space-between;
         align-items: center;
         font-size: 14px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid $gray1;
         padding-right: 20px;
       }
       .mypage-nav-head {
-        background: #eee;
+        background: $gray1;
         font-weight: bold;
         &:hover {
           padding-right: 16px;
         }
       }
       .mypage-nav-list {
-        background: #fff;
+        background: $white;
         color: #333;
         &:hover {
           background-color:rgba(255,255,255,0.6);
@@ -110,11 +114,11 @@
           height: 75px;
           display: flex;
           &__notifidation {
-            @include mypage-tabs(#fff);
+            @include mypage-tabs($white);
             border-top: 2px solid #3CCACE;
           }
           &__to-do {
-            @include mypage-tabs(#eee);
+            @include mypage-tabs($gray1);
           }
         }
         .tab-content {
@@ -122,8 +126,8 @@
           text-align: center;
           &__not-found {
             line-height: 235px;
-            background: #fff;
-            color: #ccc;
+            background: $white;
+            color: $gray2;
             font-size: 16px;
           }
         }
@@ -144,11 +148,11 @@
           height: 75px;
           display: flex;
           &__transaction-now {
-            @include mypage-tabs(#fff);
+            @include mypage-tabs($white);
             border-top: 2px solid #3CCACE;
           }
           &__transaction-old {
-            @include mypage-tabs(#eee);
+            @include mypage-tabs($gray1);
           }
         }
         .tab-content {
@@ -156,8 +160,8 @@
           text-align: center;
           &__not-found {
             line-height: 235px;
-            background: #fff;
-            color: #ccc;
+            background: $white;
+            color: $gray2;
             font-size: 16px;
           }
         }
@@ -167,7 +171,7 @@
   .logout-content {
     height: 180px;
     width: 700px;
-    background: #fff;
+    background: $white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,8 +185,32 @@
     }
     a {
       text-decoration: none;
-      color: #fff;
+      color: $white;
       font-size: 14px;
     }
   }
 }
+.exhibit{
+  width: 120px;
+  background: #3CCACE;
+  text-align: center;
+  border-radius: 4%;
+  bottom: 32px;
+  right: 32px;
+  position: fixed;
+  padding: 15px;
+  &--text{
+    color: $white;
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    margin-bottom: 5px;
+  }
+  &--image{
+    vertical-align: bottom;
+  }
+}
+.exhibit:hover{
+  cursor : pointer;
+  opacity: 0.5;
+} 
