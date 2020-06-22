@@ -83,6 +83,7 @@ gem 'fog-aws'
 gem 'mini_magick'
 gem 'active_hash'
 gem 'rails-i18n'
+gem 'ancestry'
 
 group :production do
   gem 'unicorn'
