@@ -1,0 +1,62 @@
+.left-content
+  %nav.mypage-navi
+    = link_to root_path do
+      %li.mypage-nav-head
+        マイページ
+        .arrow-right.icon-black
+    %li.mypage-nav-list
+      お知らせ
+      .arrow-right.icon
+    %li.mypage-nav-list
+      やることリスト
+      .arrow-right.icon
+    = link_to "#" do
+      %li.mypage-nav-list
+        お気に入りリスト
+        .arrow-right.icon
+    %li.mypage-nav-list
+      いいね！一覧
+      .arrow-right.icon
+    %li.mypage-nav-list
+      出品した商品 - 出品中
+      .arrow-right.icon
+    %li.mypage-nav-list
+      出品した商品 - 取引中
+      .arrow-right.icon
+    %li.mypage-nav-list
+      出品した商品 - 売却済み
+      .arrow-right.icon
+    %li.mypage-nav-list
+      購入した商品 - 取引中
+      .arrow-right.icon
+    %li.mypage-nav-list
+      購入した商品 - 過去の取引
+      .arrow-right.icon
+    %li.mypage-nav-list
+      ガイド
+      .arrow-right.icon
+    %li.mypage-nav-list
+      お問い合わせ
+      .arrow-right.icon
+    .mypage-nav-setting
+      設定
+    %li.mypage-nav-list
+      プロフィール
+      .arrow-right.icon
+    %li.mypage-nav-list
+      発送元・お届け先住所変更
+      .arrow-right.icon
+    = link_to cards_path do
+      %li.mypage-nav-list
+        クレジットカード登録/変更
+        .arrow-right.icon
+    %li.mypage-nav-list
+      メール/パスワード
+      .arrow-right.icon
+    %li.mypage-nav-list
+      本人情報
+      .arrow-right.icon
+    = link_to logout_users_path do
+      %li.mypage-nav-list
+        ログアウトページ/ログアウト
+        .arrow-right.icon
