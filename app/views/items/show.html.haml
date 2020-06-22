@@ -1,0 +1,189 @@
+-# ここにはheaderを部分テンプレートで使用します
+.item-details
+  .item-details__flame
+    .contents1
+      .item-name
+        %h1 Bluetoothイヤホン ワイヤレスイヤホン ブラック
+      .main
+        .main__image
+          .main__image__principal
+            = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+          .main__image__sub
+            %ul.image__list
+              %li.image__list__one
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              %li.image__list__two
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              %li.image__list__three
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              %li.image__list__four
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+
+      .price
+        .price-content
+          .price-content__yen
+            ¥
+          .price-content__num
+            2,000
+        .price-incidental
+          .price-incidental__tax
+            （税込）
+          .price-incidental__postage
+            送料込み
+
+      .item-block
+        .item-block__name
+          Bluetoothイヤホン ワイヤレスイヤホン ブラック
+      .details
+        %table.details__table
+          %tr.details__table__line
+            %td.title 出品者
+            %td.name よん
+          %tr.details__table__line
+            %td.title カテゴリー
+            %td.name 
+              = link_to "#" do
+                財布
+              %br/
+              = link_to "#" do
+                ファッション
+              %br/
+              = link_to "#" do
+                メンズ
+          %tr.details__table__line
+            %td.title ブランド
+            %td.name ヴィトン
+          %tr.details__table__line
+            %td.title 状態
+            %td.name 新品未使用        
+          %tr.details__table__line
+            %td.title サイズ
+            %td.name Mサイズ
+          %tr.details__table__line
+            %td.title 配送料負担
+            %td.name 送料込み(出品者負担)
+          %tr.details__table__line
+            %td.title 発送方法
+            %td.name ヤマト
+          %tr.details__table__line
+            %td.title 発送までの日数
+            %td.name 1日〜2日
+          %tr.details__table__line
+            %td.title 発送元地域
+            %td.name 
+              = link_to "#" do
+                愛知県
+
+      .like
+        = link_to "#" , class: "like__click" do
+          .like__click__icon
+            = icon('fas', 'star', class: 'icon')
+          .like__click__letter
+            お気に入り
+        = link_to "#", class: "like__arart" do
+          .like__arart__icon
+            = icon('fas', 'flag', class: 'icon')
+          .like__arart__letter
+            不適切な商品の通報
+      
+    .contents2
+      = link_to "#" , class: "purchase" do
+        購入画面に進む
+
+    .contents3
+      -# model: @itemを変更
+      = form_with model: @item do |f|
+        .new-comment
+          = f.text_area :text, class: "new-comment__field"
+          .caution
+            %p
+            相手のことを考え丁寧なコメントを心がけましょう。
+            %br/
+            不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          .comment
+            = link_to "#" do
+              %button{type: "submit", class:'btn'} 
+                .comment__btn
+                  = icon('fas', 'comment', class: 'icon')
+                  %p コメントする
+    .contents4
+      = link_to "#" do
+        .previous
+          .previous__icon
+            = icon('fas', 'angle-left', class: 'icon')
+          .previous__content
+            前の商品
+      = link_to "#" do
+        .next
+          .next__content
+            後ろの商品 
+          .next__icon
+            = icon('fas', 'angle-right', class: 'icon')
+
+    .contents5
+      .category-more
+        =link_to "#" do
+          「カテゴリー名」をもっと見る
+      .category-items
+        -# each文
+        .category-item
+          = link_to "#" do
+            .category-item__first
+              .item-image
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              .item-content
+                .item-content__name
+                  Bluetoothイヤホン
+                .item-content__mix
+                  .item-content__mix__price
+                    .item-content__mix__price__yen
+                      ¥
+                    .item-content__mix__price__num
+                      2,000
+                  .item-content__mix__like
+                    = icon('fas', 'star', class: 'icon')
+                    .item-content__mix__like__count
+                      0
+                .item-content__tax
+                  （税込）
+        .category-item
+          = link_to "#" do
+            .category-item__first
+              .item-image
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              .item-content
+                .item-content__name
+                  Bluetoothイヤホン ワイヤレスイヤホン ブラック
+                .item-content__mix
+                  .item-content__mix__price
+                    .item-content__mix__price__yen
+                      ¥
+                    .item-content__mix__price__num
+                      2,000
+                  .item-content__mix__like
+                    = icon('fas', 'star', class: 'icon')
+                .item-content__tax
+                  （税込）
+
+        .category-item
+          = link_to "#" do
+            .category-item__first
+              .item-image
+                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+              .item-content
+                .item-content__name
+                  Bluetoothイヤホン ワイヤレスイヤホン ブラック
+                .item-content__mix
+                  .item-content__mix__price
+                    .item-content__mix__price__yen
+                      ¥
+                    .item-content__mix__price__num
+                      2,000
+                  .item-content__mix__like
+                    = icon('fas', 'star', class: 'icon')
+                .item-content__tax
+                  （税込）
+.exhibit
+  %p.exhibit--text 出品する
+  = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
+-# ここにはfooterを部分テンプレートで使用します
