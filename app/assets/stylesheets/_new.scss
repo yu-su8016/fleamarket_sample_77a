@@ -181,16 +181,6 @@
         @include required;
       }
       &__form{
-        // .year{
-        //   @include birthdaybox;
-        // }
-        // .month{
-        //   @include birthdaybox;
-        // }
-        // .day{
-        //   @include birthdaybox;
-        // }
-
         display: flex;
         &__year1{
           @include birthdaybox;;

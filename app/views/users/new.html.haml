@@ -107,7 +107,7 @@
             都道府県
           %span.form__main__prefecture__required
             必須
-          -# = form.text_field :prefecture, class: 'form__main__prefecture__form' 
+          
           = form.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'form__main__prefecture__form'}
 
         .form__main__city
