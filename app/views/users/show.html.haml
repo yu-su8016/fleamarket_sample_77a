@@ -1,0 +1,35 @@
+-# = render "header"  ※header部分 marge後に部分テンプレートで追加
+
+.wrapper
+  = render "left-content"
+  .right-content
+    .right-content1
+      .right-content1__cover
+        .right-content1__name
+          名前
+        .right-content1__exhibit
+          出品数 10
+    .right-content2
+      .mypage-tab-container
+        .mypage-tabs
+          .mypage-tabs__notifidation
+            お知らせ
+          .mypage-tabs__to-do
+            やることリスト
+        .tab-content
+          .tab-content__not-found
+            現在、お知らせはありません
+    .right-content3
+      .mypage-tab-container
+        .mypage-tab-head
+          購入した商品
+        .mypage-tabs
+          .mypage-tabs__transaction-now
+            取引中
+          .mypage-tabs__transaction-old
+            過去の取引
+        .tab-content
+          .tab-content__not-found
+            取引中の商品がありません
+
+-# = render "footer"  ※footer部分 marge後に部分テンプレートで追加

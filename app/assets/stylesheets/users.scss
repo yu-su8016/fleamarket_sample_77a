@@ -1,0 +1,216 @@
+$white: #fff;
+$gray1: #eee;
+$gray2: #ccc;
+
+@mixin arrow-icon($color) {
+  color: $color;
+  right: 1px;
+  top: -5px;
+  width: 8px;
+  height: 8px;
+  border-top: solid 2px currentColor;
+  border-right: solid 2px currentColor;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+@mixin mypage-tabs($background-color) {
+  width: 350px;
+  text-align: center;
+  line-height: 75px;
+  background: $background-color;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.wrapper {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  background: #f5f5f5;
+  .left-content {
+    width: 280px;
+    margin-right: 40px;
+    .arrow-right.icon {
+      @include arrow-icon($gray2)
+    }
+    .arrow-right.icon-black {
+      @include arrow-icon(#000)
+    }
+    nav.mypage-navi {
+      li {
+        list-style: none;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        border-top: 1px solid $gray1;
+        padding-right: 20px;
+      }
+      .mypage-nav-head {
+        background: $gray1;
+        font-weight: bold;
+        &:hover {
+          padding-right: 16px;
+        }
+      }
+      .mypage-nav-list {
+        background: $white;
+        color: #333;
+        &:hover {
+          background-color:rgba(255,255,255,0.6);
+          padding-right: 16px;
+          .arrow-right.icon {
+            color: #000;
+          }
+        }
+      }
+      .mypage-nav-setting {
+        margin-top: 40px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+    }
+  }
+  .right-content {
+    width: 700px;
+    .right-content1 {
+      height: 160px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url(pict/pict-reason-01.jpg);
+      background-size: cover;
+      &__cover {
+        text-align: center;
+        .right-content1__name {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .right-content1__exhibit {
+          font-size: 14px;
+          margin-top: 8px;
+        }
+      }
+      &:hover {
+        .right-content1__cover {
+          opacity: 0.7;
+        }
+      }
+    }
+    .right-content2 {
+      .mypage-tab-container {
+        height: 310px;
+        .mypage-tabs {
+          height: 75px;
+          display: flex;
+          &__notifidation {
+            @include mypage-tabs($white);
+            border-top: 2px solid #3CCACE;
+          }
+          &__to-do {
+            @include mypage-tabs($gray1);
+          }
+        }
+        .tab-content {
+          height: 235px;
+          text-align: center;
+          &__not-found {
+            line-height: 235px;
+            background: $white;
+            color: $gray2;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .right-content3 {
+      .mypage-tab-container {
+        margin-top: 40px;
+        height: 310px;
+        .mypage-tab-head {
+          height: 75px;
+          padding: 0 16px;
+          background: #fafafa;
+          font-size: 16px;
+          line-height: 75px;
+        }
+        .mypage-tabs {
+          height: 75px;
+          display: flex;
+          &__transaction-now {
+            @include mypage-tabs($white);
+            border-top: 2px solid #3CCACE;
+          }
+          &__transaction-old {
+            @include mypage-tabs($gray1);
+          }
+        }
+        .tab-content {
+          height: 235px;
+          text-align: center;
+          &__not-found {
+            line-height: 235px;
+            background: $white;
+            color: $gray2;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  .logout-content {
+    height: 180px;
+    width: 700px;
+    background: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__btn {
+      height: 50px;
+      width: 320px;
+      background-color: #3CCACE;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 4px;
+    }
+    a {
+      text-decoration: none;
+      color: $white;
+      font-size: 14px;
+    }
+  }
+}
+.exhibit{
+  width: 120px;
+  background: #3CCACE;
+  text-align: center;
+  border-radius: 4%;
+  bottom: 32px;
+  right: 32px;
+  position: fixed;
+  padding: 15px;
+  &--text{
+    color: $white;
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    margin-bottom: 5px;
+  }
+  &--image{
+    vertical-align: bottom;
+  }
+}
+.exhibit:hover{
+  cursor : pointer;
+  opacity: 0.5;
+} 
