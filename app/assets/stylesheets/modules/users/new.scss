@@ -1,3 +1,4 @@
+
 @mixin title {
   margin: 24px 0 0;
   font-size: 18px;
@@ -13,9 +14,9 @@
 }
 
 @mixin box {
-  width: calc(100% - 2px);
+  width: calc(100% - 34px);
   margin: 8px 0 0;
-  height: 46px;
+  height: 28px;
   padding: 10px 16px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -28,7 +29,7 @@
   margin-right: 8px;
   width: calc(50% - 6px);
   margin: 8px 0 0;
-  height: 46px;
+  height: 28px;
   padding: 10px 16px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -40,7 +41,7 @@
 @mixin firstbox {
   width: calc(50% - 6px);
   margin: 8px 20px 0;
-  height: 46px;
+  height: 28px;
   padding: 10px 16px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
