@@ -1,3 +1,10 @@
 @import "reset";
-@import "modules/items";
-@import "modules/purchase";
+@import "modules/items/index";
+@import "modules/items/purchase";
+@import "modules/items/new";
+@import "modules/items/show";
+@import "modules/users/_index";
+@import "modules/users/_new";
+@import "modules/users/show";
+@import "_header";
+@import "_footer";

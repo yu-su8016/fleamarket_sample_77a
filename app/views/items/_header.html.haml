@@ -1,20 +1,20 @@
-.header
-  .header__lists
-    .header__lists__upper
-      .header__lists__upper__name
+.topheader
+  .topheader__lists
+    .topheader__lists__upper
+      .topheader__lists__upper__name
         %h1
         = image_tag "logo/logo.png", size: '140x42';
-      .header__lists__upper__search
-        .header__lists__upper__search__input
+      .topheader__lists__upper__search
+        .topheader__lists__upper__search__input
           = form_with model: @item do |form|
-            = form.text_field :name, class: 'header__lists__upper__search__input__keyword',placeholder: "キーワードから探す"
-        .header__lists__upper__search__btn
+            = form.text_field :name, class: 'topheader__lists__upper__search__input__keyword',placeholder: "キーワードから探す"
+        .topheader__lists__upper__search__btn
           = image_tag "icon/icon-search 1.png", size: '20x20';
-    .header__lists__low
-      %ul.header__lists__low__select
-        %li.header__lists__low__select__category
-          = link_to "カテゴリー"
-          .header__lists__low__select__category__list
+    .topheader__lists__low
+      %ul.topheader__lists__low__select
+        %li.topheader__lists__low__select__category
+          = link_to "カテゴリー", class: "topheader__lists__low__select__category__tab"
+          .topheader__lists__low__select__category__list
             %ul.lists 
               %li Tシャツ/カットソー(半袖/袖なし)
               %li Tシャツ/カットソー(七分/長袖)
@@ -35,11 +35,11 @@
               %li ベアトップ/チューブトップ
               %li ジャージ
               %li その他
-        %ul.header__lists__low__select__brand
-          =link_to 'ブランド'
-      .header__lists__low__user
-        .header__lists__low__user__login
-          = link_to "ログイン"
-        .header__lists__low__user__register
-          = link_to "新規会員登録"
+        %ul.topheader__lists__low__select__brand
+          =link_to 'ブランド' ,class: "topheader__lists__low__select__brand__tab"
+      .topheader__lists__low__user
+        .topheader__lists__low__user__login
+          = link_to "ログイン",  class: "topheader__lists__low__user__login--tab"
+        .topheader__lists__low__user__register
+          = link_to "新規会員登録", new_user_path, class: "topheader__lists__low__user__register--tab"
 

@@ -103,6 +103,10 @@
         &__name{
           font-weight: bold;
         }
+        a{
+          text-decoration: none;
+          color: #3CCACE;
+        }
       }
     }
     &__delivery{
@@ -117,6 +121,14 @@
         &__send{
           font-weight: bold;
         }
+        a{
+          text-decoration: none;
+          color: #3CCACE;
+        }
+        a:hover{
+          opacity: 0.8;
+          text-decoration: underline;
+        }
       }
       &__detail{
         list-style: none;
@@ -124,14 +136,9 @@
     }
   }
 }
-a{
-  text-decoration: none;
-  color: #3CCACE;
-}
-a:hover{
-  opacity: 0.8;
-  text-decoration: underline;
-}
+
+
+
 .buy__btn{
   @include content;
   text-align: center;

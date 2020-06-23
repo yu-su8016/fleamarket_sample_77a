@@ -37,7 +37,7 @@ $white: #fff;
   opacity: 0.5;
 }
 
-.header{
+.topheader{
   padding: 0 60px;
   &__lists{
     height: 110px;
@@ -95,12 +95,20 @@ $white: #fff;
             display: none;
             background-color: $white;
           }
+          a{
+            @include decoration;
+          }
+          a:hover{
+            color: orange;
+          }
         }
-        &__category a{
-          @include decoration;
-        }
-        &__brand a{
-          @include decoration;
+        &__brand{
+          a{
+            @include decoration;
+          }
+          a:hover{
+            color: orange;
+          }
         }
       }
       &__user{
@@ -377,7 +385,7 @@ $white: #fff;
   @include effect
 }
 
-.footer{
+.topfooter{
   padding: 60px 0;
   color: $white;
   background-color: #272727;
@@ -408,6 +416,9 @@ $white: #fff;
     max-width: 160px;
     width: 100%;
     margin: 0 auto;
+    &__logo:hover{
+      cursor: pointer;
+    }
     &--copyright{
       font-size: 14px;
     }
