@@ -8,7 +8,7 @@
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  &__flame{
+  &__flame {
     padding: 40px;
     .contents1 {
       background-color: #fff;
@@ -182,7 +182,7 @@
       display: block;
       margin: 20px auto;
       width: 700px;
-      .purchase{
+      .item-purchase{
         color: #fff;
         display: block;
         font-size: 24px;
@@ -231,7 +231,7 @@
               display: flex;
               align-items: center;
               margin: 0 auto;
-              .icon {
+              .icons {
                 display: inline-block;
                 font-size: inherit;
                 text-rendering: auto;
@@ -328,7 +328,7 @@
                     display: flex;
                     width: 40px;
                     position: relative;
-                    .icon{
+                    .icons{
                       position: absolute;
                       left: 0;
                       bottom: 5px;
