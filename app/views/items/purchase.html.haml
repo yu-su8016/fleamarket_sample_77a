@@ -1,0 +1,66 @@
+// headerマージ後部分テンプレート使用
+.header
+  = link_to "#", id:"logo" do
+    = image_tag "logo/logo.png", class: 'header-logo' 
+
+.purchase
+  .purchase__contents
+    .purchase__contents__name
+      購入内容の確認
+    .purchase__contents__product
+      .purchase__contents__product__image
+
+      .purchase__contents__product__detail
+        .purchase__contents__product__detail__name
+          エプソン IC4CL69L 全4色セット×2+黒2本 大容量（XL）新品
+        .purchase__contents__product__detail__price
+          %span.purchase__contents__product__detail__price--send  送料込み(税込)
+          %p.purchase__contents__product__detail__price--tax ¥ 20,000
+        
+    .purchase__contents__price
+      .purchase__contents__price__sum
+        %span.purchase__contents__price__sum__name
+          支払い金額
+        %span.purchase__contents__price__sum__detail
+          ¥ 20,000
+    .purchase__contents__way
+      .purchase__contents__way__pay
+        %span.purchase__contents__way__pay__name 支払い方法
+        = link_to '変更する>',class: 'purchase__contents__way__pay__change'
+      .purchase__contents__way__detail
+        %p.purchase__contents__way__detail__credit クレジットカード
+        %p.purchase__contents__way__detail__credit ************1234
+        %p.purchase__contents__way__detail__credit 有効期限 01 / 29
+        = image_tag "https://web-jp-assets.mercdn.net/_next/static/images/mastercard-8b5b68c12b7a2fc8619c71f49ef9209b.svg", class: 'credit-campany'
+    .purchase__contents__delivery
+      %ul.purchase__contents__delivery__name
+        %span.purchase__contents__delivery__name__send 配送先
+        = link_to '変更する>',class: 'purchase__contents__way__pay__change'
+      %li.purchase__contents__delivery__detail
+        〒012-3456
+      %li.purchase__contents__delivery__detail
+        愛知県名古屋市1−1−1
+      %li.purchase__contents__delivery__detail
+        山田 太郎
+    = form_with model: @item do |form|
+      = form.submit "購入する", class: 'buy__btn';
+
+// footerマージ後部分テンプレート使用
+.footer
+  .footer__contents1
+    %ul.footer__contents1__rule
+      %ul.footer__contents1__rule__num1
+        = link_to "#" do
+          プライバシーポリシー
+      %ul.footer__contents1__rule__num2
+        = link_to "#" do
+          FURIMA利用規約
+      %ul.footer__contents1__rule__num3
+        = link_to "#" do
+          特定商取引に関する表記
+  .footer__contents2
+    = link_to "#", id:"logo" do
+
+      = image_tag "logo/logo-white.png", class: 'footer__contents2__footerlogo'
+  %p.footer__contents3
+    ©︎FURIMA 
