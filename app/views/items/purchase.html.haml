@@ -1,3 +1,4 @@
+// headerマージ後部分テンプレート使用
 .header
   = link_to "#", id:"logo" do
     = image_tag "logo/logo.png", class: 'header-logo' 
@@ -44,7 +45,7 @@
     = form_with model: @item do |form|
       = form.submit "購入する", class: 'buy__btn';
 
-
+// footerマージ後部分テンプレート使用
 .footer
   .footer__contents1
     %ul.footer__contents1__rule
