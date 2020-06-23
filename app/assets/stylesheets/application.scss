@@ -3,8 +3,9 @@
 @import "modules/items/purchase";
 @import "modules/items/new";
 @import "modules/items/show";
-@import "modules/users/_index";
-@import "modules/users/_new";
+@import "modules/users/index";
+@import "modules/users/new";
 @import "modules/users/show";
+@import "modules/cards/index";
 @import "_header";
 @import "_footer";
