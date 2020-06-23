@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "users#show"
+  # devise_for :users
+  root "items#index"
   resources :items do
     collection do
       get :purchase
