@@ -1,14 +1,206 @@
-.contents1
+= render "header"
 
-.contents2
+.main
+  .main__contents1
+    .main__contents1__explain
+      %br
+      %br
+      %h2 人生を変えるフリマアプリ
+      .main__contents1__explain__p
+        %p FURIMAはだれでもかんたんに出品・購入できる
+        %p フリマアプリです。
+      .icon
+        .icon__App
+          = image_tag "logo/google.png", class: 'image-icon', width: "180px";
+        .icon__Google
+          = image_tag "logo/google.png", class: 'image-icon', width: "180px";
 
-.contents3
-  .previous
-    .previous__icon
-    .previous__content
-      前の商品
-  .next
-    .next__icon
-    .next__content
-    後ろの商品 
-.contents4
+  .main__contents2
+    .main__contents2__reasons
+      %h2.main__contents2__reasons__reason FURIMAが選ばれる３つの理由
+      %ul.main__contents2__reasons__lists
+        %li.main__contents2__reasons__lists__list
+          .main__contents2__reasons__lists__list__image
+            %span.main__contents2__reasons__lists__list__image__num 1
+            = image_tag "pict/pict-reason-01.jpg", width: "280px";
+          .main__contents2__reasons__lists__list__explain
+            %h3.main__contents2__reasons__lists__list__explain__text
+              %span.span 3分
+              ですぐに出品
+            %p.sentence スマホで入力するだけで簡単に出品できる！
+        %li.main__contents2__reasons__lists__list
+          .main__contents2__reasons__lists__list__image
+            %span.main__contents2__reasons__lists__list__image__num 2
+            = image_tag "pict/pict-reason-02.jpg", width: "280px";
+          .main__contents2__reasons__lists__list__explain
+            %h3.main__contents2__reasons__lists__list__explain__text
+              %span.span シンプル 
+              で使いやすい
+            %p.main__contents2__reasons__lists__list__explain__sentence めんどくさい入力は必要なく、検索も購入もスムーズ！
+
+        %li.main__contents2__reasons__lists__list
+          .main__contents2__reasons__lists__list__image
+            %span.main__contents2__reasons__lists__list__image__num 3
+            = image_tag "pict/pict-reason-03.jpg", width: "280px";
+          .main__contents2__reasons__lists__list__explain
+            %h3.main__contents2__reasons__lists__list__explain__text
+              %span.span 手数料 
+              業界最安
+            %p.sentence 最大3%でお得に出品&購入！
+
+  .main__contents3
+    .main__contents3__explain
+      %br
+      %h4.main__contents3__explain__number1 会員数日本一位
+      .main__contents3__explain__p
+        %p FURIMAは、フリマアプリで最も人気。
+        %p 出品・購入回数も業界最多です！
+        %p ほしかったあの商品に出会えるかもしれません。
+      .icon
+        .icon__App
+          = image_tag "logo/google.png", class: 'image-icon', width: "180px";
+        .icon__Google
+          = image_tag "logo/google.png", class: 'image-icon', width: "180px";
+
+  .main__contents4
+    .main__contents4__features
+      %h5.main__contents4__features__name FURIMAの特徴
+      %ul.main__contents4__features__lists
+        %li.main__contents4__features__lists__list
+          .main__contents4__features__lists__list__image
+            = image_tag "icon/icon-01.png" , width: "180px";
+          .main__contents4__features__lists__list__explain
+            %h6.main__contents4__features__lists__list__explain__title 簡単に売り買いできる
+            %p.main__contents4__features__lists__list__explain__sentence スマホひとつで、いつでもどこでも簡単に出品・購入が可能！
+
+        %li.main__contents4__features__lists__list
+          .main__contents4__features__lists__list__image
+            = image_tag "icon/icon-03.png", width: "180px";
+          .main__contents4__features__lists__list__explain
+            %h6.main__contents4__features__lists__list__explain__title 売上金は即日振込みに対応
+            %p.main__contents4__features__lists__list__explain__sentence 午前9時までに振込を依頼いただければ、翌日に指定の口座に入金いたします!
+
+        %li.main__contents4__features__lists__list
+          .main__contents4__features__lists__list__image
+            = image_tag "icon/icon-04.png", width: "180px";
+          .main__contents4__features__lists__list__explain
+            %h6.main__contents4__features__lists__list__explain__title 様々な支払いに対応
+            %p.main__contents4__features__lists__list__explain__sentence お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
+
+  .main__contents5
+    .main__contents5__category
+      %h7.category-name
+        ピックアップカテゴリー
+      .category-product
+        新規投稿商品
+      .main__contents5__category__lists
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__lists__list__detail__tax (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__lists__list__detail__tax (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★0
+            %p.main__contents5__category__lists__list__detail__tax (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__lists__list__detail__tax (税込)
+
+  .main__contents5
+    .main__contents5__category
+      .category-name
+        ピックアップブランド
+      .category-product
+        アーカイバ
+      .main__contents5__category__lists
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__image__detail__tax
+              (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__image__detail__tax
+              (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__image__detail__tax
+              (税込)
+        .main__contents5__category__lists__list
+          .main__contents5__category__lists__list__image
+            = link_to "#"
+          .main__contents5__category__lists__list__detail
+            %h8.main__contents5__category__lists__list__detail__name
+              ee
+            %ul.main__contents5__category__lists__list__detail__price
+              %li 1000円
+              %li.like ★ 0
+            %p.main__contents5__category__image__detail__tax
+              (税込)
+
+
+  .main__contents7
+    .main__contents7__download
+      %h9.main__contents7__download--upper だれでもかんたん、人生を変えるフリマアプリ
+      %li.main__contents7__download--low 今すぐ無料ダウンロード！
+      .icon2
+        .icon2__App
+        = image_tag "logo/google.png", class: 'image-icon', width: "180px";
+        .icon2__Google
+        = image_tag "logo/google.png", class: 'image-icon', width: "180px";
+
+
+= render "footer"
+
+.exhibit
+  %p.exhibit--text 出品する
+  = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
