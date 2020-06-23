@@ -4,7 +4,7 @@
   -# model: @itemを変更
   = form_with model: @item do |form|
 
-    .item-outline
+    .new-item-outline
 
       -# Dropzone.js 使用？
       .input-image
@@ -31,8 +31,8 @@
         = form.text_area :explanation, class: 'input-explanation__text-area'
 
 
-    .item-details
-      %p.item-details__category-name 商品の詳細
+    .new-item-details
+      %p.new-item-details__category-name 商品の詳細
 
       .input-category
         .input-category__headline
