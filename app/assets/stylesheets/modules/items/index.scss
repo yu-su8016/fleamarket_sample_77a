@@ -214,7 +214,7 @@ $white: #fff;
     }
   }
   &__contents3{
-    background-image: url("pict/bg-topMiddleDl-pict.jpg");
+    background-image: image-url("pict/bg-topMiddleDl-pict.jpg");
     background-position: bottom right;
     height: 400px;
     background-size: cover;
@@ -331,7 +331,7 @@ $white: #fff;
     }
   }
   &__contents7{
-    background-image: url("pict/bg-appBanner-pict.jpg");
+    background-image: image-url("pict/bg-appBanner-pict.jpg");
     padding: 100px 40px;
     position: relative;
     background-size: cover;
