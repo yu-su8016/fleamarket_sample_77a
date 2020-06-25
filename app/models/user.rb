@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :cards
   has_many :likes
   has_many :comments
+
+  accepts_nested_attributes_for :destinations 
+  # コメントアウトで住所テーブル以外は登録できる
 end
