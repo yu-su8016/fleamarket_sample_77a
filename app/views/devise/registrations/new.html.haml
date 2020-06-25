@@ -4,7 +4,9 @@
   
   .form
     -# = form_with model: @user, url: {controller: 'users', action: 'create'} local: true do |form|
+    -# = form_with model: @user, local: true do |form|
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form|
+    
 
       .form__title
         会員情報入力
@@ -74,83 +76,81 @@
             -#   日
 
 
-          -# = fields_for :destination do |d|
-        .form__main__destination
-          = form.fields_for :destinations, @destinations do |d|
+        = fields_for @destination do |d|
 
-            .form__main__destination__title
-              商品送付先住所情報
+          .form__main__destination__title
+            商品送付先住所情報
 
-            .form__main__destination-name
-              %label.form__main__destination-name__title
-                送付先氏名（全角）
-              %span.form__main__destination-name__required
-                必須
-              .form__main__destination-name__form
-                = d.text_field :family_name, class: 'form__main__destination-name__form__family'
-                = d.text_field :first_name, class: 'form__main__destination-name__form__first'
-              
-
-            .form__main__destination-kana
-              %label.form__main__destination-kana__title
-                送付先氏名カナ（全角）
-              %span.form__main__destination-kana__required
-                必須
-              .form__main__destination-kana__form
-                = d.text_field :family_name_kana, class: 'form__main__destination-kana__form__family'
-                = d.text_field :first_name_kana, class: 'form__main__destination-kana__form__first'
-                
-
-            .form__main__postalcode
-              %label.form__main__postalcode__title
-                郵便番号
-              %span.form__main__postalcode__required
-                必須
-              = d.text_field :postal_code, class: 'form__main__postalcode__form'
-
-            .form__main__prefecture
-              %label.form__main__prefecture__title
-                都道府県
-              %span.form__main__prefecture__required
-                必須
-              
-              = d.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'form__main__prefecture__form'}
-
-            .form__main__city
-              %label.form__main__city__title
-                市区町村
-              %span.form__main__city__required
-                必須
-              = d.text_field :city, class: 'form__main__city__form' 
-                
+          .form__main__destination-name
+            %label.form__main__destination-name__title
+              送付先氏名（全角）
+            %span.form__main__destination-name__required
+              必須
+            .form__main__destination-name__form
+              = d.text_field :family_name, class: 'form__main__destination-name__form__family'
+              = d.text_field :first_name, class: 'form__main__destination-name__form__first'
             
-            .form__main__address
-              %label.form__main__address__title
-                番地
-              %span.form__main__address__required
-                必須
-              = d.text_field :address, class: 'form__main__address__form' 
-                
-              
-            .form__main__after-adress
-              %label.form__main__after-adress__title
-                マンション名やビル名、部屋番号
-              %span.form__main__after-adress__required
-                任意
-              = d.text_field :after_adress, class: 'form__main__after-adress__form' 
+
+          .form__main__destination-kana
+            %label.form__main__destination-kana__title
+              送付先氏名カナ（全角）
+            %span.form__main__destination-kana__required
+              必須
+            .form__main__destination-kana__form
+              = d.text_field :family_name_kana, class: 'form__main__destination-kana__form__family'
+              = d.text_field :first_name_kana, class: 'form__main__destination-kana__form__first'
               
 
-            .form__main__phone
-              %label.form__main__phone__title
-                お届け先電話番号
-              %span.form__main__phone__required
-                任意
-              = d.text_field :phone, class: 'form__main__phone__form' 
+          .form__main__postalcode
+            %label.form__main__postalcode__title
+              郵便番号
+            %span.form__main__postalcode__required
+              必須
+            = d.text_field :postal_code, class: 'form__main__postalcode__form'
 
+          .form__main__prefecture
+            %label.form__main__prefecture__title
+              都道府県
+            %span.form__main__prefecture__required
+              必須
+            
+            = d.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'form__main__prefecture__form'}
+
+          .form__main__city
+            %label.form__main__city__title
+              市区町村
+            %span.form__main__city__required
+              必須
+            = d.text_field :city, class: 'form__main__city__form' 
               
-
-        
           
+          .form__main__address
+            %label.form__main__address__title
+              番地
+            %span.form__main__address__required
+              必須
+            = d.text_field :address, class: 'form__main__address__form' 
+              
+            
+          .form__main__after-adress
+            %label.form__main__after-adress__title
+              マンション名やビル名、部屋番号
+            %span.form__main__after-adress__required
+              任意
+            = d.text_field :after_address, class: 'form__main__after-adress__form' 
+            
+
+          .form__main__phone
+            %label.form__main__phone__title
+              お届け先電話番号
+            %span.form__main__phone__required
+              任意
+            = d.text_field :phone, class: 'form__main__phone__form' 
+
+            
+
+      
+        
           = form.submit "登録", class: 'form__main__btn'
          
   = render "users/footer"
