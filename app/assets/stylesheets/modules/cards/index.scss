@@ -28,6 +28,18 @@ $gray2: #ccc;
 }
 
 .card {
+  .notifications {
+  color: $white;
+  text-align: center;  
+
+  .notice {
+    background-color: lightBlue;
+  }
+
+  .alert {
+    background-color: orange;
+  }
+}
   .card-content1 {
     width: 700px;
     padding-bottom: 64px;
