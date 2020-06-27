@@ -3,6 +3,11 @@
 .wrapper
   = render "users/left-content"
   .card
+
+    .notifications
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: key)
+
     .card-content1
       .card-content1__head
         クレジットカード情報入力
@@ -14,7 +19,7 @@
             %span.card-content1__content--required
               必須
             .card-content1__number--form
-              = f.text_field :number, class: "number"
+              = f.text_field :unmber, class: "number"
             .card-content1__number--card-icon
               = image_tag 'icon/card.png', size: '280x26';
           .card-content1__limit
@@ -28,7 +33,7 @@
                 %span
                   月
               .card-content1__limit--form--year
-                = f.select :limit_year, ["20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+                = f.select :limit_year, ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
                 %span
                   年
           .card-content1__security-code
@@ -49,18 +54,26 @@
       .card_list
         .card_list__head
           カード一覧
-        -# - @cards.each do |card|  ※以下コメントアウトはmodel作成後に使用予定
-        .card_list__content
-          .card_list__content--cover
-            = link_to "#", method: :delete do
-              %span.card_list__content__btn
-                削除する
-            .card_list__content__number
-              -# = card.number
-              ************1061
-            .card_list__content__limit
-              -# = card.limit_month / card.limit_year
-              09 / 23
-        -# - end
-        
+          = @user.id
+
+        - if @cards
+          - @cards.each do |card|
+            .card_list__content
+              .card_list__content--cover
+                = link_to delete_user_cards_path(card_id: card.id) do
+                  %span.card_list__content__btn
+                    削除する
+                .card_list__content__number
+                  ************
+                  = card.last4
+                .card_list__content__limit
+                  = card.exp_month
+                  \/
+                  = card.exp_year
+                .card_list__content__brand
+                  = card.brand
+        - else
+          .card_list__content
+            カードの登録がありません
+
 = render "items/footer"
