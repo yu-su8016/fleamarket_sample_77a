@@ -1,0 +1,53 @@
+= render "users/header"
+
+.purchase2
+  .purchase__contents2--cover
+    .purchase__contents2
+      - if params[:id] == '1'
+        .purchase__contents2--name
+          カード一覧
+      - else
+        .purchase__contents2--name
+          宛先一覧
+    - if params[:id] == '1'
+      - if @cards
+        - @cards.each do |card|
+          .purchase_card
+            .purchase_card__list
+              = link_to user_item_purchases_path(item_id: params[:item_id], card_id: card.id, distinations_id: params[:distinations_id]) do
+                %span.purchase_card__list__btn
+                  　選択　
+                .purchase_card__list--number
+                  ************
+                  = card.last4
+                .purchase_card__list--limit
+                  = card.exp_month
+                  \/
+                  = card.exp_year
+                .purchase_card__list--brand
+                  = card.brand
+      - else
+        .purchase_card__none
+          カードの登録がありません
+    - else
+      - @distinations.each do |destination|
+        .purchase_destination
+          .purchase_destination__list
+            = link_to user_item_purchases_path(item_id: params[:item_id], card_id: params[:card_id], distinations_id: destination.id) do
+              %span.purchase_destination__list__btn
+                　選択　
+              .purchase_destination__list--postal_code
+                〒
+                = destination.postal_code[0, 3]
+                \-
+                = destination.postal_code[3, 8]
+              .purchase_destination__list--address
+                = destination.prefecture
+                = destination.city
+                = destination.address
+                = destination.after_address
+              .purchase_destination__list--name
+                =  destination.family_name
+                =  destination.first_name
+
+= render "users/footer"
