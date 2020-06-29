@@ -120,9 +120,9 @@ RSpec.describe Item, type: :model do
       end
     end
     context 'サイズが入力がされていない場合' do
-      it '出品ができないこと' do
+      it '出品ができること' do
         item = build(:item, size: "")
-        expect(item).not_to be_valid
+        expect(item).to be_valid
       end
     end
   end

@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :item do
+    
+    association :user
+    association :category
+
     name            { Faker::Lorem.characters(number: 10) }
     explanation     { Faker::Lorem.characters(number: 100) }
     category_id     { category.id }
@@ -12,7 +16,5 @@ FactoryBot.define do
     day             { Faker::Lorem.word }
     price           { Faker::Number.number(digits: 4)}
     seller_id       { user.id }
-    association :user
-    association :category
   end
 end
