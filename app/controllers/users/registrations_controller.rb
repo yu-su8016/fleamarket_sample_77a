@@ -12,18 +12,38 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+   
     user = User.new(user_params)
     user.save
     @user_id = user.id
 
     destination = Destination.new(destination_params)
     destination.save
+    
+    
+    # redirect_to user_items_path(user_id: @user_id)
+   
+    redirect_to root_path
+
+   
+    # user = User.new(user_params)
+    # @user_id = user.id
+    # destination = Destination.new(destination_params)
+    # @user_id = user.id
+
+    # if user.save && destination.save
+    #   redirect_to "items#index"
+    # else
+    #   redirect_to "users/registrations#new"
+    # end
+
+    
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday)
+    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday)
   end
 
   def destination_params

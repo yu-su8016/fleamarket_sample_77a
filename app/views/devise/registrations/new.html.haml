@@ -33,6 +33,14 @@
           %span.form__main__password__required
             必須
           = form.text_field :password, class: 'form__main__password__form'
+
+        .form__main__password-confirmation
+          %label.form__main__password-confirmation__title
+            確認パスワード
+          %span.form__main__password-confirmation__required
+            必須
+          = form.text_field :password_confirmation, class: 'form__main__password-confirmation__form'
+
         
     
         
@@ -49,7 +57,7 @@
           
         .form__main__name-kana
           %label.form__main__name-kana__title
-            お名前カナ（全角）
+            お名前かな（全角）
           %span.form__main__name-kana__required
             必須
           .form__main__name-kana__form
@@ -93,7 +101,7 @@
 
           .form__main__destination-kana
             %label.form__main__destination-kana__title
-              送付先氏名カナ（全角）
+              送付先氏名かな（全角）
             %span.form__main__destination-kana__required
               必須
             .form__main__destination-kana__form

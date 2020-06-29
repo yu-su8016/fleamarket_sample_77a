@@ -112,6 +112,9 @@ $white: #fff;
         display: flex;
         width: 150px;
         justify-content: space-between;
+        &__logout a{
+          @include decoration;
+        }
         &__login a{
           @include decoration;
         }

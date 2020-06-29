@@ -127,6 +127,20 @@
         @include box;
       }
     }
+
+    &__password-confirmation{
+      margin: 24px 0 0;
+      &__title{
+        font-weight: 600;
+      }
+      &__required{
+        @include required;
+      }
+      &__form{
+        @include box;
+      }
+    }
+
     
     &__person-title{
       @include title;
@@ -181,27 +195,31 @@
       }
       &__form{
         display: flex;
-        &__year1{
-          @include birthdaybox;;
-        }
-        &__year2{
-          margin: 18px 10px;
-        }
-        &__month1{
-          @include birthdaybox;
-        }
-        &__month2{
-          margin: 18px 10px;
-        }
-        &__day1{
-          @include birthdaybox;
-        }
-        &__day2{
-          margin: 18px 10px;
-        }
+
+        // &__year1{
+        //   @include birthdaybox;;
+        // }
+        // &__year2{
+        //   margin: 18px 10px;
+        // }
+        // &__month1{
+        //   @include birthdaybox;
+        // }
+        // &__month2{
+        //   margin: 18px 10px;
+        // }
+        // &__day1{
+        //   @include birthdaybox;
+        // }
+        // &__day2{
+        //   margin: 18px 10px;
+        // }
       }
     }
 
+    
+  
+    
     &__destination-title{
       @include title;
     }
