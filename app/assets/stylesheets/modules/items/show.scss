@@ -1,5 +1,6 @@
 @mixin sub-image {
   object-fit: contain;
+  display: block;
   height: 87px;
 }
 
@@ -35,28 +36,13 @@
           &__sub{
             .image__list{
               display: flex;
-              justify-content: space-between;
+              justify-content: space-around;
               text-align: center;
+              margin-top: 10px;
               &__one{
+                display: flex;
                 width: 25%;
-                .image{
-                  @include sub-image;
-                }
-              }
-              &__two{
-                width: 25%;
-                .image{
-                  @include sub-image;
-                }
-              }
-              &__three{
-                width: 25%;
-                .image{
-                  @include sub-image;
-                }
-              }
-              &__four{
-                width: 25%;
+                margin-left: 20px;
                 .image{
                   @include sub-image;
                 }
