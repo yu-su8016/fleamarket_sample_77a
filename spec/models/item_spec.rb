@@ -4,26 +4,16 @@ RSpec.describe Item, type: :model do
 
   describe '画像' do
     
-    context '画像が1枚ある場合' do
+    context '画像が1枚以上ある場合' do
       it '出品ができること' do
-        image = build(:image)
+        image = build(:item)
         expect(image).to be_valid
       end
     end
     context '画像がない場合' do
       it '出品ができないこと' do
-        image = build(:image)
+        image = build(:no_image_item)
         expect(image).not_to be_valid
-      end
-    end
-    context '画像が10枚ある場合' do
-      it '出品ができること' do
-        
-      end
-    end
-    context '画像が11枚ある場合' do
-      it '出品ができないこと' do
-        
       end
     end
   end
