@@ -83,6 +83,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
 gem 'active_hash'
+gem 'rails-i18n'
 
 group :production do
   gem 'unicorn'
