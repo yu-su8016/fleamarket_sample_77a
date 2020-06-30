@@ -136,7 +136,7 @@ RSpec.describe Item, type: :model do
     end
     context '状態が選択されていない場合' do
       it '出品ができないこと' do
-        item = build(:item, condition: "")
+        item = build(:item, condition_id: "")
         expect(item).not_to be_valid
       end
     end
@@ -151,7 +151,7 @@ RSpec.describe Item, type: :model do
     end
     context '負担者が選択されていない場合' do
       it '出品ができないこと' do
-        item = build(:item, delivery_fee: "")
+        item = build(:item, delivery_fee_id: "")
         expect(item).not_to be_valid
       end
     end
@@ -166,7 +166,7 @@ RSpec.describe Item, type: :model do
     end
     context '方法が選択されていない場合' do
       it '出品ができないこと' do
-        item = build(:item, delivery_method: "")
+        item = build(:item, delivery_method_id: "")
         expect(item).not_to be_valid
       end
     end
@@ -181,7 +181,7 @@ RSpec.describe Item, type: :model do
     end
     context '地域が選択されていない場合' do
       it '出品できないこと' do
-        item = build(:item, prefecture: "")
+        item = build(:item, prefecture_id: "")
         expect(item).not_to be_valid
       end
     end
@@ -196,7 +196,7 @@ RSpec.describe Item, type: :model do
     end
     context '日数が選択されている場合' do
       it '出品できないこと' do
-        item = build(:item, day: "")
+        item = build(:item, day_id: "")
         expect(item).not_to be_valid
       end
     end
