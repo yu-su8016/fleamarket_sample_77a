@@ -5,10 +5,16 @@ class Item < ApplicationRecord
   belongs_to :user, foreign_key: "seller_id"
   belongs_to :category, foreign_key: "category_id"
 
+  accepts_nested_attributes_for :images
+
+  validates_associated :images
+
   validates :name, presence: true, length: { maximum: 40 }
   validates :explanation, presence: true, length: { maximum: 1000 }
   validates :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+
+  validates :images, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :condition

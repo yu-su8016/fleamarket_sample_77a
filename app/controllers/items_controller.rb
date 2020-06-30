@@ -12,14 +12,17 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    10.times { @item.images.build }
   end
 
   def create
     @item = Item.new(item_params)
+    # binding.pry
     if @item.save
       redirect_to "/"
     else
-      render 'new'
+      10.times {@item.images.build}
+      render :new
     end
   end
 
@@ -34,6 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price).merge(seller_id: 1)
+    params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
+                                                                                                                                                                                                      # current_user id
   end
 end

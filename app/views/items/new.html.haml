@@ -7,14 +7,13 @@
 
       -# Dropzone.js 使用？
       .input-image
-        -# 子のimageテーブルに保存
-        -# = form.fields_for :images do |image|
-        -#   .input-image__headline
-        -#     = form.label :image, "出品画像", class: 'input-image__headline--label'
-        -#     %span.input-image__headline--required 必須
-        -#   .input-image__comment
-        -#     複数枚アップロードできます。
-        -#   = form.file_field :image, class: 'input-image__file-field'
+        .input-image__headline
+          = form.label :images, "出品画像", class: 'input-image__headline--label'
+          %span.input-image__headline--required 必須
+        .input-image__comment
+          10枚までアップロードできます。
+        = form.fields_for :images do |image|
+          = image.file_field :images, class: 'input-image__file-field'
         -# js で form を追加?
 
       .input-name
