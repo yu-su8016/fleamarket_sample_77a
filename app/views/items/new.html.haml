@@ -1,34 +1,33 @@
 = render "users/header"
 
 .contents
-  -# model: @itemを変更
-  = form_with model: @item do |form|
+  = form_with model: @item, local: true do |form|
 
     .new-item-outline
 
       -# Dropzone.js 使用？
       .input-image
         -# 子のimageテーブルに保存
-        = form.fields_for :images do |image|
-          .input-image__headline
-            = form.label :image, "出品画像", class: 'input-image__headline--label'
-            %span.input-image__headline--required 必須
-          .input-image__comment
-            複数枚アップロードできます。
-          = form.file_field :image, class: 'input-image__file-field'
+        -# = form.fields_for :images do |image|
+        -#   .input-image__headline
+        -#     = form.label :image, "出品画像", class: 'input-image__headline--label'
+        -#     %span.input-image__headline--required 必須
+        -#   .input-image__comment
+        -#     複数枚アップロードできます。
+        -#   = form.file_field :image, class: 'input-image__file-field'
         -# js で form を追加?
 
       .input-name
         .input-name__headline
           = form.label :name, "商品名", class: 'input-name__headline--label'
           %span.input-name__headline--required 必須
-        = form.text_field :name, class: 'input-name__text-field'
+        = form.text_field :name, placeholder: "40文字まで", class: 'input-name__text-field'
 
       .input-explanation
         .input-explanation__headline
           = form.label :explanation, "商品の説明", class: 'input-explanation__headline--label'
           %span.input-explanation__headline--required 必須
-        = form.text_area :explanation, class: 'input-explanation__text-area'
+        = form.text_area :explanation, placeholder: "1,000文字まで\n(色、素材、重さ、定価、注意点など)\n\n例）2015年ごろに3万円で購入したバッグです。ネイビーで傷はありません。", class: 'input-explanation__text-area'
 
 
     .new-item-details
@@ -45,26 +44,25 @@
         -# = form.collection_select(:category_id, @categorys, :id, :name, {prompt: "選択してください"}, {class: 'input-category__select'})
 
         -# 下記を削除し、上記のコメントアウトを外す。
-        = form.select :category_id, [ "レディース", "メンズ", "ベビー・キッズ", "インテリア・住まい・小物" ], {prompt: "選択してください"}, {class: 'input-category__select'}
+        = form.select :category_id, [ ["レディース", 1], ["メンズ", 2], ["ベビー・キッズ", 3], ["インテリア・住まい・小物", 4] ], {prompt: "選択してください"}, {class: 'input-category__select'}
 
       .input-brand
         .input-brand__headline
           = form.label :brand, "ブランド", class: 'input-brand__headline--label'
           %span.input-brand__headline--any 任意
-        = form.text_field :brand, class: 'input-brand__text-field'
+        = form.text_field :brand, placeholder: "例）シャネル", class: 'input-brand__text-field'
 
       .input-size
         .input-size__headline
           = form.label :size, "商品のサイズ", class: 'input-size__headline--label'
-          %span.input-size__headline--required 必須
-        = form.text_field :size, class: 'input-size__text-field'
+          %span.input-size__headline--any 任意
+        = form.text_field :size, placeholder: "例）S・M・L、27cmEEE、〇〇cm × 〇〇cm", class: 'input-size__text-field'
 
       .input-condition
         .input-condition__headline
-          = form.label :condition, "商品の状態", class: 'input-condition__headline--label'
+          = form.label :condition_id, "商品の状態", class: 'input-condition__headline--label'
           %span.input-condition__headline--required 必須
-        -# = from.collection_select(:condition, @conditions, :name, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
-        = form.select :condition, [ "新品、未使用", "未使用品に近い", "目立った傷や汚れなし", "やや傷や汚れあり", "傷や汚れあり", "全体的に状態が悪い" ], {prompt: "選択してください"}, {class: 'input-condition__select'}
+        = form.collection_select(:condition_id, @conditions, :id, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
 
 
     .delivery
@@ -72,28 +70,31 @@
 
       .input-delivery-fee
         .input-delivery-fee__headline
-          = form.label :delivery_fee, "配送料の負担", class: 'input-delivery-fee__headline--label'
+          = form.label :delivery_fee_id, "配送料の負担", class: 'input-delivery-fee__headline--label'
           %span.input-delivery-fee__headline--required 必須
-        -# = form.collection_select(:delivery_fee, @delivery_fee, :name, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
-        = form.select :delivery_fee, [ "出品者負担(送料込み)", "購入者負担(送料別)" ], {prompt: "選択してください"}, {class: 'input-delivery-fee__select'}
+        = form.collection_select(:delivery_fee_id, @delivery_fees, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
+
+      .input-delivery-method
+        .input-delivery-method__headline
+          = form.label :delivery_method_id, "配送の方法", class: 'input-delivery-method__headline--label'
+          %span.input-delivery-method__headline--required 必須
+        = form.collection_select(:delivery_method_id, @delivery_methods, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-method__select'})
 
       .input-delivery-prefecture
         .input-delivery-prefecture__headline
-          = form.label :prefecture, "配送元の地域", class: 'input-delivery-prefecture__headline--label'
+          = form.label :prefecture_id, "配送元の地域", class: 'input-delivery-prefecture__headline--label'
           %span.input-delivery-prefecture__headline--required 必須
-        -# = form.collection_select(:prefecture, @prefectures, :id, :naem, {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'})
-        = form.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'}
+        = form.collection_select(:prefecture_id, @prefectures, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'})
 
       .input-delivery-days
         .input-delivery-days__headline
-          =form.label :day, "発送までの日数", class: 'input-delivery-days__headline--label'
+          =form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
           %span.input-delivery-days__headline--required 必須
-        -# = form.collection_select(:day, @delivery_days, :day, :day, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
-        = form.select :day, [ "1~2日で発送", "2~3日で発送", "4~7日で発送" ], {prompt: "選択してください"}, {class: 'input-delivery-days__select'}
+        = form.collection_select(:day_id, @days, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
 
 
     .price
-      %p.price__category-name 価格
+      %p.price__category-name 価格  (¥300 〜 9,999,999)
 
       .input-price
         .input-price__headline
