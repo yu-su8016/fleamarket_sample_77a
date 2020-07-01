@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if params[:user_id]
       @user = User.find(params[:user_id])
-      redirect_to users_confirmation_path, notice: '登録されました'
+      redirect_to users_confirmation_path
     else
       @user = nil
       redirect_to new_user_registration_path, alert: '登録されませんでした'
