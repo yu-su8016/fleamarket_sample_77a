@@ -1,41 +1,46 @@
 class PurchasesController < ApplicationController
   before_action :payjp_key
   before_action :set_user
+  before_action :set_item, except: :show
 
   def index
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
-      @cards = customer.cards.retrieve(params[:card_id])
+      unless params[:destinations_id]
+        @cards = customer.cards.retrieve(params[:card_id])
+      else
+        @cards = customer.cards.data[0]
+      end
     end
-    @distinations = Destination.find(params[:distinations_id])
+    @destinations = Destination.find(params[:destinations_id])
   end
 
   def show
     if params[:id] == '1'
-      if @user.card
-        customer = Payjp::Customer.retrieve(@user.card.customer_id)
-        @cards = customer.cards
-      end
+      customer = Payjp::Customer.retrieve(@user.card.customer_id)
+      @cards = customer.cards
     else
-      @distinations = Destination.includes(:user).where(users: {id: params[:user_id]})
+      @destinations = Destination.includes(:user).where(users: {id: params[:user_id]})
     end
   end
 
-  def buy
+  def purchase
     if @user.card  
-      item = Item.find(params[:item_id])
-      item.update_attribute(:buyer_id, params[:user_id])
-    
+      @item.update_attribute(:buyer_id, params[:user_id])
       charge = Payjp::Charge.create(
-        :amount => item.price,
+        :amount => @total_price,
         :customer => @user.card.customer_id,
         :card => params[:card_id],
         :currency => 'jpy',
       )
+      redirect_to action: :after_purchase
     else
-      redirect_to action: "index"
-      flash[:alert] = '購入にはクレジットカード登録が必要です'
+      redirect_to user_item_purchases_path(destinations_id: params[:destinations_id])
+      flash[:alert] = '購入にはクレジットカードの登録が必要です'
     end
+  end
+
+  def after_purchase
   end
 
   private
@@ -48,6 +53,11 @@ class PurchasesController < ApplicationController
   def set_user
     @user = User.find(params[:user_id])
     ## ユーザー登録機能実装後修正 find()をcurrent_user.idへ
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+    @total_price = @item.delivery_fee.to_i + @item.price
   end
 
 end
