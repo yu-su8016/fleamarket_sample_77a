@@ -1,6 +1,6 @@
 - if @item.errors.any?
   .alert
     %ul
-      - @item.errors.full_messages.each do |message|
+      - @item.errors.full_messages_for(culumn).each do |message|
         %li
           = message
