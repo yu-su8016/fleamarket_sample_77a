@@ -72,12 +72,12 @@ $gray2: #ccc;
             
           }
           &--month {
-            #limit_month {
+            #exp_month {
               @include limit
             }
           }
           &--year {
-            #limit_year {
+            #exp_year {
               @include limit
             } 
           }
