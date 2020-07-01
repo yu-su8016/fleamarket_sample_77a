@@ -21,17 +21,16 @@
           .main__form__contents2__btn3
             Appleでログイン
         .main__form__contents3
-          .main__form__contents3__box
-            %p.main__form__contents3__box__mail-title
-              メールアドレス
-            = form.text_field :email, class: 'main__form__contents3__box__mail-form'
+          %p.main__form__contents3__mail-title
+            メールアドレス
+          = form.text_field :email, class: 'main__form__contents3__mail-form'
 
-            %p.main__form__contents3__box__password-title
-              パスワード
-            = form.text_field :password, class: 'main__form__contents3__box__password-form'
-            
-            .main__form__contents3__box__btn
-              = form.submit "ログイン", class: 'form__main__btn'
+          %p.main__form__contents3__password-title
+            パスワード
+          = form.text_field :password, class: 'main__form__contents3__password-form'
+          
+          
+          = form.submit "ログイン", class: 'main__form__contents3__btn'
              
 
 

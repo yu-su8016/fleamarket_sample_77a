@@ -15,30 +15,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
    
     user = User.new(user_params)
     user.save
+    sign_in(user)
+
     @user_id = user.id
 
     destination = Destination.new(destination_params)
     destination.save
-    
-    
-    # redirect_to user_items_path(user_id: @user_id)
-   
-    redirect_to root_path
 
-   
-    # user = User.new(user_params)
-    # @user_id = user.id
-    # destination = Destination.new(destination_params)
-    # @user_id = user.id
-
-    # if user.save && destination.save
-    #   redirect_to "items#index"
-    # else
-    #   redirect_to "users/registrations#new"
-    # end
-
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      redirect_to users_confirmation_path, notice: '登録されました'
+    else
+      @user = nil
+      redirect_to new_user_registration_path, alert: '登録されませんでした'
+    end
     
   end
+  
+
+  def confirmation
+  end
+
+  def after_sign_in_path_for(resource)
+    flash[:alert] = "ログインに成功しました" 
+    users_confirmation_path
+  end
+
 
   private
 
@@ -87,9 +89,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

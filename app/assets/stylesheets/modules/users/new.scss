@@ -50,17 +50,6 @@
   font-size: 16px;
 }
 
-@mixin birthdaybox {
-  width: 76PX;
-  height: 46px;
-  display: inline-block;
-  margin: 8px 0 0;
-  position: relative;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
 
 
 .body{
@@ -194,26 +183,17 @@
         @include required;
       }
       &__form{
-        display: flex;
-
-        // &__year1{
-        //   @include birthdaybox;;
-        // }
-        // &__year2{
-        //   margin: 18px 10px;
-        // }
-        // &__month1{
-        //   @include birthdaybox;
-        // }
-        // &__month2{
-        //   margin: 18px 10px;
-        // }
-        // &__day1{
-        //   @include birthdaybox;
-        // }
-        // &__day2{
-        //   margin: 18px 10px;
-        // }
+       
+        select{
+          width: 88px;
+          height: 46px;
+          display: inline-block;
+          margin: 8px 0 0;
+          position: relative;
+          background: #fff;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
       }
     }
 
