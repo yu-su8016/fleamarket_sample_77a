@@ -1,0 +1,12 @@
+= render "users/header"
+
+.after_purchase
+  .after_purchase__content
+    = link_to items_path do
+      .after_purchase__content--link
+        .after_purchase__content--link--cover
+          購入しました
+          %br
+          トップページへ
+
+= render "users/footer"
