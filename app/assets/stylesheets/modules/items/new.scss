@@ -27,27 +27,6 @@
   padding: 0 16px;
 }
 
-// --------------------------------------
-// ヘッダー部分
-//      render後削除
-header {
-  width: 100vw;
-  height: 128px;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    text-decoration: none;
-  }
-  .header-logo {
-    border-style: none;
-    width: 185px;
-    height: 49px;
-  }
-}
-// --------------------------------------
 
 body {
   background-color: #f5f5f5;
@@ -57,7 +36,7 @@ body {
     background-color: #fff;
     margin: 0 auto;
 
-    .item-outline {
+    .new-item-outline {
       @include input-item-layout;
 
       .input-image {
@@ -124,7 +103,7 @@ body {
       }
     }
 
-    .item-details {
+    .new-item-details {
       @include input-item-layout;
 
       &__category-name {
@@ -317,12 +296,3 @@ body {
     }
   }
 }
-// --------------------------------------
-// フッター部分
-//      render後削除
-footer {
-  width: 100vw;
-  height: 128px;
-  background-color: #f5f5f5;
-}
-// --------------------------------------

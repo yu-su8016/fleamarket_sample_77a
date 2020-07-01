@@ -89,7 +89,7 @@ $gray2: #ccc;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-image: url(pict/pict-reason-01.jpg);
+      background-image: image-url("pict/pict-reason-01.jpg");
       background-size: cover;
       &__cover {
         text-align: center;
