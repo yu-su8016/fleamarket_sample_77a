@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      category: カテゴリー
+      item: 商品
+      image: 画像
+    attributes:
+      user:
+        email: メールアドレス
+        encrypted_password: パスワード
+        nickname: ニックネーム
+        family_name: 名字
+        first_name: 名前
+        family_name_kana: 名字(かな)
+        first_name_kana: 名前(かな)
+        birthday: 生年月日
+      item:
+        name: 商品名
+        explanation: 商品説明
+        brand: ブランド名
+        price: 販売価格
+        size: 商品のサイズ
+        category_id: カテゴリー
+        condition_id: 商品の状態
+        delivery_fee_id: 配送料の負担
+        prefecture_id: 配送もとの地域
+        day_id: 配送までの日数
+        delivery_method_id: 配送の方法
+        category: カテゴリー
+        images: 商品の画像
+      

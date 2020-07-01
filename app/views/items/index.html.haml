@@ -201,6 +201,8 @@
 
 = render "footer"
 
-.exhibit
-  %p.exhibit--text 出品する
-  = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
+= link_to new_item_path do
+  .exhibit
+    %p.exhibit--text 出品する
+    = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
+
