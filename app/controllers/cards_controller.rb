@@ -29,17 +29,17 @@ class CardsController < ApplicationController
         )
         card = Card.new(user_id: @user.id, customer_id: customer.id)
         card.save
+        redirect_to user_cards_path(user_id: 4), notice: '登録されました'
         ## ユーザー登録機能実装後修正 user_id: current_user.idへ
       else
         customer = Payjp::Customer.retrieve(@user.card.customer_id)
         customer.cards.create(
           card: token.id
         )
+        redirect_to user_cards_path(user_id: 4), notice: '登録されました'
       end
-      redirect_to user_cards_path(user_id: 1), notice: '登録されました'
-
     rescue
-      redirect_to user_cards_path(user_id: 1), alert: '登録できませんでした'
+      redirect_to user_cards_path(user_id: 4), alert: '登録できませんでした'
     end
   end
 
@@ -47,7 +47,7 @@ class CardsController < ApplicationController
     customer = Payjp::Customer.retrieve(@user.card.customer_id)
     card = customer.cards.retrieve(params[:card_id])
     card.delete
-    redirect_to user_cards_path(user_id: 3), alert: '削除しました'
+    redirect_to user_cards_path(user_id: 4), alert: '削除しました'
   end
 
   private
