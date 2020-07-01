@@ -9,8 +9,7 @@
 }
 
 @mixin input {
-  height: 28px;
-  padding: 10px 16px 8px;
+  height: 46px;
   border-radius: 4px;
   border: 1px solid #ccc;
   background: #fff;
@@ -78,32 +77,33 @@
       }
     }
     &__contents3{
-      &__box{
-        padding: 24px 64px 32px;
-        &__mail-title{
-          font-size: 14px;
-        }
-        &__mail-form{
-          margin: 0 0 24px;
-          width: 290px;
-          @include input;
-        }
-        &__password-title{
-          font-size: 14px;
-        }
-        &__password-form{
-          margin: auto;
-          width: 290px;
-          @include input;
-        }
-        &__btn{
-          margin: 24px 0 24px;
-          width: 100%;
-          font-size: 14px;
-          text-align: center;
-          @include btn;
-        }
+ 
+      &__mail-title{
+        font-size: 14px;
       }
+      &__mail-form{
+        margin: 0 0 24px;
+        width: 290px;
+        @include input;
+      }
+      &__password-title{
+        font-size: 14px;
+      }
+      &__password-form{
+        margin: auto;
+        width: 290px;
+        @include input;
+      }
+      &__btn{
+        width: 100%;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 24px;
+        @include btn;
+        
+        
+      }
+      
     }
   }
 }

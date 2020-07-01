@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
 
   before_action :set_hash, only: [:new, :create]
   def index
+
   end
   def purchase
     

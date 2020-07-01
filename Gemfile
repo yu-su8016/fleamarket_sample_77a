@@ -46,12 +46,11 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rails-console'
-
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'gimei'
-  
 end
 
 group :development do
