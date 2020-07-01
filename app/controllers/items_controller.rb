@@ -17,12 +17,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    # binding.pry
     if @item.save
       redirect_to "/"
     else
       10.times { @item.images.build }
-      # binding.pry
       render :new
     end
   end
