@@ -1,4 +1,5 @@
 @import "reset";
+@import "config/colors";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "modules/items/index";
@@ -9,6 +10,9 @@
 @import "modules/users/index";
 @import "modules/users/new";
 @import "modules/users/show";
+@import "modules/users/confirmation";
 @import "modules/cards/index";
 @import "_header";
 @import "_footer";
+@import "modules/flash";
+@import "error_form";

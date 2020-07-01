@@ -1,0 +1,25 @@
+-# クレジットカード登録するかどうかの確認画面
+
+.body
+  = render "users/header"
+  .main
+    .main__form
+      .main__form__contents1
+        .main__form__contents1__title
+          クレジットカード登録
+      .main__form__contents2
+        %p.main__form__contents2__message
+          いますぐクレジットカード登録する方はこちら
+        .main__form__contents2__btn
+          = link_to "#" do
+            いますぐ登録
+     
+          
+      .main__form__contents3
+        %p.main__form__contents3__message
+          あとでクレジットカード登録する方はこちら
+        .main__form__contents3__btn
+          = link_to "/" do
+            あとで登録
+
+  = render "users/footer"
