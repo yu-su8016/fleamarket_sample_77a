@@ -3,7 +3,11 @@ class ItemsController < ApplicationController
   before_action :item_find_params, only: [:create, :show, :destroy]
 
   def index
-    @items = Item.all.order("id DESC").limit(4)
+    @items = Item.all.order("created_at ASC").limit(4)
+  end
+  
+  def purchase
+    
   end
 
   def new
