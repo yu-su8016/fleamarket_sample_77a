@@ -1,39 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
   def index
-  end
-
-  def new
-    @item = Item.new
-    @image = @item.images.build
-  end
-
-  def show
-    @item = Item.find(params[:id]) 
-    @category = Category.find(@item.category_id)
-    @comment = Comment.new
-    @comments = @item.comments.includes(:user)
-    @likes = Like.new
-    # @likes = @item.likes.includes(:user)
-  end
-  
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy 
-      # if items.user_id == current_user.id
-      #   item.destroy 
-      # end
-  end
-
-  def delete
-  end
-  
-  private
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
-  end
-
-  def show
+    @items = Item.all.order("id DESC").limit(4)
   end
 
   def new
@@ -51,8 +19,33 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
+  def show
+    @item = Item.find(params[:id]) 
+    @category = Category.find(@item.category_id)
+    @conditions = Condition.find(@item.condition_id)
+    @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
+    @delivery_methods = DeliveryMethod.find(@item.delivery_method_id)
+    @prefectures = Prefecture.find(@item.prefecture_id)
+    @days = Day.find(@item.day_id)
 
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
+    @likes = Like.new
+    # @likes = @item.likes.includes(:user)
+  end
+  
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy 
+      # if items.user_id == current_user.id
+      #   item.destroy 
+      # end
+  end
+
+  def delete
+  end
+ 
+  private
   def set_hash
     @conditions = Condition.all
     @delivery_fees = DeliveryFee.all
@@ -63,6 +56,5 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
-                                                                                                                                                                                                      # current_user id
   end
 end

@@ -34,7 +34,7 @@
             （税込）
           .price-incidental__postage
             配送料
-            = @item.delivery_fee
+            = @delivery_fees.name
 
       .item-block
         .item-block__name
@@ -65,7 +65,7 @@
           %tr.details__table__line
             %td.title 状態
             %td.name
-              = @item.condition
+              = @conditions.name
           %tr.details__table__line
             %td.title サイズ
             %td.name
@@ -73,20 +73,20 @@
           %tr.details__table__line
             %td.title 配送料負担
             %td.name
-              = @item.delivery_fee
+              = @delivery_fees.name
           %tr.details__table__line
             %td.title 発送方法
             %td.name 
-              = @item.delivery_method
+              = @delivery_methods.name
           %tr.details__table__line
             %td.title 発送までの日数
             %td.name
-              = @item.day
+              = @days.name
           %tr.details__table__line
             %td.title 発送元地域
             %td.name 
               = link_to "#" do
-                = @item.prefecture
+                = @prefectures.name
 
       .like
         = link_to "#" , class: "like__click" do
@@ -100,27 +100,26 @@
           .like__arart__letter
             不適切な商品の通報
       
-      -# ここには、user,deviceがマーにされた後、コメントアウトを外す
-      -# - if user_signed_in? && current_user.id == @item.user
-    .contents2
-      = link_to purchase_items_path(@item) , class: "item-purchase" do
-        編集画面に進む
-    .contents2
-      = link_to @item ,method: :delete, class: "item-purchase" do
-        この出品商品を削除する
-      -# - elsif user_signed_in?
-    .contents2
-      = link_to purchase_items_path(@item) , class: "item-purchase" do
-        購入画面に進む
-      -# - else
-    .contents2
-      = link_to purchase_items_path(@item) , class: "item-purchase" do
-        購入画面に進む前に、ログインページへ
+    - if user_signed_in? && current_user.id == @item.user.id
+      .contents2
+        = link_to edit_user_item(@item) , class: "item-purchase" do
+          編集画面に進む
+      .contents2
+        = link_to @item ,method: :delete, class: "item-purchase" do
+          この出品商品を削除する
+    - elsif user_signed_in?
+      .contents2
+        = link_to purchase_user_items_path(@item) , class: "item-purchase" do
+          購入画面に進む
+    - else
+      .contents2
+        = link_to new_user_registration_path(@item) , class: "item-purchase" do
+          購入画面に進む前に、ログインページへ
     
 
     .contents3
       -# = form_with(model: [@item, @comment], local: true) do |f|
-      = form_with(model: @item, local: true) do |f|
+      = form_with(comment: @item, local: true) do |f|
         .new-comment
           = f.text_area :text, class: "new-comment__field"
           .caution
@@ -136,7 +135,7 @@
                   %p コメントする
     .contents4
       - if @item.previous.present?
-        = link_to item_path(@item.previous.id) do
+        = link_to user_item_path(@item.previous.id) do
           .previous
             .previous__icon
               = icon('fas', 'angle-left', class: 'icons')
@@ -145,7 +144,7 @@
       - else
         .none
       - if @item.next.present?
-        = link_to item_path(@item.next.id) do
+        = link_to user_item_path(@item.next.id) do
           .next
             .next__content
               次の商品 
