@@ -1,6 +1,14 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
   before_action :item_find_params, only: [:create, :show, :destroy]
+  def index
+    @category_parent = Category.roots
+    @category_children = @category_parent.find_by(name: "レディース").children
+    @category_grandchild = @category_children.find_by(name: "トップス").children
+  end
+  def purchase
+    
+  end
 
   def index
     @items = Item.all.order("created_at ASC").limit(4)
