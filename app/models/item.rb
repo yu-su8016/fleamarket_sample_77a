@@ -1,12 +1,13 @@
 class Item < ApplicationRecord
   has_many :likes
   has_many :comments
-  has_many :images
+
+  has_many :images, dependent: :destroy
   belongs_to :user, foreign_key: "seller_id"
   belongs_to :category, foreign_key: "category_id"
 
   accepts_nested_attributes_for :images
-
+  # accepts_nested_attributes_for :images, allow_destroy: true
   validates_associated :images 
 
   validates :name, presence: true, length: { maximum: 40 }
@@ -22,4 +23,13 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :day
   belongs_to_active_hash :delivery_method
+
+  def previous
+    Item.where("id < ?", self.id).order("id DESC").first
+  end
+
+  def next
+    Item.where("id > ?", self.id).order("id ASC").first
+  end
+
 end
