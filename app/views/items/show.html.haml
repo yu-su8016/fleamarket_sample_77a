@@ -3,6 +3,9 @@
 .item-details
   .item-details__flame
     .contents1
+      - if @item.buyer_id.present?
+        .item-sold
+          売り切れました
       .item-name
         %h1 
         = @item.name
@@ -50,12 +53,13 @@
             %td.name 
               = link_to "#" do
                 -# ここにカテゴリーへのパスを指定する 
-                = @item.category_id
+                = @category.name
               %br/
-              -# = @category.ancestry.each do |ancestry|
+              -# = @category.ancestry.name
               = link_to "#" do
                 カテゴリーancestry(仮入力)
               %br/
+              -# = @category.ancestry.name
               = link_to "#" do
                 カテゴリーancestry(仮入力)
           %tr.details__table__line
@@ -85,9 +89,11 @@
           %tr.details__table__line
             %td.title 発送元地域
             %td.name 
+              -# リンク先未設定の為、”#”を仮記載
               = link_to "#" do
                 = @prefectures.name
 
+      -# お気に入り機能未実装の為、リンク先は”#”を仮記載
       .like
         = link_to "#" , class: "like__click" do
           .like__click__icon
@@ -99,25 +105,37 @@
             = icon('fas', 'flag', class: 'icons')
           .like__arart__letter
             不適切な商品の通報
-      
-    - if user_signed_in? && current_user.id == @item.user.id
-      .contents2
-        = link_to edit_user_item(@item) , class: "item-purchase" do
-          編集画面に進む
-      .contents2
-        = link_to @item ,method: :delete, class: "item-purchase" do
-          この出品商品を削除する
-    - elsif user_signed_in?
-      .contents2
-        = link_to purchase_user_items_path(@item) , class: "item-purchase" do
-          購入画面に進む
-    - else
-      .contents2
-        = link_to new_user_registration_path(@item) , class: "item-purchase" do
-          購入画面に進む前に、ログインページへ
-    
 
+    -# 売り切れかどうか？出品者か？などを条件分岐
+    -if @item.buyer_id == nil
+      - if user_signed_in? && current_user.id == @item.user.id
+        .contents2
+          = link_to edit_user_item_path(@item) , class: "item-purchase" do
+            編集画面に進む
+        .contents2
+          = link_to user_item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+            この出品商品を削除する
+      - elsif user_signed_in?
+        .contents2
+          = link_to purchase_user_items_path(@item) , class: "item-purchase" do
+            購入画面に進む
+      - else
+        .contents2
+          = link_to new_user_registration_path(@item) , class: "item-purchase" do
+            購入画面に進む前に、ログインページへ
+    
+    -else
+      - if user_signed_in? && current_user.id == @item.user.id
+        .contents2
+          = link_to user_item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+            この出品商品を削除する
+      - else 
+        .contents2-sold
+          .item-purchase
+            この商品は既に購入されています
+            
     .contents3
+      -# コメント機能未実装の為、コメントアウト
       -# = form_with(model: [@item, @comment], local: true) do |f|
       = form_with(comment: @item, local: true) do |f|
         .new-comment
@@ -154,6 +172,7 @@
         .none 
     .contents5
       .category-more
+        -# カテゴリー機能が未実装の為、リンク先は”＃”で仮記載
         = link_to "#" do
           「カテゴリー名」をもっと見る
       .category-items

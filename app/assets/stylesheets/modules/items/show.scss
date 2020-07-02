@@ -16,6 +16,16 @@
       width: 700px;
       margin: 0 auto;
       padding: 24px 40px 40px;
+      .item-sold{
+        background: grey;
+        margin: 20px auto;
+        width: 100%;
+        line-height: 50px;
+        text-align: center;
+        color: #f8f8f8;
+        font-size: 30px;
+        font-weight: bold;
+      }
       .item-name{
         text-align: center;
         font-weight: bold;
@@ -165,6 +175,21 @@
     }
     .contents2 {
       background: #ea352d;
+      display: block;
+      margin: 20px auto;
+      width: 700px;
+      .item-purchase{
+        color: #fff;
+        display: block;
+        font-size: 24px;
+        line-height: 60px;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+    .contents2-sold {
+      background: grey;
       display: block;
       margin: 20px auto;
       width: 700px;
