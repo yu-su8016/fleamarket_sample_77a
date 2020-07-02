@@ -113,7 +113,7 @@
           = link_to edit_user_item_path(@item) , class: "item-purchase" do
             編集画面に進む
         .contents2
-          = link_to user_item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+          = link_to user_item_path(@item), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
             この出品商品を削除する
       - elsif user_signed_in?
         .contents2

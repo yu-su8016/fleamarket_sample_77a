@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
+  before_action :item_find_params, only: [:create, :show, :destroy]
+
   def index
     @items = Item.all.order("id DESC").limit(4)
   end
@@ -10,7 +12,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -20,29 +21,22 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id]) 
     @category = Category.find(@item.category_id)
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
     @delivery_methods = DeliveryMethod.find(@item.delivery_method_id)
     @prefectures = Prefecture.find(@item.prefecture_id)
     @days = Day.find(@item.day_id)
-
-    @comment = Comment.new
-    @comments = @item.comments.includes(:user)
-    @likes = Like.new
-    # @likes = @item.likes.includes(:user)
   end
   
   def destroy
-    @item = Item.find(params[:id])
-    @item.destroy 
-      # if items.user_id == current_user.id
-      #   item.destroy 
-      # end
-  end
-
-  def delete
+    if @item.user.id == current_user.id
+      if @item.destroy
+        redirect_to root_path, notice: "削除が完了しました"
+      else
+        redirect_to root_path, alert: "削除が失敗しました"
+      end
+    end
   end
  
   private
@@ -56,5 +50,9 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
+  end
+
+  def item_find_params
+    @item = Item.find(params[:id]) 
   end
 end
