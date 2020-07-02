@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
-
   before_action :set_hash, only: [:new, :create]
   def index
-
+    @items = Item.all.order("created_at ASC").limit(4)
   end
   def purchase
     
@@ -38,6 +37,5 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
-                                                                                                                                                                                                      # current_user id
   end
 end
