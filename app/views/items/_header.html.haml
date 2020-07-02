@@ -40,7 +40,7 @@
       .topheader__lists__low__user
         - if user_signed_in?
           .topheader__lists__low__user__logout
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "topheader__lists__low__user__logout--tab"
+            = link_to "マイページ", user_path(current_user), class: "topheader__lists__low__user__logout--tab"
         - else
           .topheader__lists__low__user__login
             = link_to "ログイン", new_user_session_path, method: :get, class: "topheader__lists__low__user__login--tab"

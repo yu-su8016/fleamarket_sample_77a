@@ -108,13 +108,12 @@
 
           
           .form__main__prefecture
-            %label.form__main__prefecture__title
+            %label.form__main__prefecture__title      
               都道府県
             %span.form__main__prefecture__required
               必須
-            -# 都道府県は商品出品機能の実装 #27で作成したactive_hashを使用するため仮の状態です。
-            = d.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'form__main__prefecture__form'}
-
+            = d.collection_select(:prefecture_id, @prefectures, :id, :name, {prompt: "選択してください"}, {class: 'form__main__prefecture__form'})
+          
           .form__main__city
             %label.form__main__city__title
               市区町村
