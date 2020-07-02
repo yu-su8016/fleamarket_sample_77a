@@ -1,0 +1,128 @@
+= render "users/header"
+
+.contents
+  = form_with model:@item, local:true do |f|
+    .new-item-title
+      %p 商品の情報を入力
+    .new-item-outline
+      .input-image
+        .input-image__headline
+          = f.label :images, "出品画像", class: 'input-image__headline--label'
+          %span.input-image__headline--required 必須
+        .input-image__comment 
+          最大5枚までアップロードできます
+
+          -# 画像投稿js機能
+          .post__drop__box__container
+            .prev-content
+
+              - @item.images.each do |image|
+                .preview-box
+                  .upper-box
+                    = image_tag image.images.to_s, width: "112", height: "112", alt: "preview"
+                  .lower-box
+                    .update-box
+                      %label.edit-btn 編集
+                    .delete-box
+                      .delete-btn
+                        %span 削除
+            .label-content
+              = f.label :"images_attributes_#{@item.images.length}_image", class: "label-box", id: "label-box--#{@item.images.length}" do
+                %pre.label-box__text-visible クリックしてファイルをアップロード
+            .hidden-content
+              = f.fields_for :images do |i|
+                = i.file_field :image, class: "hidden-field"
+                = i.check_box:_destroy, class: "hidden-checkbox"
+
+              - @item.images.length.upto(5) do |i|
+                %input{name: "item[images_attributes][#{i}][image]", id: "item_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
+          -# 終わり
+              
+      .input-name
+        .input-name__headline
+          = f.label :name, "商品名", class: 'input-name__headline--label'
+          %span.input-name__headline--required 必須
+        = f.text_field :name, class: 'input-name__text-field'
+
+      .input-explanation
+        .input-explanation__headline
+          = f.label :explanation, "商品の説明", class: 'input-explanation__headline--label'
+          %span.input-explanation__headline--required 必須
+        = f.text_area :explanation, class: 'input-explanation__text-area'
+
+
+    .new-item-details
+      %p.new-item-details__category-name 商品の詳細
+
+      .input-category
+        .input-category__headline
+          = f.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+          %span.input-category__headline--required 必須
+        -# form.collection_select(保存されるカラム名, オブジェクトの配列, カラムに保存される項目, 選択肢に表示されるカラム名, {オプション}, {htmlオプション})
+        -# オブジェクトの配列：itemsコントローラーで @categorys = Category.all
+        -# https://pikawaka.com/rails/form_with#form.select 参照
+
+        -# = form.collection_select(:category_id, @categorys, :id, :name, {prompt: "選択してください"}, {class: 'input-category__select'})
+
+        -# 下記を削除し、上記のコメントアウトを外す。
+        = f.select :category_id, [ "レディース", "メンズ", "ベビー・キッズ", "インテリア・住まい・小物" ], {prompt: "選択してください"}, {class: 'input-category__select'}
+
+      .input-brand
+        .input-brand__headline
+          = f.label :brand, "ブランド", class: 'input-brand__headline--label'
+          %span.input-brand__headline--any 任意
+        = f.text_field :brand, class: 'input-brand__text-field'
+
+      .input-size
+        .input-size__headline
+          = f.label :size, "商品のサイズ", class: 'input-size__headline--label'
+          %span.input-size__headline--required 必須
+        = f.text_field :size, class: 'input-size__text-field'
+
+      .input-condition
+        .input-condition__headline
+          = f.label :condition, "商品の状態", class: 'input-condition__headline--label'
+          %span.input-condition__headline--required 必須
+        -# = from.collection_select(:condition, @conditions, :name, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
+        = f.select :condition, [ "新品、未使用", "未使用品に近い", "目立った傷や汚れなし", "やや傷や汚れあり", "傷や汚れあり", "全体的に状態が悪い" ], {prompt: "選択してください"}, {class: 'input-condition__select'}
+
+
+    .delivery
+      %p.delivery__category-name 配送について
+
+      .input-delivery-fee
+        .input-delivery-fee__headline
+          = f.label :delivery_fee, "配送料の負担", class: 'input-delivery-fee__headline--label'
+          %span.input-delivery-fee__headline--required 必須
+        -# = form.collection_select(:delivery_fee, @delivery_fee, :name, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
+        = f.select :delivery_fee, [ "出品者負担(送料込み)", "購入者負担(送料別)" ], {prompt: "選択してください"}, {class: 'input-delivery-fee__select'}
+
+      .input-delivery-prefecture
+        .input-delivery-prefecture__headline
+          = f.label :prefecture, "配送元の地域", class: 'input-delivery-prefecture__headline--label'
+          %span.input-delivery-prefecture__headline--required 必須
+        -# = form.collection_select(:prefecture, @prefectures, :id, :naem, {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'})
+        = f.select :prefecture, [ "北海道", "東京", "大阪", "愛知", "沖縄" ], {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'}
+
+      .input-delivery-days
+        .input-delivery-days__headline
+          =f.label :day, "発送までの日数", class: 'input-delivery-days__headline--label'
+          %span.input-delivery-days__headline--required 必須
+        -# = form.collection_select(:day, @delivery_days, :day, :day, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
+        = f.select :day, [ "1~2日で発送", "2~3日で発送", "4~7日で発送" ], {prompt: "選択してください"}, {class: 'input-delivery-days__select'}
+
+
+    .price
+      %p.price__category-name 価格
+
+      .input-price
+        .input-price__headline
+          = f.label :price, "販売価格", class: 'input-price__headline--label'
+          %span.input-price__headline--required 必須
+        = f.text_field :price, class: 'input-price__text-field'
+
+      .submit
+        %div
+          = f.submit "出品する",class: "submit__btn"
+
+= render "users/footer"
