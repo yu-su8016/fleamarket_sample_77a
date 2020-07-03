@@ -14,11 +14,13 @@ Rails.application.routes.draw do
       get :logout
     end
   end
+
   resources :items do
     collection do
       get :purchase
     end
   end
+
   resources :cards do
   end
 end

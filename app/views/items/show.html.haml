@@ -3,78 +3,97 @@
 .item-details
   .item-details__flame
     .contents1
+      - if @item.buyer_id.present?
+        .item-sold
+          売り切れました
       .item-name
-        %h1 Bluetoothイヤホン ワイヤレスイヤホン ブラック
+        %h1 
+        = @item.name
       .main
         .main__image
           .main__image__principal
-            = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
+            = image_tag @item.images[0].images.to_s, class: "image"
           .main__image__sub
             %ul.image__list
-              %li.image__list__one
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              %li.image__list__two
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              %li.image__list__three
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              %li.image__list__four
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-
+              - @item.images.each.with_index(1) do |image, i|
+                - if i <= 4
+                  %li.image__list__one
+                    = image_tag image.images.to_s, class: "image"
+          .main__image__sub
+            %ul.image__list
+              - @item.images.each.with_index(1) do |image, i|
+                - if i >= 5 && i <= 8 
+                  %li.image__list__one
+                    = image_tag image.images.to_s, class: "image"
+              -# 画像最大８枚以上の場合、「.main__image__sub」以下を後述する。
       .price
         .price-content
           .price-content__yen
             ¥
           .price-content__num
-            2,000
+            = @item.price
         .price-incidental
           .price-incidental__tax
             （税込）
           .price-incidental__postage
-            送料込み
+            配送料
+            = @delivery_fees.name
 
       .item-block
         .item-block__name
-          Bluetoothイヤホン ワイヤレスイヤホン ブラック
+          = @item.name
       .details
         %table.details__table
           %tr.details__table__line
             %td.title 出品者
-            %td.name よん
+            %td.name 
+              = @item.user.nickname
           %tr.details__table__line
             %td.title カテゴリー
             %td.name 
               = link_to "#" do
-                財布
+                -# ここにカテゴリーへのパスを指定する 
+                = @category.name
               %br/
+              -# = @category.ancestry.name
               = link_to "#" do
-                ファッション
+                カテゴリーancestry(仮入力)
               %br/
+              -# = @category.ancestry.name
               = link_to "#" do
-                メンズ
+                カテゴリーancestry(仮入力)
           %tr.details__table__line
             %td.title ブランド
-            %td.name ヴィトン
+            %td.name 
+              = @item.brand
           %tr.details__table__line
             %td.title 状態
-            %td.name 新品未使用        
+            %td.name
+              = @conditions.name
           %tr.details__table__line
             %td.title サイズ
-            %td.name Mサイズ
+            %td.name
+              = @item.size
           %tr.details__table__line
             %td.title 配送料負担
-            %td.name 送料込み(出品者負担)
+            %td.name
+              = @delivery_fees.name
           %tr.details__table__line
             %td.title 発送方法
-            %td.name ヤマト
+            %td.name 
+              = @delivery_methods.name
           %tr.details__table__line
             %td.title 発送までの日数
-            %td.name 1日〜2日
+            %td.name
+              = @days.name
           %tr.details__table__line
             %td.title 発送元地域
             %td.name 
+              -# リンク先未設定の為、”#”を仮記載
               = link_to "#" do
-                愛知県
+                = @prefectures.name
 
+      -# お気に入り機能未実装の為、リンク先は”#”を仮記載
       .like
         = link_to "#" , class: "like__click" do
           .like__click__icon
@@ -86,14 +105,39 @@
             = icon('fas', 'flag', class: 'icons')
           .like__arart__letter
             不適切な商品の通報
-      
-    .contents2
-      = link_to "#" , class: "item-purchase" do
-        購入画面に進む
 
+    -# 売り切れかどうか？出品者か？などを条件分岐
+    -if @item.buyer_id == nil
+      - if user_signed_in? && current_user.id == @item.user.id
+        .contents2
+          = link_to edit_item_path(@item) , class: "item-purchase" do
+            編集画面に進む
+        .contents2
+          = link_to item_path(@item), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+            この出品商品を削除する
+      - elsif user_signed_in?
+        .contents2
+          = link_to purchase_items_path(@item) , class: "item-purchase" do
+            購入画面に進む
+      - else
+        .contents2
+          = link_to user_registration_path, class: "item-purchase" do
+            購入画面に進む前に、ログインページへ
+    
+    -else
+      - if user_signed_in? && current_user.id == @item.user.id
+        .contents2
+          = link_to item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+            この出品商品を削除する
+      - else 
+        .contents2-sold
+          .item-purchase
+            この商品は既に購入されています
+            
     .contents3
-      -# model: @itemを変更
-      = form_with model: @item do |f|
+      -# コメント機能未実装の為、コメントアウト
+      -# = form_with(model: [@item, @comment], local: true) do |f|
+      = form_with(comment: @item, local: true) do |f|
         .new-comment
           = f.text_area :text, class: "new-comment__field"
           .caution
@@ -108,84 +152,54 @@
                   = icon('fas', 'comment', class: 'icons')
                   %p コメントする
     .contents4
-      = link_to "#" do
-        .previous
-          .previous__icon
-            = icon('fas', 'angle-left', class: 'icons')
-          .previous__content
-            前の商品
-      = link_to "#" do
-        .next
-          .next__content
-            後ろの商品 
-          .next__icon
-            = icon('fas', 'angle-right', class: 'icons')
-
+      - if @item.previous.present?
+        = link_to item_path(@item.previous.id) do
+          .previous
+            .previous__icon
+              = icon('fas', 'angle-left', class: 'icons')
+            .previous__content
+              前の商品
+      - else
+        .none
+      - if @item.next.present?
+        = link_to item_path(@item.next.id) do
+          .next
+            .next__content
+              次の商品 
+            .next__icon
+              = icon('fas', 'angle-right', class: 'icons')
+      - else 
+        .none 
     .contents5
       .category-more
-        =link_to "#" do
+        -# カテゴリー機能が未実装の為、リンク先は”＃”で仮記載
+        = link_to "#" do
           「カテゴリー名」をもっと見る
       .category-items
-        -# each文
-        .category-item
-          = link_to "#" do
-            .category-item__first
-              .item-image
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              .item-content
-                .item-content__name
-                  Bluetoothイヤホン
-                .item-content__mix
-                  .item-content__mix__price
-                    .item-content__mix__price__yen
-                      ¥
-                    .item-content__mix__price__num
-                      2,000
-                  .item-content__mix__like
-                    = icon('fas', 'star', class: 'icons')
-                    .item-content__mix__like__count
-                      0
-                .item-content__tax
-                  （税込）
-        .category-item
-          = link_to "#" do
-            .category-item__first
-              .item-image
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              .item-content
-                .item-content__name
-                  Bluetoothイヤホン ワイヤレスイヤホン ブラック
-                .item-content__mix
-                  .item-content__mix__price
-                    .item-content__mix__price__yen
-                      ¥
-                    .item-content__mix__price__num
-                      2,000
-                  .item-content__mix__like
-                    = icon('fas', 'star', class: 'icons')
-                .item-content__tax
-                  （税込）
+        - @category.items.each.with_index(1) do |item, i|
+          - if i <= 3
+            .category-item
+              = link_to item_path(item) do
+                .category-item__first
+                  .item-image
+                    = image_tag item.images[0].images.to_s, class: "image"
+                  .item-content
+                    .item-content__name
+                      = item.name
+                    .item-content__mix
+                      .item-content__mix__price
+                        .item-content__mix__price__yen
+                          ¥
+                        .item-content__mix__price__num
+                          = item.price
+                      .item-content__mix__like
+                        = icon('fas', 'star', class: 'icons')
+                    .item-content__tax
+                      （税込）
 
-        .category-item
-          = link_to "#" do
-            .category-item__first
-              .item-image
-                = image_tag "icon/member_photo_noimage_thumb.png", class: "image"
-              .item-content
-                .item-content__name
-                  Bluetoothイヤホン ワイヤレスイヤホン ブラック
-                .item-content__mix
-                  .item-content__mix__price
-                    .item-content__mix__price__yen
-                      ¥
-                    .item-content__mix__price__num
-                      2,000
-                  .item-content__mix__like
-                    = icon('fas', 'star', class: 'icons')
-                .item-content__tax
-                  （税込）
 .exhibit
   %p.exhibit--text 出品する
   = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
 
 = render "footer"
+
