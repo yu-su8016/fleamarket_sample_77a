@@ -6,7 +6,7 @@ FactoryBot.define do
     family_name_kana      {"やまだ"}
     first_name_kana       {"たろう"}
     postal_code           {"0000000"}
-    prefecture            {"愛知県"}
+    prefecture_id         {"愛知県"}
     city                  {"名古屋市"}
     address               {"1-1"}
   end
