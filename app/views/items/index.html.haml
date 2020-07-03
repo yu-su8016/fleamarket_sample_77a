@@ -95,7 +95,7 @@
         新規投稿商品
       .main__contents5__category__lists
         - @items.each do |item|
-          = link_to user_items_path(item) do
+          = link_to item_path(item) do
             .main__contents5__category__lists__list
               .main__contents5__category__lists__list__image
                 = image_tag item.images[0].images.to_s, size: '220x150'
@@ -122,7 +122,7 @@
         アーカイバ
       .main__contents5__category__lists
         - @items.each do |item|
-          = link_to user_items_path(item) do
+          = link_to item_path(item) do
             .main__contents5__category__lists__list
               .main__contents5__category__lists__list__image
                 = image_tag item.images[0].images.to_s, size: '220x150'
@@ -153,7 +153,7 @@
 
 = render "footer"
 
-= link_to "#" do
+= link_to new_item_path(current_user.id) do
   -#  new_item_pathがエラーになる為、一旦コメントアウト
   .exhibit
     %p.exhibit--text 出品する
