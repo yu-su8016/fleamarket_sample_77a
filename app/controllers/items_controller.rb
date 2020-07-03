@@ -5,11 +5,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order("created_at ASC").limit(4)
   end
-  
-  def purchase
-    
-  end
-
+ 
   def new
     @item = Item.new
     10.times { @item.images.build }

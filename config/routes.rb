@@ -12,14 +12,15 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :logout
-    
-    end
-    resources :items do
-      collection do
-        get :purchase
-      end
     end
   end
+  
+  resources :items do
+    collection do
+      get :purchase
+    end
+  end
+
   resources :cards do
   end
 end
