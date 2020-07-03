@@ -1,4 +1,4 @@
-= render "header"
+-# = render "header"
 
 .item-details
   .item-details__flame
@@ -51,17 +51,36 @@
           %tr.details__table__line
             %td.title カテゴリー
             %td.name 
-              = link_to "#" do
-                -# ここにカテゴリーへのパスを指定する 
-                = @category.name
-              %br/
-              -# = @category.ancestry.name
-              = link_to "#" do
-                カテゴリーancestry(仮入力)
-              %br/
-              -# = @category.ancestry.name
-              = link_to "#" do
-                カテゴリーancestry(仮入力)
+              - @category_parent.each do |parent|
+                -if @item.category_id == parent.id
+                  = link_to "#" do
+                    = parent.name
+                - parent.children.each do |child|
+                  -if @item.category_id == child.id
+                    = link_to "#" do
+                      = parent.name
+                      %br/
+                    = link_to "#" do
+                      = child.name
+                  - child.children.each do |grandchild|
+                    -if @item.category_id == grandchild.id
+                      = link_to "#" do
+                        = parent.name
+                        %br/
+                      = link_to "#" do
+                        = child.name
+                        %br/
+                      = link_to "#" do
+                        = grandchild.name
+                  -# = link_to "#" do
+                  -#   = parent.parent.parent.name #親カテゴリー
+                  -#   %br
+                  -# = link_to "#" do
+                  -#   = parent.parent.name #子カテゴリー
+                  -#   %br
+                  -# = link_to "#" do
+                  -#   = parent.name #孫カテゴリー
+                
           %tr.details__table__line
             %td.title ブランド
             %td.name 

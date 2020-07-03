@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @category_parent = Category.where(ancestry:nil)
     @category = Category.find(@item.category_id)
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
