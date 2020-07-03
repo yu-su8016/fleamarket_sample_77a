@@ -94,46 +94,24 @@
       .category-product
         新規投稿商品
       .main__contents5__category__lists
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__lists__list__detail__tax (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__lists__list__detail__tax (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★0
-            %p.main__contents5__category__lists__list__detail__tax (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__lists__list__detail__tax (税込)
+        - @items.each do |item|
+          = link_to user_items_path(item) do
+            .main__contents5__category__lists__list
+              .main__contents5__category__lists__list__image
+                = image_tag item.images[0].images.to_s, size: '220x150'
+                -if item.buyer_id.present? 
+                  .main__contents5__category__lists__list__image__sold
+                    .main__contents5__category__lists__list__image__sold__inner
+                      SOLD
+              .main__contents5__category__lists__list__detail
+                %h8.main__contents5__category__lists__list__detail__name
+                  = item.name
+                %ul.main__contents5__category__lists__list__detail__price
+                  %li 
+                    = item.price 
+                    円
+                  %li.like ★ 0
+                %p.main__contents5__category__lists__list__detail__tax (税込)
 
   .main__contents5
     .main__contents5__category
@@ -142,51 +120,24 @@
       .category-product
         アーカイバ
       .main__contents5__category__lists
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__image__detail__tax
-              (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__image__detail__tax
-              (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__image__detail__tax
-              (税込)
-        .main__contents5__category__lists__list
-          .main__contents5__category__lists__list__image
-            = link_to "#"
-          .main__contents5__category__lists__list__detail
-            %h8.main__contents5__category__lists__list__detail__name
-              ee
-            %ul.main__contents5__category__lists__list__detail__price
-              %li 1000円
-              %li.like ★ 0
-            %p.main__contents5__category__image__detail__tax
-              (税込)
-
+        - @items.each do |item|
+          = link_to user_items_path(item) do
+            .main__contents5__category__lists__list
+              .main__contents5__category__lists__list__image
+                = image_tag item.images[0].images.to_s, size: '220x150'
+                -if item.buyer_id.present? 
+                  .main__contents5__category__lists__list__image__sold
+                    .main__contents5__category__lists__list__image__sold__inner
+                      SOLD
+              .main__contents5__category__lists__list__detail
+                %h8.main__contents5__category__lists__list__detail__name
+                  = item.name
+                %ul.main__contents5__category__lists__list__detail__price
+                  %li 
+                    = item.price
+                    円
+                  %li.like ★ 0
+                %p.main__contents5__category__image__detail__tax (税込)
 
   .main__contents7
     .main__contents7__download
