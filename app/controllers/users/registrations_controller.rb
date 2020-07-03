@@ -37,7 +37,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ログインに成功しました" 
+    flash.now[:alert] = "すでにログインしています" 
+    flash[:notice] = "ログインに成功しました" 
     users_confirmation_path
   end
 
