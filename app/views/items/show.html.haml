@@ -110,24 +110,24 @@
     -if @item.buyer_id == nil
       - if user_signed_in? && current_user.id == @item.user.id
         .contents2
-          = link_to edit_user_item_path(@item) , class: "item-purchase" do
+          = link_to edit_item_path(@item) , class: "item-purchase" do
             編集画面に進む
         .contents2
-          = link_to user_item_path(@item), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+          = link_to item_path(@item), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
             この出品商品を削除する
       - elsif user_signed_in?
         .contents2
-          = link_to purchase_user_items_path(@item) , class: "item-purchase" do
+          = link_to purchase_items_path(@item) , class: "item-purchase" do
             購入画面に進む
       - else
         .contents2
-          = link_to new_user_registration_path(@item) , class: "item-purchase" do
+          = link_to user_registration_path, class: "item-purchase" do
             購入画面に進む前に、ログインページへ
     
     -else
       - if user_signed_in? && current_user.id == @item.user.id
         .contents2
-          = link_to user_item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
+          = link_to item_path(@item) ,method: :delete, data: {confirm: "本当に削除しますか？"}, class: "item-purchase" do
             この出品商品を削除する
       - else 
         .contents2-sold
@@ -153,7 +153,7 @@
                   %p コメントする
     .contents4
       - if @item.previous.present?
-        = link_to user_item_path(@item.previous.id) do
+        = link_to item_path(@item.previous.id) do
           .previous
             .previous__icon
               = icon('fas', 'angle-left', class: 'icons')
@@ -162,7 +162,7 @@
       - else
         .none
       - if @item.next.present?
-        = link_to user_item_path(@item.next.id) do
+        = link_to item_path(@item.next.id) do
           .next
             .next__content
               次の商品 
@@ -179,7 +179,7 @@
         - @category.items.each.with_index(1) do |item, i|
           - if i <= 3
             .category-item
-              = link_to "#" do
+              = link_to item_path(item) do
                 .category-item__first
                   .item-image
                     = image_tag item.images[0].images.to_s, class: "image"
