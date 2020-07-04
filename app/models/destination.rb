@@ -9,4 +9,8 @@ class Destination < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :city, presence: true
   validates :address, presence: true
+  
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
+
 end

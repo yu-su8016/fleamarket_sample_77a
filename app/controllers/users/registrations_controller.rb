@@ -3,7 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  before_action :set_hash, only: [:new, :create]
+  
   # GET /resource/sign_up
   def new
     @user = User.new
@@ -12,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-   
+  
     user = User.new(user_params)
     user.save
     sign_in(user)
@@ -29,15 +30,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user = nil
       redirect_to new_user_registration_path, alert: '登録されませんでした'
     end
-    
+   
   end
   
-
   def confirmation
   end
 
   def after_sign_in_path_for(resource)
-    flash[:alert] = "ログインに成功しました" 
+    flash.now[:alert] = "すでにログインしています" 
+    flash[:notice] = "ログインに成功しました" 
     users_confirmation_path
   end
 
@@ -49,7 +50,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def destination_params
-    params.require(:destination).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture, :city, :address, :after_address, :phone).merge(user_id: @user_id)
+    params.require(:destination).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture_id, :city, :address, :after_address, :phone).merge(user_id: @user_id)
+  end
+
+  def set_hash
+    @prefectures = Prefecture.all
   end
 
   # GET /resource/edit
