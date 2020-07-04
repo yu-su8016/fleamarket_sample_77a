@@ -22,24 +22,25 @@ class CardsController < ApplicationController
           'X-Payjp-Direct-Token-Generate': 'true'
         } 
       )
-      
       unless @user.card
         customer = Payjp::Customer.create(
           card: token.id
         )
         card = Card.new(user_id: @user.id, customer_id: customer.id)
         card.save
-        redirect_to user_cards_path(user_id: 4), notice: '登録されました'
-        ## ユーザー登録機能実装後修正 user_id: current_user.idへ
+        redirect_to action: :index
+        flash[:notice] = '登録されました'
       else
         customer = Payjp::Customer.retrieve(@user.card.customer_id)
         customer.cards.create(
           card: token.id
         )
-        redirect_to user_cards_path(user_id: 4), notice: '登録されました'
+        redirect_to action: :index
+        flash[:notice] = '登録されました'
       end
     rescue
-      redirect_to user_cards_path(user_id: 4), alert: '登録できませんでした'
+      redirect_to action: :index
+      flash[:alert] = '登録できませんでした　内容に誤りがあります'
     end
   end
 
@@ -47,7 +48,8 @@ class CardsController < ApplicationController
     customer = Payjp::Customer.retrieve(@user.card.customer_id)
     card = customer.cards.retrieve(params[:card_id])
     card.delete
-    redirect_to user_cards_path(user_id: 4), alert: '削除しました'
+    redirect_to action: :index
+    flash[:alert] = '削除しました'
   end
 
   private
@@ -59,7 +61,7 @@ class CardsController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
-    ## ユーザー登録機能実装後修正 find()をcurrent_user.idへ
+    ## merge後修正 params[:user_id]をcurrent_user.idへ
   end
 
 end
