@@ -6,13 +6,13 @@ class PurchasesController < ApplicationController
   def index
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
-      unless params[:destinations_id]
+      if params[:card_id]
         @cards = customer.cards.retrieve(params[:card_id])
       else
         @cards = customer.cards.data[0]
       end
     end
-    @destinations = Destination.find(params[:destinations_id])
+    @destinations = Destination.find(params[:destination_id])
   end
 
   def show
@@ -21,12 +21,14 @@ class PurchasesController < ApplicationController
       @cards = customer.cards
     else
       @destinations = Destination.includes(:user).where(users: {id: params[:user_id]})
+      ## merge後修正 params[:user_id]をcurrent_user.idへ
     end
   end
 
   def purchase
     if @user.card  
       @item.update_attribute(:buyer_id, params[:user_id])
+      ## merge後修正 params[:user_id]をcurrent_user.idへ
       charge = Payjp::Charge.create(
         :amount => @total_price,
         :customer => @user.card.customer_id,
@@ -35,7 +37,7 @@ class PurchasesController < ApplicationController
       )
       redirect_to action: :after_purchase
     else
-      redirect_to user_item_purchases_path(destinations_id: params[:destinations_id])
+      redirect_to user_item_purchases_path(destination_id: params[:destination_id])
       flash[:alert] = '購入にはクレジットカードの登録が必要です'
     end
   end
@@ -52,12 +54,12 @@ class PurchasesController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
-    ## ユーザー登録機能実装後修正 find()をcurrent_user.idへ
+    ## merge後修正 params[:user_id]をcurrent_user.idへ
   end
 
   def set_item
     @item = Item.find(params[:item_id])
-    @total_price = @item.delivery_fee.to_i + @item.price
+    @total_price = @item.delivery_fee_id.to_i + @item.price
   end
 
 end
