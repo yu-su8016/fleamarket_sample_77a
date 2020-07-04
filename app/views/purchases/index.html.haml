@@ -1,7 +1,12 @@
--# = render "users/header"
+= render "users/header"
 
 .purchase
   .purchase__contents
+  
+    .notifications
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: key)
+
     .purchase__contents__name
       購入内容の確認
     .purchase__contents__product
@@ -9,25 +14,32 @@
 
       .purchase__contents__product__detail
         .purchase__contents__product__detail__name
-          エプソン IC4CL69L 全4色セット×2+黒2本 大容量（XL）新品
+          = @item.brand
+          %br
+          = @item.name
+          %br
+          = @item.condition_id
         .purchase__contents__product__detail__price
           %span.purchase__contents__product__detail__price--send  送料込み(税込)
-          %p.purchase__contents__product__detail__price--tax ¥ 20,000
+          %p.purchase__contents__product__detail__price--tax
+            ¥
+            = @total_price.to_s(:delimited)
         
     .purchase__contents__price
       .purchase__contents__price__sum
         %span.purchase__contents__price__sum__name
           支払い金額
         %span.purchase__contents__price__sum__detail
-          ¥ 20,000
+          ¥
+          = @total_price.to_s(:delimited)
     .purchase__contents__way
-      .purchase__contents__way__pay
-        %span.purchase__contents__way__pay__name 支払い方法
-        = link_to user_item_purchase_path(id: 1, distinations_id: params[:distinations_id]) do
-          .purchase__contents__way__pay__change
-            変更する>
-
       - if @cards
+        .purchase__contents__way__pay
+          %span.purchase__contents__way__pay__name 支払い方法
+          = link_to user_item_purchase_path(id: 1, destination_id: params[:destination_id]) do
+            .purchase__contents__way__pay__change
+              変更する>
+
         .purchase__contents__way__detail
           %p.purchase__contents__way__detail__credit クレジットカード
           %p.purchase__contents__way__detail__credit
@@ -40,9 +52,12 @@
             = @cards.exp_year
           %p.credit-campany
             = @cards.brand
+          
       - else
         .purchase__contents__way__detail
-          カードの登録がありません
+        = link_to user_cards_path do
+          クレジットカードを登録してください>
+
 
     .purchase__contents__delivery
       %ul.purchase__contents__delivery__name
@@ -53,19 +68,21 @@
       
       %li.purchase__contents__delivery__detail
         〒
-        = @distinations.postal_code[0, 3]
+        = @destinations.postal_code[0, 3]
         \-
-        = @distinations.postal_code[3, 8]
+        = @destinations.postal_code[3, 8]
       %li.purchase__contents__delivery__detail
-        = @distinations.prefecture
-        = @distinations.city
-        = @distinations.address
-        = @distinations.after_address
+        = @destinations.prefecture
+        = @destinations.city
+        = @destinations.address
+        = @destinations.after_address
       %li.purchase__contents__delivery__detail
-        =  @distinations.family_name
-        =  @distinations.first_name
-    = form_with url: buy_user_item_purchases_path, method: "get" do |form|
-      = form.hidden_field :card_id, value: params[:card_id]
+        =  @destinations.family_name
+        =  @destinations.first_name
+    = form_with url: purchase_user_item_purchases_path, method: "get", local: true do |form|
+      - if @card
+        = form.hidden_field :card_id, value: @cards.id
+      = form.hidden_field :destination_id, value: @destinations.id
       = form.submit "購入する", class: 'buy__btn';
 
 = render "users/footer"
