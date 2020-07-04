@@ -12,5 +12,6 @@ class ItemsController < ApplicationController
     end
     destinations = Destination.includes(:user).where(users: {id: params[:user_id]})
     @destinations = destinations[0]
+    params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
   end
 end
