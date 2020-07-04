@@ -1,76 +1,95 @@
 require 'rails_helper'
+include AuthHelper
 
 describe CardsController do
-  before do
-    it '#@userに期待した値が入っていること' do
-      
-    end
-    it 'Payjp.api_keyが正しいこと' do
-      
-    end
-  end
+  before {basic_login}
+  let(:user) { create(:user) }
+  let(:item) { create(:item, seller_id: user.id) }
+  let(:params) {{ user_id: user.id, item_id: item.id }}
   describe 'GET #index' do
-    content 'userがカードを保有している場合(@user.cardあり)' do
+    it '#@userに期待した値が入っていること' do
+      get :index, params: params
+      expect(assigns(:user)).to eq user
+    end
+    context 'userがカードを保有している場合(@user.cardあり)' do
+      before do
+        card = create(:card, user_id: user.id)
+        payjp_customer = double("Payjp::Customer")
+        @payjp_cards = double("Payjp::Cards")
+        allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer) 
+        allow(payjp_customer).to receive(:cards).and_return(@payjp_cards)
+      end
       it '@cardsに期待した値が入っていること' do
-        
+        get :index, params: params
+        expect(assigns(:cards)).to eq @payjp_cards
       end
       it 'index.html.haml に遷移すること' do
-        
+        get :index, params: params
+        expect(response).to render_template :index
       end
     end
-    content 'userがカードを保有していない@user.cardなし' do
-      it '@cardsはない' do
+    context 'userがカードを保有していない@user.cardなし' do
+      it 'index.html.haml に遷移すること' do
+        get :index, params: params
+        expect(response).to render_template :index
       end
     end
   end
-
   describe 'POST #create' do
-    content 'tokenが作られる場合' do
-      content 'カードの登録が初めての場合(@user.cardなし)' do
-        it 'Payjpのcustomerオブジェクトを作ること' do
-          
-        end
-        it 'costomerオブジェクトにcardオブジェクトを登録すること' do
-          
-        end
-        it 'cardを保存すること' do
-        
+    context 'tokenが作られる場合' do
+      before do
+        payjp_token = double("Payjp::Token", id: 1)
+        allow(Payjp::Token).to receive(:create).and_return(payjp_token)
+      end
+      context 'カードの登録が初めての場合(@user.cardなし)' do
+        before do
+          payjp_customer = double("Payjp::Customer", id: 'cus_121673955bd7aa144de5a8f6c262')
+          allow(Payjp::Customer).to receive(:create).and_return(payjp_customer)
+          params[:customer_id] = payjp_customer.id
         end
         it 'index.html.haml に遷移すること' do
-        
+          post :create, params: params
+          expect(response).to redirect_to user_cards_path
         end
       end
-      content 'カードの登録が2回目以降の場合(@user.cardあり)' do
-        it 'Payjpのcostomerオブジェクトを呼び出すこと' do
-          
-        end
-        it 'costomerオブジェクトにカードを登録すること' do
-          
+      context 'カードの登録が2回目以降の場合(@user.cardあり)' do
+        before do
+          card = create(:card, user_id: user.id)
+          payjp_customer = double("Payjp::Customer")
+          payjp_cards = double("Payjp::Cards")
+          payjp_card_create = double("Payjp::CardCreate")
+          allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer) 
+          allow(payjp_customer).to receive(:cards).and_return(payjp_cards)
+          allow(payjp_cards).to receive(:create).and_return(payjp_card_create)
         end
         it 'index.html.haml に遷移すること' do
-          
+          post :create, params: params
+          expect(response).to redirect_to user_cards_path
         end
       end
     end
-    content 'tokenが作られない場合' do
+    context 'tokenが作られない場合' do
       it 'index.html.haml に遷移すること' do
-          
+        post :create, params: params
+        expect(response).to redirect_to user_cards_path
       end
     end
     
   end
   describe '#delete' do
-    it 'Payjpのcostomerオブジェクトを呼び出すこと' do
-      
-    end
-    it 'costomerオブジェクトのcardオブジェクトを呼び出すこと' do
-      
-    end
-    it 'cardオブジェクトを削除すること' do
-      
+    before do
+      card = create(:card, user_id: user.id)
+      payjp_customer = double("Payjp::Customer")
+      payjp_cards = double("Payjp::Cards")
+      payjp_card = double("Payjp::Card")
+      allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer) 
+      allow(payjp_customer).to receive(:cards).and_return(payjp_cards)
+      allow(payjp_cards).to receive(:retrieve).and_return(payjp_card)
+      allow(payjp_card).to receive(:delete)
     end
     it 'index.html.haml に遷移すること' do
-          
+      get :delete, params: params
+      expect(response).to redirect_to user_cards_path
     end
   end
 
