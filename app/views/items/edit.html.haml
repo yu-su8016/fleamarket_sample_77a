@@ -19,7 +19,7 @@
               - @item.images.each do |image|
                 .preview-box
                   .upper-box
-                    = image_tag image.images.to_s, width: "112", height: "112", alt: "preview"
+                    = image_tag image.image.to_s, width: "112", height: "112", alt: "preview"
                   .lower-box
                     .update-box
                       %label.edit-btn 編集
@@ -31,7 +31,7 @@
                 %pre.label-box__text-visible クリックしてファイルをアップロード
             .hidden-content
               = f.fields_for :images do |i|
-                = i.file_field :image, class: "hidden-field"
+                = i.file_field :images, class: "hidden-field"
                 = i.check_box:_destroy, class: "hidden-checkbox"
 
               - @item.images.length.upto(4) do |i|

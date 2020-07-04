@@ -1,5 +1,6 @@
 class Image < ApplicationRecord
-  belongs_to :item, optional: true
   mount_uploader :image, ImageUploader
-  validates :images, presence: true
+  belongs_to :item, optional: true
+  # validates :image, presence: true, length: {manimum: 1, maximum: 5}
+  
 end

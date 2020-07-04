@@ -98,7 +98,7 @@
           = link_to item_path(item) do
             .main__contents5__category__lists__list
               .main__contents5__category__lists__list__image
-                = image_tag item.images[0].images.to_s, size: '220x150'
+                = image_tag item.images[0].image.to_s, size: '220x150'
                 -if item.buyer_id.present? 
                   .main__contents5__category__lists__list__image__sold
                     .main__contents5__category__lists__list__image__sold__inner
@@ -124,7 +124,7 @@
           = link_to item_path(item) do
             .main__contents5__category__lists__list
               .main__contents5__category__lists__list__image
-                = image_tag item.images[0].images.to_s, size: '220x150'
+                = image_tag item.images[0].image.url, size: '220x150'
                 -if item.buyer_id.present? 
                   .main__contents5__category__lists__list__image__sold
                     .main__contents5__category__lists__list__image__sold__inner
@@ -152,7 +152,7 @@
 
 = render "footer"
 
-= link_to new_item_path(current_user.id) do
+= link_to new_item_path do
   -#  new_item_pathがエラーになる為、一旦コメントアウト
   .exhibit
     %p.exhibit--text 出品する
