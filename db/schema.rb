@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_090850) do
+ActiveRecord::Schema.define(version: 2020_07_02_064231) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_06_29_090850) do
     t.string "family_name_kana", null: false
     t.string "first_name_kana", null: false
     t.string "postal_code", null: false
-    t.integer "prefecture", null: false
     t.string "city", null: false
     t.string "address", null: false
     t.string "after_address"
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_090850) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "prefecture_id", null: false
     t.index ["user_id"], name: "index_destinations_on_user_id"
   end
 
@@ -66,18 +66,18 @@ ActiveRecord::Schema.define(version: 2020_06_29_090850) do
     t.string "name", null: false
     t.text "explanation", null: false
     t.string "brand"
-    t.string "condition", null: false
-    t.string "delivery_fee", null: false
-    t.integer "prefecture", null: false
-    t.string "day", null: false
     t.integer "price", null: false
     t.string "size"
-    t.string "delivery_method", null: false
     t.bigint "seller_id", null: false
     t.bigint "buyer_id"
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condition_id", null: false
+    t.integer "delivery_fee_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "day_id", null: false
+    t.integer "delivery_method_id", null: false
     t.index ["brand"], name: "index_items_on_brand"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["category_id"], name: "index_items_on_category_id"
