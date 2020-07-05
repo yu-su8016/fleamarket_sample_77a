@@ -1,8 +1,12 @@
 require 'rails_helper'
 include AuthHelper
+include ControllerMacros
 
 describe PurchasesController do
-  before {basic_login}
+  before do 
+    basic_login
+    login(user)
+  end
   let(:user) { create(:user) }
   let(:buyer) { create(:user) }
   let(:item) { create(:item, seller_id: user.id)}
@@ -49,14 +53,14 @@ describe PurchasesController do
         before do
           payjp_customer = double("Payjp::Customer")
           payjp_cards = double("Payjp::Cards")
-          @payjp_card = PayjpMock.payjp_mock
+          @payjp_mock_card = PayjpMock.payjp_mock
           allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer) 
           allow(payjp_customer).to receive(:cards).and_return(payjp_cards)
-          allow(payjp_cards).to receive(:data).and_return(@payjp_card) 
+          allow(payjp_cards).to receive(:data).and_return(@payjp_mock_card) 
         end
         it '@cardsに期待した値が入っていること' do
           get :index, params: params
-          expect(assigns(:cards)).to eq @payjp_card[0]
+          expect(assigns(:cards)).to eq @payjp_mock_card[0]
         end
         it 'index.html.haml に遷移すること' do
           get :index, params: params
@@ -113,7 +117,7 @@ describe PurchasesController do
     end
     it 'after_purchase.html.haml に遷移すること' do
       get :purchase, params: params
-      expect(response).to redirect_to after_purchase_item_purchases_path
+      expect(response).to redirect_to after_purchase_item_purchases_path(item_id: item.id)
     end
   end
 end
