@@ -105,23 +105,15 @@ describe PurchasesController do
     end
   end
   describe 'GET #purchase' do
-    context 'userがカードを保有している場合(@user.cardあり)' do
-      before do
-        card = create(:card, user_id: user.id)
-        item[:buyer_id] = buyer.id
-        payjp_charge = double("Payjp::Charge")
-        allow(Payjp::Charge).to receive(:create).and_return(payjp_charge)
-      end
-      it 'after_purchase.html.haml に遷移すること' do
-        get :purchase, params: params
-        expect(response).to redirect_to after_purchase_user_item_purchases_path
-      end
+    before do
+      card = create(:card, user_id: user.id)
+      item[:buyer_id] = buyer.id
+      payjp_charge = double("Payjp::Charge")
+      allow(Payjp::Charge).to receive(:create).and_return(payjp_charge)
     end
-    context 'userがカードを保有していない(@user.cardなし)' do
-      it 'index.html.haml に遷移すること' do
-        get :purchase, params: params
-        expect(response).to redirect_to user_item_purchases_path(destination_id: destination.id)
-      end
+    it 'after_purchase.html.haml に遷移すること' do
+      get :purchase, params: params
+      expect(response).to redirect_to after_purchase_item_purchases_path
     end
   end
 end
