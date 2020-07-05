@@ -2,7 +2,10 @@ require 'rails_helper'
 include AuthHelper
 
 describe CardsController do
-  before {basic_login}
+  before do 
+    basic_login
+    login(user)
+  end
   let(:user) { create(:user) }
   let(:item) { create(:item, seller_id: user.id) }
   let(:params) {{ user_id: user.id, item_id: item.id }}
@@ -19,16 +22,32 @@ describe CardsController do
         allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer) 
         allow(payjp_customer).to receive(:cards).and_return(@payjp_cards)
       end
-      it '@cardsに期待した値が入っていること' do
-        get :index, params: params
-        expect(assigns(:cards)).to eq @payjp_cards
+      context 'カードデータがある場合(cards.data[0]あり)' do
+        before do
+          payjp_mock_card = PayjpMock.payjp_mock
+          allow(@payjp_cards).to receive(:data).and_return(payjp_mock_card)
+        end
+        it '@cardsに期待した値が入っていること' do
+          get :index, params: params
+          expect(assigns(:cards)).to eq @payjp_cards
+        end
+        it 'index.html.haml に遷移すること' do
+          get :index, params: params
+          expect(response).to render_template :index
+        end
       end
-      it 'index.html.haml に遷移すること' do
-        get :index, params: params
-        expect(response).to render_template :index
+      context 'カードデータがない場合(cards.data[0]ない)' do
+        before do
+          payjp_mock_card_none = PayjpMock.payjp_mock_none
+          allow(@payjp_cards).to receive(:data).and_return(payjp_mock_card_none)
+        end
+        it 'index.html.haml に遷移すること' do
+          get :index, params: params
+          expect(response).to render_template :index
+        end
       end
     end
-    context 'userがカードを保有していない@user.cardなし' do
+    context 'userがカードを保有していない場合(@user.cardなし)' do
       it 'index.html.haml に遷移すること' do
         get :index, params: params
         expect(response).to render_template :index
