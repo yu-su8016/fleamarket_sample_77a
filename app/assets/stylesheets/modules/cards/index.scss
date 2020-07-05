@@ -40,6 +40,7 @@ $gray2: #ccc;
     background-color: orange;
   }
 }
+
   .card-content1 {
     width: 700px;
     padding-bottom: 64px;
@@ -135,16 +136,23 @@ $gray2: #ccc;
       }
     }
   }
+  .card-content1__none {
+    width: 700px;
+    height: 70px;
+    background: $white;
+    text-align: center;
+    line-height: 70px;
+  }
   .card-content2 {
     width: 700px;
     background: $white;
     margin-top: 72px;
     .card_list {
+      padding: 50px 0;
       &__head {
         @include head
       }
       &__content {
-        padding: 20px 0 50px 0;
         display: flex;
         justify-content: center;
         &--cover {
