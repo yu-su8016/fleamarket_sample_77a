@@ -45,4 +45,9 @@ module PayjpMock
       "object": "card"
     }]
   end
+
+  def self.payjp_mock_none
+    []
+  end
+
 end
