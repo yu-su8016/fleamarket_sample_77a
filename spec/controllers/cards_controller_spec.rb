@@ -49,7 +49,7 @@ describe CardsController do
         end
         it 'index.html.haml に遷移すること' do
           post :create, params: params
-          expect(response).to redirect_to user_cards_path
+          expect(response).to redirect_to cards_path
         end
       end
       context 'カードの登録が2回目以降の場合(@user.cardあり)' do
@@ -64,14 +64,14 @@ describe CardsController do
         end
         it 'index.html.haml に遷移すること' do
           post :create, params: params
-          expect(response).to redirect_to user_cards_path
+          expect(response).to redirect_to cards_path
         end
       end
     end
     context 'tokenが作られない場合' do
       it 'index.html.haml に遷移すること' do
         post :create, params: params
-        expect(response).to redirect_to user_cards_path
+        expect(response).to redirect_to cards_path
       end
     end
     
@@ -89,7 +89,7 @@ describe CardsController do
     end
     it 'index.html.haml に遷移すること' do
       get :delete, params: params
-      expect(response).to redirect_to user_cards_path
+      expect(response).to redirect_to cards_path
     end
   end
 
