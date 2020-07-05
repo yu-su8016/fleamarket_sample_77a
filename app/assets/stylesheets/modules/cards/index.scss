@@ -139,6 +139,7 @@ $gray2: #ccc;
   .card-content1__none {
     width: 700px;
     height: 70px;
+    margin-top: 50px;
     background: $white;
     text-align: center;
     line-height: 70px;
@@ -148,7 +149,7 @@ $gray2: #ccc;
     background: $white;
     margin-top: 72px;
     .card_list {
-      padding: 50px 0;
+      padding-bottom: 50px;
       &__head {
         @include head
       }
