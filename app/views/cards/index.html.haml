@@ -4,10 +4,6 @@
   = render "users/left-content"
   .card
 
-    .notifications
-      - flash.each do |key, value|
-        = content_tag(:div, value, class: key)
-
     .card-content1
       .card-content1__head
         クレジットカード情報入力
@@ -53,13 +49,13 @@
     .card-content2
       .card_list
         .card_list__head
-          カード一覧
+          クレジットカード一覧
 
         - if @cards
           - @cards.each do |card|
             .card_list__content
               .card_list__content--cover
-                = link_to delete_user_cards_path(card_id: card.id) do
+                = link_to delete_cards_path(card_id: card.id) do
                   %span.card_list__content__btn
                     削除する
                 .card_list__content__number
@@ -72,7 +68,7 @@
                 .card_list__content__brand
                   = card.brand
         - else
-          .card_list__content
-            カードの登録がありません
+          .card-content1__none
+            登録がありません
 
 = render "items/footer"
