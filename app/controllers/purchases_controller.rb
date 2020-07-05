@@ -20,26 +20,19 @@ class PurchasesController < ApplicationController
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
       @cards = customer.cards
     else
-      @destinations = Destination.includes(:user).where(users: {id: params[:user_id]})
-      ## merge後修正 params[:user_id]をcurrent_user.idへ
+      @destinations = Destination.includes(:user).where(users: {id: current_user.id})
     end
   end
 
   def purchase
-    if @user.card  
-      @item.update_attribute(:buyer_id, params[:user_id])
-      ## merge後修正 params[:user_id]をcurrent_user.idへ
-      charge = Payjp::Charge.create(
-        :amount => @total_price,
-        :customer => @user.card.customer_id,
-        :card => params[:card_id],
-        :currency => 'jpy',
-      )
-      redirect_to action: :after_purchase
-    else
-      redirect_to user_item_purchases_path(destination_id: params[:destination_id])
-      flash[:alert] = '購入にはクレジットカードの登録が必要です'
-    end
+    @item.update_attribute(:buyer_id, current_user.id)
+    charge = Payjp::Charge.create(
+      :amount => @total_price,
+      :customer => @user.card.customer_id,
+      :card => params[:card_id],
+      :currency => 'jpy',
+    )
+    redirect_to action: :after_purchase
   end
 
   def after_purchase
@@ -53,8 +46,7 @@ class PurchasesController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:user_id])
-    ## merge後修正 params[:user_id]をcurrent_user.idへ
+    @user = User.find(current_user.id)
   end
 
   def set_item
