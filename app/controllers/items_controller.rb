@@ -21,14 +21,14 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @category = Category.find(@item.category_id)
-    @conditions = Condition.find(@item.condition_id)
-    @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
-    @delivery_methods = DeliveryMethod.find(@item.delivery_method_id)
-    @prefectures = Prefecture.find(@item.prefecture_id)
-    @days = Day.find(@item.day_id)
+    # @category = Category.find(@item.category_id)
+    # @conditions = Condition.find(@item.condition_id)
+    # @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
+    # @delivery_methods = DeliveryMethod.find(@item.delivery_method_id)
+    # @prefectures = Prefecture.find(@item.prefecture_id)
+    # @days = Day.find(@item.day_id)
 
-    destinations = Destination.includes(:user).where(users: {id: params[:user_id]})
+    destinations = Destination.includes(:user).where(users: {id: current_user.id})
     @destinations = destinations[0]
     ## merge後、params[:user_id]をcurrent_user.idへ修正
   end
