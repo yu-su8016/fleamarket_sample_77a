@@ -5,7 +5,10 @@ class CardsController < ApplicationController
   def index
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
-      @cards = customer.cards
+      cards = customer.cards
+      if cards.data[0]
+        @cards = cards
+      end
     end
   end
   
@@ -60,8 +63,7 @@ class CardsController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:user_id])
-    ## merge後修正 params[:user_id]をcurrent_user.idへ
+    @user = User.find(current_user.id)
   end
 
 end
