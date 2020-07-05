@@ -20,10 +20,10 @@ Rails.application.routes.draw do
         get :purchase, :after_purchase
       end
     end
-    resources :cards do
-      collection do
-        get :delete
-      end
+  end
+  resources :cards do
+    collection do
+      get :delete
     end
   end
 end
