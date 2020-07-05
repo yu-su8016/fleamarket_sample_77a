@@ -36,7 +36,7 @@
       - if @cards
         .purchase__contents__way__pay
           %span.purchase__contents__way__pay__name 支払い方法
-          = link_to user_item_purchase_path(id: 1, destination_id: params[:destination_id]) do
+          = link_to item_purchase_path(id: 1, destination_id: params[:destination_id]) do
             .purchase__contents__way__pay__change
               変更する>
 
@@ -55,14 +55,14 @@
           
       - else
         .purchase__contents__way__detail
-        = link_to user_cards_path do
+        = link_to cards_path do
           クレジットカードを登録してください>
 
 
     .purchase__contents__delivery
       %ul.purchase__contents__delivery__name
         %span.purchase__contents__delivery__name__send 配送先
-        = link_to user_item_purchase_path(id: 2, card_id: params[:card_id]) do
+        = link_to item_purchase_path(id: 2, card_id: params[:card_id]) do
           .purchase__contents__delivery__name__change
             変更する>
       
@@ -79,10 +79,10 @@
       %li.purchase__contents__delivery__detail
         =  @destinations.family_name
         =  @destinations.first_name
-    = form_with url: purchase_user_item_purchases_path, method: "get", local: true do |form|
-      - if @card
+    = form_with url: purchase_item_purchases_path, method: "get", local: true do |form|
+      - if @cards
         = form.hidden_field :card_id, value: @cards.id
-      = form.hidden_field :destination_id, value: @destinations.id
-      = form.submit "購入する", class: 'buy__btn';
+        = form.hidden_field :destination_id, value: @destinations.id
+        = form.submit "購入する", class: 'buy__btn';
 
 = render "users/footer"
