@@ -4,6 +4,9 @@ class PurchasesController < ApplicationController
   before_action :set_item, except: :show
 
   def index
+    @conditions = Condition.find(@item.condition_id)
+    @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
+
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
       if params[:card_id]
@@ -12,7 +15,7 @@ class PurchasesController < ApplicationController
         @cards = customer.cards.data[0]
       end
     end
-    @destinations = Destination.find(params[:destination_id])
+    @destination = Destination.find(params[:destination_id])
   end
 
   def show
@@ -27,7 +30,7 @@ class PurchasesController < ApplicationController
   def purchase
     @item.update_attribute(:buyer_id, current_user.id)
     charge = Payjp::Charge.create(
-      :amount => @total_price,
+      :amount => @item.price,
       :customer => @user.card.customer_id,
       :card => params[:card_id],
       :currency => 'jpy',
@@ -51,7 +54,6 @@ class PurchasesController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
-    @total_price = @item.delivery_fee_id.to_i + @item.price
   end
 
 end

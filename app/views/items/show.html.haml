@@ -117,11 +117,11 @@
             この出品商品を削除する
       - elsif user_signed_in?
         .contents2
-          = link_to purchase_items_path(@item, destination_id: @destination.id) , class: "item-purchase" do
+          = link_to item_purchases_path(@item, destination_id: @destination.id) , class: "item-purchase" do
             購入画面に進む
       - else
         .contents2
-          = link_to user_registration_path, class: "item-purchase" do
+          = link_to new_user_session_path, class: "item-purchase" do
             購入画面に進む前に、ログインページへ
     
     -else
@@ -177,7 +177,7 @@
           「カテゴリー名」をもっと見る
       .category-items
         - @category.items.each.with_index(1) do |item, i|
-          - if i <= 3
+          - if item.id != @item.id && i <= 4
             .category-item
               = link_to item_path(item) do
                 .category-item__first

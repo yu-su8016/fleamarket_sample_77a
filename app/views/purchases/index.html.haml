@@ -18,12 +18,15 @@
           %br
           = @item.name
           %br
-          = @item.condition_id
+          = @conditions.name
         .purchase__contents__product__detail__price
-          %span.purchase__contents__product__detail__price--send  送料込み(税込)
-          %p.purchase__contents__product__detail__price--tax
+          .purchase__contents__product__detail__price--send
+            配送料 
+            = @delivery_fees.name
+            （税込）
+          .purchase__contents__product__detail__price--tax
             ¥
-            = @total_price.to_s(:delimited)
+            = @item.price
         
     .purchase__contents__price
       .purchase__contents__price__sum
@@ -31,7 +34,7 @@
           支払い金額
         %span.purchase__contents__price__sum__detail
           ¥
-          = @total_price.to_s(:delimited)
+          = @item.price
     .purchase__contents__way
       - if @cards
         .purchase__contents__way__pay
@@ -68,21 +71,21 @@
       
       %li.purchase__contents__delivery__detail
         〒
-        = @destinations.postal_code[0, 3]
+        = @destination.postal_code[0, 3]
         \-
-        = @destinations.postal_code[3, 8]
+        = @destination.postal_code[3, 8]
       %li.purchase__contents__delivery__detail
-        = @destinations.prefecture_id
-        = @destinations.city
-        = @destinations.address
-        = @destinations.after_address
+        = @destination.prefecture_id
+        = @destination.city
+        = @destination.address
+        = @destination.after_address
       %li.purchase__contents__delivery__detail
-        =  @destinations.family_name
-        =  @destinations.first_name
+        =  @destination.family_name
+        =  @destination.first_name
     = form_with url: purchase_item_purchases_path, method: "get", local: true do |form|
       - if @cards
         = form.hidden_field :card_id, value: @cards.id
-        = form.hidden_field :destination_id, value: @destinations.id
+        = form.hidden_field :destination_id, value: @destination.id
         = form.submit "購入する", class: 'buy__btn';
 
 = render "users/footer"
