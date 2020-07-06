@@ -68,21 +68,21 @@
       
       %li.purchase__contents__delivery__detail
         〒
-        = @destinations.postal_code[0, 3]
+        = @destination.postal_code[0, 3]
         \-
-        = @destinations.postal_code[3, 8]
+        = @destination.postal_code[3, 8]
       %li.purchase__contents__delivery__detail
-        = @destinations.prefecture_id
-        = @destinations.city
-        = @destinations.address
-        = @destinations.after_address
+        = @destination.prefecture_id
+        = @destination.city
+        = @destination.address
+        = @destination.after_address
       %li.purchase__contents__delivery__detail
-        =  @destinations.family_name
-        =  @destinations.first_name
+        =  @destination.family_name
+        =  @destination.first_name
     = form_with url: purchase_item_purchases_path, method: "get", local: true do |form|
       - if @cards
         = form.hidden_field :card_id, value: @cards.id
-        = form.hidden_field :destination_id, value: @destinations.id
+        = form.hidden_field :destination_id, value: @destination.id
         = form.submit "購入する", class: 'buy__btn';
 
 = render "users/footer"
