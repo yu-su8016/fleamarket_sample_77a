@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
     @days = Day.find(@item.day_id)
 
     destinations = Destination.includes(:user).where(users: {id: current_user.id})
-    @destinations = destinations[0]
+    @destination = destinations[0]
   end
   
   def destroy
