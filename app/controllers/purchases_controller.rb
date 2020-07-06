@@ -12,7 +12,7 @@ class PurchasesController < ApplicationController
         @cards = customer.cards.data[0]
       end
     end
-    @destinations = Destination.find(params[:destination_id])
+    @destination = Destination.find(params[:destination_id])
   end
 
   def show
