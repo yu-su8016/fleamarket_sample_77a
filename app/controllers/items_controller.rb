@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
   before_action :item_find_params, only: [:create, :show, :destroy]
+ 
+ 
   def index
     @category_parent = Category.roots
     @category_children = @category_parent.find_by(name: "レディース").children
@@ -17,7 +19,20 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     10.times { @item.images.build }
+
+    @category_parent_array = ["---"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
   end
+
+  def category_children
+    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+ end
+
+ def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
+ end
 
   def create
     if @item.save
