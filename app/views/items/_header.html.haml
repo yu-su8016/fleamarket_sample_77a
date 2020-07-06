@@ -13,22 +13,15 @@
     .topheader__lists__low
       .topheader__lists__low__select
       
-        .category
-          = link_to "カテゴリー", class: "category__tab"
-          .categories
-            %ul.categories__list
+        .topheader-category
+          = link_to "カテゴリー", class: "topheader-category__tab"
+          .category-list
+            %ul.category-list__parent.hide
               - @category_parent.each do |category|
-                %li.categories__list--category-name
+                %li.category-list__parent--name{id: "#{category[:id]}"}
                   = category[:name]
-            %ul.categories__list
-              - @category_children.each do |category|
-                %li.categories__list--category-name
-                  = category[:name]
-            %ul.categories__list
-              - @category_grandchild.each do |category|
-                %li.categories__list--category-name
-                  = link_to "#{category[:name]}"
-
+            %ul.category-list__children
+            %ul.category-list__grandchild
 
         .topheader__lists__low__select__brand
           =link_to 'ブランド' ,class: "topheader__lists__low__select__brand__tab"
