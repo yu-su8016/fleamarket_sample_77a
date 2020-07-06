@@ -14,13 +14,16 @@ Rails.application.routes.draw do
       get :logout
     end
   end
-  
   resources :items do
-    collection do
-      get :purchase
+    resources :purchases do
+      collection do
+        get :purchase, :after_purchase
+      end
     end
   end
-
   resources :cards do
+    collection do
+      get :delete
+    end
   end
 end

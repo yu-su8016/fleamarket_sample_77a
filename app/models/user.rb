@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :destinations
-  has_many :cards
+  has_one :card
   has_many :likes
   has_many :comments
 
