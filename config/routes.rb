@@ -14,16 +14,20 @@ Rails.application.routes.draw do
       get :logout
     end
   end
-  
   resources :items do
     collection do
-      get :purchase
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
       get :header_category, defaults: { format: 'json' }
+    resources :purchases do
+      collection do
+        get :purchase, :after_purchase
+      end
     end
   end
-
   resources :cards do
+    collection do
+      get :delete
+    end
   end
 end

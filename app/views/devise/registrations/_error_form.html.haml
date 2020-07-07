@@ -1,0 +1,4 @@
+- if @user.errors.any?
+  .alert
+    = @user.errors.full_messages_for(culumn).first
+     

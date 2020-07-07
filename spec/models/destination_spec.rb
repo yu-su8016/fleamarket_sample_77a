@@ -2,7 +2,7 @@ require 'rails_helper'
 describe Destination do
   describe '#create' do
     # 1
-    it "family_nameとfirst_name、family_name_kanaとfirst_name_kana、postal_codeは７桁、prefectureとcityとaddressが存在すれば登録できること" do
+    it "family_nameとfirst_name、family_name_kanaとfirst_name_kana、postal_codeは７桁、prefecture_idとcityとaddressが存在すれば登録できること" do
       destination = build(:destination)
       expect(destination).to be_valid
     end
@@ -45,9 +45,9 @@ describe Destination do
 
     # 7
     it " prefectureがない場合は登録できないこと" do
-      destination = build(:destination, prefecture: nil)
+      destination = build(:destination, prefecture_id: nil)
       destination.valid?
-      expect(destination.errors[:prefecture]).to include("を入力してください")
+      expect(destination.errors[:prefecture_id]).to include("を入力してください")
     end
 
     # 8

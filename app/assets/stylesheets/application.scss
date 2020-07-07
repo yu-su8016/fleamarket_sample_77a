@@ -3,7 +3,6 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "modules/items/index";
-@import "modules/items/purchase";
 @import "modules/items/new";
 @import "modules/items/show";
 @import "modules/items/destroy";
@@ -12,6 +11,9 @@
 @import "modules/users/show";
 @import "modules/users/confirmation";
 @import "modules/cards/index";
+@import "modules/purchases/index";
+@import "modules/purchases/show";
+@import "modules/purchases/after_purchase";
 @import "_header";
 @import "_footer";
 @import "modules/flash";

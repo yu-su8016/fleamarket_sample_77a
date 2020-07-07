@@ -52,6 +52,9 @@ class ItemsController < ApplicationController
     @delivery_methods = DeliveryMethod.find(@item.delivery_method_id)
     @prefectures = Prefecture.find(@item.prefecture_id)
     @days = Day.find(@item.day_id)
+
+    destinations = Destination.includes(:user).where(users: {id: current_user})
+    @destination = destinations[0]
   end
   
   def destroy

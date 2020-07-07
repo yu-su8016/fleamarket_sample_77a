@@ -85,6 +85,7 @@ gem 'active_hash'
 gem 'rails-i18n'
 gem 'ancestry'
 gem 'jquery-rails'
+gem 'payjp'
 
 group :production do
   gem 'unicorn'
