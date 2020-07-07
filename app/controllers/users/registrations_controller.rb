@@ -33,10 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday, destinations_attributes: [:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture_id, :city, :address, :after_address, :phone, user_id: current_user])
   end
 
-  def destination_params
-    params.require(:destination).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture_id, :city, :address, :after_address, :phone).merge(user_id: @user_id)
-  end
-
   def set_hash
     @prefectures = Prefecture.all
   end
