@@ -1,6 +1,6 @@
 $(function(){
   function appendOption(category){
-    let html = `<option value="${category.name}" data-category="${category.id}">${category.name}</option>`;
+    let html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
     return html;
   }
   // 子
@@ -8,7 +8,7 @@ $(function(){
     let childSelectHtml = '';
     childSelectHtml = `<div class='input-category' id= 'children_wrapper'>
                         <div class='input-category__headline' id="input_child_category">
-                          <select class="input-category__select" id="item_child_category_id" "name=item[category_id]">
+                          <select class="input-category__select" id="item_child_category_id" "name=item[category_id]" >
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           <select>
@@ -21,7 +21,7 @@ $(function(){
     let grandchildSelectHtml = '';
     grandchildSelectHtml = `<div class='input-category' id= 'grandchildren_wrapper'>
                               <div class='input-category__headline' id="input_grandchild_category">
-                                <select class="input-category__select" id="item_grandchild_category" name="category_id">
+                                <select class="input-category__select" id="item_grandchild_category" name="category_id" >
                                   <option value="---" data-category="---">---</option>
                                   ${insertHTML}
                                 </select>
@@ -48,7 +48,6 @@ $(function(){
         appendChidrenBox(insertHTML);
       })
       .fail(function(){
-        console.log (this)
         alert('カテゴリー取得に失敗しました');
       })
     }else{
