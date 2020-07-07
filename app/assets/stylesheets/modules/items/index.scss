@@ -36,6 +36,22 @@ $white: #fff;
   opacity: 0.5;
 }
 
+@mixin category{
+  position: relative;
+  right: 12px;
+  z-index: 2;
+}
+
+@mixin category-name{
+  width: 250px;
+  height: 45px;
+  font-size: 13px;
+  background-color: $white;
+  line-height: 48px;
+  display: inline-block;
+  padding: 0 12px;
+}
+
 .topheader{
   * {
     box-sizing: border-box;
@@ -87,14 +103,13 @@ $white: #fff;
       display: flex;
       justify-content: space-between;
       font-size: 13px;
-      // padding-bottom: 10px;
       &__select{
         display: flex;
         width: 170px;
         justify-content: space-between;
         position: relative;
 
-        .category{
+        .topheader-category{
           width: 70px;
           height: 30px;
 
@@ -108,22 +123,30 @@ $white: #fff;
             color: orange;
           }
 
-          .categories{
+          .category-list{
             display: flex;
             
-            &__list{
-              width: 250px;
-              position: relative;
-              right: 12px;
-              z-index: 2;
+            &__parent{
+              @include category;
 
-              &--category-name{
-                width: 250px;
-                font-size: 13px;
-                background-color: $white;
-                line-height: 48px;
-                display: inline-block;
-                padding: 0 12px;
+              &--name{
+                @include category-name;
+              }
+            }
+
+            &__children{
+              @include category;
+
+              &--name{
+                @include category-name;
+              }
+            }
+
+            &__grandchild{
+              @include category;
+
+              &--name{
+                @include category-name;
               }
             }
             .hide{

@@ -1,21 +1,17 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
   before_action :item_find_params, only: [:show, :destroy]
- 
- 
+  skip_before_action :authenticate_user!, only: :header_category
+
   def index
+    @items = Item.all.order("created_at ASC").limit(4)
     @category_parent = Category.roots
-    @category_children = @category_parent.find_by(name: "レディース").children
-    @category_grandchild = @category_children.find_by(name: "トップス").children
   end
+
   def purchase
     
   end
 
-  def index
-    @items = Item.all.order("created_at ASC").limit(4)
-  end
- 
   def new
     @item = Item.new
     10.times { @item.images.build }
@@ -66,7 +62,13 @@ class ItemsController < ApplicationController
     end
   end
  
+  def header_category
+    @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
+    render json: @category_children
+  end
+
   private
+  
   def set_hash
     @conditions = Condition.all
     @delivery_fees = DeliveryFee.all
