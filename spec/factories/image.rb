@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :image do
 
-    images { Faker::LoremPixel.image }
+    image { Faker::LoremPixel.image }
 
     
   end

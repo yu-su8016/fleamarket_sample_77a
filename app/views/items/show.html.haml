@@ -12,13 +12,13 @@
       .main
         .main__image
           .main__image__principal
-            = image_tag @item.images[0].images.to_s, class: "image"
+            = image_tag @item.images[0].image.to_s, class: "image"
           .main__image__sub
             %ul.image__list
               - @item.images.each.with_index(1) do |image, i|
                 - if i <= 4
                   %li.image__list__one
-                    = image_tag image.images.to_s, class: "image"
+                    = image_tag image.image.to_s, class: "image"
           .main__image__sub
             %ul.image__list
               - @item.images.each.with_index(1) do |image, i|
@@ -182,7 +182,7 @@
               = link_to item_path(item) do
                 .category-item__first
                   .item-image
-                    = image_tag item.images[0].images.to_s, class: "image"
+                    = image_tag @item.images[0].image.to_s, class: "image"
                   .item-content
                     .item-content__name
                       = item.name
