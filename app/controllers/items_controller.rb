@@ -15,11 +15,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     10.times { @item.images.build }
-
-    @category_parent_array = []
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent
-    end
+    @category_parent_array = Category.where(ancestry: nil)
   end
 
   def category_children
@@ -32,10 +28,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @category_parent_array = []
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent
-    end
+    @category_parent_array = Category.where(ancestry: nil)
     if @item.save
       redirect_to root_path
     else

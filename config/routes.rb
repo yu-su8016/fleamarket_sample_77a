@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
       get :header_category, defaults: { format: 'json' }
+    end
     resources :purchases do
       collection do
         get :purchase, :after_purchase
