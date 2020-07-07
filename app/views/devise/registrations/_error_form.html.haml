@@ -1,5 +1,4 @@
 - if @user.errors.any?
   .alert
-    %ul
-      = @user.errors.full_messages_for(culumn).first
+    = @user.errors.full_messages_for(culumn).first
      
