@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
   end
   resources :items do
+    collection do
+      get :search
+    end
     resources :purchases do
       collection do
         get :purchase, :after_purchase

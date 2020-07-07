@@ -39,6 +39,10 @@ class ItemsController < ApplicationController
       redirect_to root_path, alert: "削除が失敗しました"
     end
   end
+
+  def search
+    @items = Item.search(params[:search])
+  end
  
   private
   def set_hash

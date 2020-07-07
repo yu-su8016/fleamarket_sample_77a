@@ -58,24 +58,24 @@ $white: #fff;
         border-radius: 4px;
       }
       &__search{
-        display: flex;
         width: 100%;
         &__input{
           width: 100%;
+          display: flex;
           &__keyword{
-            width: 100%;
-            position:relative;
+            width: 55vw;
             height: 37px;
             padding: 0 0 0 5px;
+            vertical-align: bottom;
           }
-        }
-        &__btn{
-          width: 35x;
-          height: 35px;
-          border: 0;
-          cursor: pointer;
-          background-color: $aqua;
-          padding: 8px;
+          &__btn{
+            width: 37px;
+            height: 37px;
+            border: 0;
+            cursor: pointer;
+            background-color: $aqua;
+            padding: 8px;
+          }
         }
       }
     }

@@ -31,4 +31,8 @@ class Item < ApplicationRecord
     Item.where("id > ?", self.id).order("id ASC").first
   end
 
+  def self.search(search)
+    Item.where(['name LIKE ?', "%#{search}%"])
+  end
+
 end
