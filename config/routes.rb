@@ -11,10 +11,11 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :logout
+      get :logout, :like
     end
   end
   resources :items do
+    resource :likes, only: [:create, :destroy]
     resources :purchases do
       collection do
         get :purchase, :after_purchase
@@ -27,3 +28,4 @@ Rails.application.routes.draw do
     end
   end
 end
+

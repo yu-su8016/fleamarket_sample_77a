@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
 
     destinations = Destination.includes(:user).where(users: {id: current_user})
     @destination = destinations[0]
+    @like = Like.find_by(user_id: current_user.id, item_id: params[:id])
   end
   
   def destroy
@@ -39,7 +40,7 @@ class ItemsController < ApplicationController
       redirect_to root_path, alert: "削除が失敗しました"
     end
   end
- 
+
   private
   def set_hash
     @conditions = Condition.all
@@ -56,4 +57,5 @@ class ItemsController < ApplicationController
   def item_find_params
     @item = Item.find(params[:id]) 
   end
+
 end

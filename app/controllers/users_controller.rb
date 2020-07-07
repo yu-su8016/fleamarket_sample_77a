@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @user.build_destinations
-   
   end
 
 
@@ -20,7 +19,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    
   end
 
   def show
@@ -29,5 +27,7 @@ class UsersController < ApplicationController
   def logout
   end
 
+  def like
+  end
 
 end
