@@ -1,0 +1,4 @@
+- if @user.destinations[0].errors.any?
+  .alert
+    %ul
+      = @user.destinations[0].errors.full_messages_for(culumn).first
