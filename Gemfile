@@ -86,7 +86,6 @@ gem 'rails-i18n'
 gem 'ancestry'
 gem 'jquery-rails'
 
-
 group :production do
   gem 'unicorn'
 end

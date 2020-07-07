@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
-  before_action :item_find_params, only: [:create, :show, :destroy]
+  before_action :item_find_params, only: [:show, :destroy]
   skip_before_action :authenticate_user!, only: :header_category
 
   def index
@@ -15,9 +15,27 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     10.times { @item.images.build }
+
+    @category_parent_array = []
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent
+    end
+  end
+
+  def category_children
+    @category_children = Category.find(params[:parent_name] ).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   def create
+    @item = Item.new(item_params)
+    @category_parent_array = []
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent
+    end
     if @item.save
       redirect_to root_path
     else
@@ -27,6 +45,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @category_parent = Category.where(ancestry:nil)
     @category = Category.find(@item.category_id)
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)

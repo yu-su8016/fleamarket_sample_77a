@@ -1,6 +1,5 @@
 = render "users/header"
 
-
 .contents
   = form_with model: @item, local: true do |form|
 
@@ -38,8 +37,8 @@
         .input-category__headline
           = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
           %span.input-category__headline--required 必須
-          = render "error_form", culumn: :category
-        = form.select :category_id, [ ["レディース", 1], ["メンズ", 2], ["ベビー・キッズ", 3], ["インテリア・住まい・小物", 4] ], {prompt: "選択してください"}, {class: 'input-category__select'}
+          = render "error_form", culumn: :category 
+          = form.collection_select :category_id, @category_parent_array,:id,:name, {prompt: "---"}, {class: 'input-category__select', id: 'item_category_id'}
 
       .input-brand
         .input-brand__headline
