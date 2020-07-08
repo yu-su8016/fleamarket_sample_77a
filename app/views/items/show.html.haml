@@ -93,15 +93,13 @@
               = link_to "#" do
                 = @prefectures.name
 
-      -# お気に入り機能未実装の為、リンク先は”#”を仮記載
       .like
-
         - if @like
           = link_to item_path, class: "like__click--none", remote: true do
             .like__click--none__icon
               = icon('fas', 'star', class: 'icons')
             .like__click--none__letter
-              お気に入り
+              お気に入り済み
 
         - else
           = link_to item_path, class: "like__click", remote: true do

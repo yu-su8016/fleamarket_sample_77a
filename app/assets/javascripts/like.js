@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function() {
           <i class="fas fa-star icons"></i>
         </div>
         <div class="like__click__letter">
-          お気に入り
+          お気に入り済み
         </div>
       </a>`;
       $(".like").prepend(html);
