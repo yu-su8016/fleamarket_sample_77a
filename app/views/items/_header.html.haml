@@ -2,8 +2,10 @@
   .topheader__lists
     .topheader__lists__upper
       .topheader__lists__upper__name
-        %h1
-        = image_tag "logo/logo.png", size: '140x42';
+        = link_to root_path, id:"logo" do
+          %h1
+          = image_tag "logo/logo.png", size: '140x42';
+        
       .topheader__lists__upper__search
         .topheader__lists__upper__search__input
           = form_with model: @item do |form|
