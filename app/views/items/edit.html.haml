@@ -1,0 +1,116 @@
+= render "users/header"
+
+.contents
+  = form_with model: @item, local: true do |form|
+
+    .new-item-outline
+
+      .input-image
+        .input-image__headline
+          = form.label :images, "出品画像", class: 'input-image__headline--label'
+          %span.input-image__headline--required 必須
+          = render "error_form", culumn: :images
+        .input-image__comment
+          10枚までアップロードできます。
+        = form.fields_for :images do |image|
+          = image.file_field :images, class: 'input-image__file-field'
+
+      .input-name
+        .input-name__headline
+          = form.label :name, "商品名", class: 'input-name__headline--label'
+          %span.input-name__headline--required 必須
+          = render "error_form", culumn: :name
+        = form.text_field :name, placeholder: "40文字まで", class: 'input-name__text-field'
+
+      .input-explanation
+        .input-explanation__headline
+          = form.label :explanation, "商品の説明", class: 'input-explanation__headline--label'
+          %span.input-explanation__headline--required 必須
+          = render "error_form", culumn: :explanation
+        = form.text_area :explanation, placeholder: "1,000文字まで\n(色、素材、重さ、定価、注意点など)\n\n例）2015年ごろに3万円で購入したバッグです。ネイビーで傷はありません。", class: 'input-explanation__text-area'
+
+
+    .new-item-details
+      %p.new-item-details__category-name 商品の詳細
+
+      .input-category
+        .input-category__headline
+          = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+          %span.input-category__headline--required 必須
+          = render "error_form", culumn: :category 
+          = form.collection_select :category_id, @category_parent_array,:id,:name, {prompt: "---"}, {class: 'input-category__select', id: 'item_category_id'}
+
+        .input-category__headline
+          = form.select :child_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @item.category.parent.id}),{}, {class: 'input-category__select', id: 'item_child_category_id'}
+          
+        .input-category__headline
+          = form.select :category_id, options_for_select(@category_grandchildren_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @item.category.id}),{}, {class: 'input-category__select', id: 'item_grandchild_category'}
+
+
+      .input-brand
+        .input-brand__headline
+          = form.label :brand, "ブランド", class: 'input-brand__headline--label'
+          %span.input-brand__headline--any 任意
+        = form.text_field :brand, placeholder: "例）シャネル", class: 'input-brand__text-field'
+
+      .input-size
+        .input-size__headline
+          = form.label :size, "商品のサイズ", class: 'input-size__headline--label'
+          %span.input-size__headline--any 任意
+        = form.text_field :size, placeholder: "例）S・M・L、27cmEEE、〇〇cm × 〇〇cm", class: 'input-size__text-field'
+
+      .input-condition
+        .input-condition__headline
+          = form.label :condition_id, "商品の状態", class: 'input-condition__headline--label'
+          %span.input-condition__headline--required 必須
+          = render "error_form", culumn: :condition_id
+        = form.collection_select(:condition_id, @conditions, :id, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
+
+
+    .delivery
+      %p.delivery__category-name 配送について
+
+      .input-delivery-fee
+        .input-delivery-fee__headline
+          = form.label :delivery_fee_id, "配送料の負担", class: 'input-delivery-fee__headline--label'
+          %span.input-delivery-fee__headline--required 必須
+          = render "error_form", culumn: :delivery_fee_id
+        = form.collection_select(:delivery_fee_id, @delivery_fees, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
+
+      .input-delivery-method
+        .input-delivery-method__headline
+          = form.label :delivery_method_id, "配送の方法", class: 'input-delivery-method__headline--label'
+          %span.input-delivery-method__headline--required 必須
+          = render "error_form", culumn: :delivery_method_id
+        = form.collection_select(:delivery_method_id, @delivery_methods, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-method__select'})
+
+      .input-delivery-prefecture
+        .input-delivery-prefecture__headline
+          = form.label :prefecture_id, "配送元の地域", class: 'input-delivery-prefecture__headline--label'
+          %span.input-delivery-prefecture__headline--required 必須
+          = render "error_form", culumn: :prefecture_id
+        = form.collection_select(:prefecture_id, @prefectures, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-prefecture__select'})
+
+      .input-delivery-days
+        .input-delivery-days__headline
+          =form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
+          %span.input-delivery-days__headline--required 必須
+          = render "error_form", culumn: :day_id
+        = form.collection_select(:day_id, @days, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
+
+
+    .price
+      %p.price__category-name 価格  (¥300 〜 9,999,999)
+
+      .input-price
+        .input-price__headline
+          = form.label :price, "販売価格", class: 'input-price__headline--label'
+          %span.input-price__headline--required 必須
+          = render "error_form", culumn: :price
+        = form.text_field :price, class: 'input-price__text-field'
+
+
+    .submit
+      = form.submit "出品する", class: 'submit__btn'
+
+= render "users/footer"

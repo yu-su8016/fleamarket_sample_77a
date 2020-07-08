@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_hash, only: [:new, :create]
-  before_action :item_find_params, only: [:show, :destroy]
+  before_action :set_hash, only: [:new, :create, :edit, :update]
+  before_action :item_find_params, only: [:show, :destroy, :edit, :update]
   skip_before_action :authenticate_user!, only: :header_category
 
   def index
@@ -18,14 +18,6 @@ class ItemsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
   end
 
-  def category_children
-    @category_children = Category.find(params[:parent_name] ).children
-  end
-
-  def category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
-  end
-
   def create
     @item = Item.new(item_params)
     @category_parent_array = Category.where(ancestry: nil)
@@ -36,6 +28,29 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    grandchild_category = @item.category
+    child_category = grandchild_category.parent
+
+    @category_parent_array = Category.where(ancestry: nil)
+
+    @category_children_array = []
+    Category.where(ancestry: child_category.ancestry).each do |children|
+      @category_children_array << children
+    end
+
+    @category_grandchildren_array = []
+    Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
+      @category_grandchildren_array << grandchildren
+    end
+
+
+  end
+
+  def update
+  end
+
 
   def show
     @category_parent = Category.where(ancestry:nil)
@@ -66,6 +81,14 @@ class ItemsController < ApplicationController
   def header_category
     @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
     render json: @category_children
+  end
+
+  def category_children
+    @category_children = Category.find(params[:parent_name] ).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   private
