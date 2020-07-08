@@ -7,13 +7,13 @@
 
       .input-image
         .input-image__headline
-          = form.label :images, "出品画像", class: 'input-image__headline--label'
+          = form.label :image, "出品画像", class: 'input-image__headline--label'
           %span.input-image__headline--required 必須
-          = render "error_form", culumn: :images
+          = render "error_form", culumn: :image
         .input-image__comment
           10枚までアップロードできます。
         = form.fields_for :images do |image|
-          = image.file_field :images, class: 'input-image__file-field'
+          = image.file_field :image, class: 'input-image__file-field'
 
       .input-name
         .input-name__headline
