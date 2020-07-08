@@ -58,6 +58,10 @@ class ItemsController < ApplicationController
       redirect_to root_path, alert: "削除が失敗しました"
     end
   end
+
+  def search
+    @items = Item.search(params[:search])
+  end
  
   def header_category
     @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
