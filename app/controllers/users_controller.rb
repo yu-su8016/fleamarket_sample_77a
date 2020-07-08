@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def like
+    @items = Item.includes(:likes).where(likes: {user_id: current_user})    
   end
 
 end
