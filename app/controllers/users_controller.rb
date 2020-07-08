@@ -24,9 +24,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    @category_parent = Category.roots
   end
 
   def logout
+    @category_parent = Category.roots
   end
 
 

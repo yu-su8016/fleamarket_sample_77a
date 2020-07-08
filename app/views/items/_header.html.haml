@@ -4,6 +4,7 @@
       .topheader__lists__upper__name
         = link_to root_path do
           = image_tag "logo/logo.png", size: '140x42';
+
       .topheader__lists__upper__search
         .topheader__lists__upper__search__input
           = form_with url: search_items_path, local: true, method: :get do |form|
@@ -11,31 +12,19 @@
             %button.topheader__lists__upper__search__input__btn<>
               = image_tag "icon/icon-search 1.png", size: '20x20';
     .topheader__lists__low
-      %ul.topheader__lists__low__select
-        %li.topheader__lists__low__select__category
-          = link_to "カテゴリー", class: "topheader__lists__low__select__category__tab"
-          .topheader__lists__low__select__category__list
-            %ul.lists 
-              %li Tシャツ/カットソー(半袖/袖なし)
-              %li Tシャツ/カットソー(七分/長袖)
-              %li シャツ/ブラウス(半袖/袖なし)
-              %li シャツ/ブラウス(七分/長袖)
-              %li ポロシャツ
-              %li キャミソール
-              %li タンクトップ
-              %li ホルターネック
-              %li ニット
-              %li セーター
-              %li チュニック
-              %li カーディガン/ボレロ
-              %li アンサンブル
-              %li ベスト/ジレ
-              %li パーカー
-              %li トレーナー/スウェット
-              %li ベアトップ/チューブトップ
-              %li ジャージ
-              %li その他
-        %ul.topheader__lists__low__select__brand
+      .topheader__lists__low__select
+      
+        .topheader-category
+          = link_to "カテゴリー", class: "topheader-category__tab"
+          .category-list
+            %ul.category-list__parent.hide
+              - @category_parent.each do |category|
+                %li.category-list__parent--name{id: "#{category[:id]}"}
+                  = category[:name]
+            %ul.category-list__children
+            %ul.category-list__grandchild
+
+        .topheader__lists__low__select__brand
           =link_to 'ブランド' ,class: "topheader__lists__low__select__brand__tab"
       .topheader__lists__low__user
         - if user_signed_in?
@@ -45,4 +34,5 @@
           .topheader__lists__low__user__login
             = link_to "ログイン", new_user_session_path, method: :get, class: "topheader__lists__low__user__login--tab"
           .topheader__lists__low__user__register
-            = link_to "新規会員登録", new_user_registration_path, method: :delete, class: "topheader__lists__low__user__register--tab"
+            = link_to "新規会員登録", new_user_registration_path, method: :get, class: "topheader__lists__low__user__register--tab"
+
