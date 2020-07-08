@@ -61,6 +61,7 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.search(params[:search])
+    @category_parent = Category.roots
   end
  
   def header_category
@@ -79,7 +80,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :images]).merge(seller_id: 1)
+    params.require(:item).permit(:name, :explanation, :category_id, :brand, :size, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, :price, images_attributes: [:id, :image]).merge(seller_id: 1)
   end
 
   def item_find_params
