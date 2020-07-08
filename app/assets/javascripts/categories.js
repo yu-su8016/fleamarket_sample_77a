@@ -1,7 +1,7 @@
 $(function(){
   function appendOption(category){
-    let category_html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
-    return category_html;
+    let html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
+    return html;
   }
   // 子
   function appendChidrenBox(insertHTML){
