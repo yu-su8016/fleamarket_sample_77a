@@ -66,27 +66,55 @@ describe User do
     end
 
     # 10
+    it " family_name全角でない場合は登録できないこと" do
+      user = build(:user, family_name: "yamada")
+      user.valid?
+      expect(user.errors[:family_name]).to include("は不正な値です")
+    end
+
+    # 11
     it " first_nameがない場合は登録できないこと" do
       user = build(:user, first_name: nil)
       user.valid?
       expect(user.errors[:first_name]).to include("を入力してください", "は不正な値です")
     end
 
-    # 11
+    # 12
+    it " first_nameが全角でない場合は登録できないこと" do
+      user = build(:user, first_name: "taro")
+      user.valid?
+      expect(user.errors[:first_name]).to include("は不正な値です")
+    end
+
+    # 13
     it " family_name_kanaがない場合は登録できないこと" do
       user = build(:user, family_name_kana: nil)
       user.valid?
       expect(user.errors[:family_name_kana]).to include("を入力してください", "は不正な値です")
     end
+    
+    # 14
+    it " family_name_kanaがひらがなでない場合は登録できないこと" do
+      user = build(:user, family_name_kana: "ヤマダ")
+      user.valid?
+      expect(user.errors[:family_name_kana]).to include("は不正な値です")
+    end
 
-    # 12
+    # 15
     it " first_name_kanaがない場合は登録できないこと" do
       user = build(:user, first_name_kana: nil)
       user.valid?
       expect(user.errors[:first_name_kana]).to include("を入力してください", "は不正な値です")
     end
 
-    # 13
+    # 16
+    it " first_name_kanaがひらがなでない場合は登録できないこと" do
+      user = build(:destination, first_name_kana: "タロウ")
+      user.valid?
+      expect(user.errors[:first_name_kana]).to include("は不正な値です")
+    end
+
+    # 17
     it " birthdayがない場合は登録できないこと" do
       user = build(:user, birthday: nil)
       user.valid?
