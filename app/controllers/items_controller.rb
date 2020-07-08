@@ -48,6 +48,7 @@ class ItemsController < ApplicationController
 
     destinations = Destination.includes(:user).where(users: {id: current_user})
     @destination = destinations[0]
+    @like = Like.find_by(user_id: current_user.id, item_id: params[:id])
   end
   
   def destroy
@@ -80,4 +81,5 @@ class ItemsController < ApplicationController
   def item_find_params
     @item = Item.find(params[:id]) 
   end
+
 end

@@ -11,10 +11,11 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :logout
+      get :logout, :like
     end
   end
   resources :items do
+    resource :likes, only: [:create, :destroy]
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
@@ -32,3 +33,4 @@ Rails.application.routes.draw do
     end
   end
 end
+
