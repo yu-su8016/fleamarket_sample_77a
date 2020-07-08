@@ -21,11 +21,6 @@ describe PurchasesController do
       get :index, params: params
       expect(assigns(:item)).to eq item
     end
-    it '@total_priceに期待した値が入っていること' do
-      total_price = item.delivery_fee_id.to_i + item.price
-      get :index, params: params
-      expect(assigns(:total_price)).to eq total_price
-    end
     context 'userがカードを保有している場合(@user.cardあり)' do
       before do
         @card = create(:card, user_id: user.id)

@@ -231,4 +231,26 @@ RSpec.describe Item, type: :model do
     end
   end 
 
+  describe '#search' do
+
+    let(:red_bag) { create(:item, name: '赤い鞄') }
+    let(:red_clothes) { create(:item, name: '赤い服') }
+
+    context '"鞄"で検索した場合' do
+      it '"red_bag"が検索されること' do
+        expect(Item.search("鞄")).to include(red_bag)
+      end
+      
+      it '"red_clothes"が検索されないこと' do
+        expect(Item.search("鞄")).to_not include(red_clothes)
+      end
+    end
+
+    context '"靴"で検索した場合' do
+      it '何も検索されないこと' do
+        expect(Item.search("靴")).to be_empty
+      end
+    end
+  end
+
 end
