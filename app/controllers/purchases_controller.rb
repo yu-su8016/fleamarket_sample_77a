@@ -6,6 +6,7 @@ class PurchasesController < ApplicationController
   def index
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
+    
 
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)

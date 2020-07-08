@@ -1,17 +1,34 @@
 class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create]
-  before_action :item_find_params, only: [:create, :show, :destroy]
+  before_action :item_find_params, only: [:show, :destroy]
+  skip_before_action :authenticate_user!, only: :header_category
 
   def index
     @items = Item.all.order("created_at ASC").limit(4)
+    @category_parent = Category.roots
   end
- 
+
+  def purchase
+    
+  end
+
   def new
     @item = Item.new
     10.times { @item.images.build }
+    @category_parent_array = Category.where(ancestry: nil)
+  end
+
+  def category_children
+    @category_children = Category.find(params[:parent_name] ).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   def create
+    @item = Item.new(item_params)
+    @category_parent_array = Category.where(ancestry: nil)
     if @item.save
       redirect_to root_path
     else
@@ -21,6 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @category_parent = Category.where(ancestry:nil)
     @category = Category.find(@item.category_id)
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
@@ -40,8 +58,14 @@ class ItemsController < ApplicationController
       redirect_to root_path, alert: "削除が失敗しました"
     end
   end
+ 
+  def header_category
+    @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
+    render json: @category_children
+  end
 
   private
+  
   def set_hash
     @conditions = Condition.all
     @delivery_fees = DeliveryFee.all

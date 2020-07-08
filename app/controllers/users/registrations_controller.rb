@@ -8,49 +8,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     @user = User.new
-    @destination = Destination.new
+    @destination = @user.destinations.new
   end
 
   # POST /resource
   def create
-  
-    user = User.new(user_params)
-    user.save
-    sign_in(user)
-
-    @user_id = user.id
-
-    destination = Destination.new(destination_params)
-    destination.save
-
-    if params[:user_id]
-      @user = User.find(params[:user_id])
+    @user = User.new(user_params)
+    if @user.save
       redirect_to users_confirmation_path
+      flash[:notice] = "ログインに成功しました"
+      sign_in(@user)
     else
-      @user = nil
-      redirect_to new_user_registration_path, alert: '登録されませんでした'
-    end
-   
+      flash[:alert] = "登録されませんでした"
+      render :new
+    end   
   end
   
   def confirmation
   end
 
-  def after_sign_in_path_for(resource)
-    flash.now[:alert] = "すでにログインしています" 
-    flash[:notice] = "ログインに成功しました" 
-    users_confirmation_path
-  end
-
-
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday)
-  end
-
-  def destination_params
-    params.require(:destination).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture_id, :city, :address, :after_address, :phone).merge(user_id: @user_id)
+    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday, destinations_attributes: [:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture_id, :city, :address, :after_address, :phone, user_id: current_user])
   end
 
   def set_hash

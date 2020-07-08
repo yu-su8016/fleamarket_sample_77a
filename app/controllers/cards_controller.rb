@@ -3,6 +3,7 @@ class CardsController < ApplicationController
   before_action :set_user
 
   def index
+    @category_parent = Category.roots
     if @user.card
       customer = Payjp::Customer.retrieve(@user.card.customer_id)
       cards = customer.cards
