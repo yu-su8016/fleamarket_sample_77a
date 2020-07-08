@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_064231) do
+ActiveRecord::Schema.define(version: 2020_07_04_103904) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 2020_07_02_064231) do
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "images", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "images", null: false
     t.index ["item_id"], name: "index_images_on_item_id"
   end
 
