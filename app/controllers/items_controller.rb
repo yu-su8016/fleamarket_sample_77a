@@ -30,21 +30,30 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    grandchild_category = @item.category
-    child_category = grandchild_category.parent
+    @category = Category.find(@item.category_id)
 
-    @category_parent_array = Category.where(ancestry: nil)
+    if @category.root?
+      @parent_category = @category
+      @parent_category_array = @parent_category.siblings
 
-    @category_children_array = []
-    Category.where(ancestry: child_category.ancestry).each do |children|
-      @category_children_array << children
+    elsif @category.ancestors? && @category.children?
+      @child_category = @category
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent
+      @parent_category_array = @parent_category.siblings
+
+    else
+      @grandchild_category = @category
+      @grandchildren_category_array = @grandchild_category.siblings
+
+      @child_category = @grandchild_category.parent
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent      
+      @parent_category_array = @parent_category.siblings
     end
-
-    @category_grandchildren_array = []
-    Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
-      @category_grandchildren_array << grandchildren
-    end
-
+    
   end
 
   def update
