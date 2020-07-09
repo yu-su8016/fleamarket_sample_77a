@@ -1,0 +1,25 @@
+= render "header"
+
+.cearch-contents
+  .number-of-searches
+    - if @items.length != 0
+      .number-of-searches__true
+        = "#{@items.length} 件の結果が見つかりました。"
+    - else
+      .number-of-searches__false
+        該当する商品は見つかりませんでした。キーワードを変えて再度お試しください。
+
+  .search-results
+    - @items.each do |item|
+      = link_to item_path(item), class: "search-item" do
+        .search-item__display
+          .search-item__display--price
+            ¥
+            = item.price.to_s(:delimited)
+          = image_tag item.images[0].image.to_s, class: "search-item__display--image"
+        .search-item__display--name
+          = item.name
+          
+          
+
+= render "footer"

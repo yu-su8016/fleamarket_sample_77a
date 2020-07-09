@@ -1,0 +1,68 @@
+@mixin search-results($color) {
+  font-size: 20px;
+  color: $color;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.cearch-contents {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+  border-top: 2px solid #b5b5b5;
+  .number-of-searches {
+    
+    &__true {
+      @include search-results(#3CCACE);
+    }
+    &__false {
+      @include search-results(#ea352d);
+    }
+  }
+
+  .search-results {
+    display: flex;
+    justify-content: space-around;
+    .search-item {
+      
+      text-decoration: none;
+      background-color: #fff;
+      
+
+      &__display {
+        width: 212px;
+        height: 150px;
+        position: relative;
+        
+        &--price {
+          font-size: 12px;
+          color: #fff;
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 0 10px;
+          border-radius: 10px;
+          position: absolute;
+          bottom: 5px;
+          left: 5px;
+
+        }
+        &--image {
+          width: 212px;
+          height: 150px;
+          object-fit: cover;
+        }
+        &--name {
+          color: #000;
+          width: 212px;
+          height: 60px;
+          padding: 5px;
+          box-sizing: border-box;
+          word-break: break-word;
+          overflow: hidden;
+          vertical-align: text-top;
+        }
+      }
+    }
+  }
+}
+

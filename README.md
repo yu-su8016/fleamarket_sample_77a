@@ -25,15 +25,15 @@
 |name|string|null: false, index: true|
 |explanation|text|null: false|
 |brand|string|index: true|
-|condition(active_hash)|string|null: false|
-|delivery_fee(active_hash)|string|null: false|
-|prefecture(active_hash)|integer|null: false|
-|day(active_hash)|string|null: false|
-|size(active_hash)|string|
-|delivery_method(active_hash)|string|null: false|
+|condition_id(active_hash)|string|null: false|
+|delivery_fee_id(active_hash)|string|null: false|
+|prefecture_id(active_hash)|integer|null: false|
+|day_id(active_hash)|string|null: false|
+|size|string|
+|delivery_method_id(active_hash)|string|null: false|
 |price|integer|null: false, index: true|
-|seller|integer|null: false, foreign_key: true|
-|buyer|integer|foreign_key: true|
+|seller_id|integer|null: false, foreign_key: true|
+|buyer_id|integer|foreign_key: true|
 |category_id|integer|null: false, foreign_key: true|
 ### Association
 - has_many :images
@@ -46,10 +46,7 @@
 |Column|Type|Option|
 |------|----|------|
 |id|integer|
-|number|string|null: false|
-|limit_month|string|null: false|
-|limit_year|string|null: false|
-|security_code|string|null: false|
+|customer_id|string|null: false|
 |user_id|integer|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
@@ -102,7 +99,7 @@
 |family_name_kana|string|null: false|
 |first_name_kana|string|null: false|
 |postal_code|string|null: false|
-|prefecture(active_hash)|integer|null: false|
+|prefecture_id(active_hash)|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |after_address|string|

@@ -131,7 +131,7 @@ body {
         margin-bottom: 35px;
 
         &__headline {
-          margin-bottom: 16px;
+          margin: 16px 0 ;
 
           &--label {
             @include label;

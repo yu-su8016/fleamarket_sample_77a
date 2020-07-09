@@ -9,11 +9,11 @@ FactoryBot.define do
     explanation         { Faker::Lorem.characters(number: 100) }
     brand               { Faker::Lorem.word }
     size                { Faker::Lorem.word }
-    condition_id        { Faker::Lorem.word }
-    delivery_fee_id     { Faker::Lorem.word }
-    delivery_method_id  { Faker::Lorem.word }
-    prefecture_id       { Faker::Address.city }
-    day_id              { Faker::Lorem.word }
+    condition_id        { Faker::Number.within(range: 1..6) }
+    delivery_fee_id     { Faker::Number.within(range: 1..2) }
+    delivery_method_id  { Faker::Number.within(range: 1..3) }
+    prefecture_id       { Faker::Number.within(range: 1..47) }
+    day_id              { Faker::Number.within(range: 1..3) }
     price               { Faker::Number.number(digits: 4)}
 
     after(:build) do |item|
@@ -30,11 +30,11 @@ FactoryBot.define do
     explanation         { Faker::Lorem.characters(number: 100) }
     brand               { Faker::Lorem.word }
     size                { Faker::Lorem.word }
-    condition_id        { Faker::Lorem.word }
-    delivery_fee_id     { Faker::Lorem.word }
-    delivery_method_id  { Faker::Lorem.word }
-    prefecture_id       { Faker::Address.city }
-    day_id              { Faker::Lorem.word }
+    condition_id        { Faker::Number.within(range: 1..6) }
+    delivery_fee_id     { Faker::Number.within(range: 1..2) }
+    delivery_method_id  { Faker::Number.within(range: 1..3) }
+    prefecture_id       { Faker::Number.within(range: 1..47) }
+    day_id              { Faker::Number.within(range: 1..3) }
     price               { Faker::Number.number(digits: 4)}
   end
 

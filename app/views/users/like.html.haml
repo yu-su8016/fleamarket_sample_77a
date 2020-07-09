@@ -1,0 +1,34 @@
+= render "items/header"
+
+.wrapper
+  = render "left-content"
+  .like_wrapper
+    .like-main__name
+      お気に入り一覧
+    .like-main__contents5
+      -unless @items.blank?
+        .like-main__contents5__category__lists
+          - @items.each do |item|
+            = link_to item_path(item) do
+              .like-main__contents5__category__lists__list
+                .like-main__contents5__category__lists__list__image
+                  = image_tag item.images[0].images.to_s, size: '220x150'
+                  -if item.buyer_id.present? 
+                    .like-main__contents5__category__lists__list__image__sold
+                      .like-main__contents5__category__lists__list__image__sold__inner
+                        SOLD
+                .like-main__contents5__category__lists__list__detail
+                  %h8.like-main__contents5__category__lists__list__detail__name
+                    = item.name
+                  %ul.like-main__contents5__category__lists__list__detail__price
+                    %li 
+                      = item.price
+                      円
+                    %li.like ★ 0
+                  %p.like-main__contents5__category__image__detail__tax (税込)
+      - else
+        .like-main__contents5__category__lists
+          登録がありません
+
+
+= render "items/footer"

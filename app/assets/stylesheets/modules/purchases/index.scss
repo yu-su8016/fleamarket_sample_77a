@@ -25,6 +25,15 @@
   }
 } 
 
+.notice {
+  background-color: lightBlue;
+}
+
+.alert {
+  background-color: orange;
+}
+
+
 .purchase{
   box-sizing: border-box;
   background-color: #f5f5f5;
@@ -95,6 +104,13 @@
       @include content;
       @include border;
       font-size: 13px;
+      a {
+        text-decoration: none;
+        color: #3CCACE;
+        font-size: 13px;
+      }
+      &__detail {
+      }
       &__pay{
         @include between;
         &__name{

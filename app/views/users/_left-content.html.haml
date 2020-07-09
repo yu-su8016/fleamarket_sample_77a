@@ -1,6 +1,6 @@
 .left-content
   %nav.mypage-navi
-    = link_to user_path(id: 1) do
+    = link_to user_path(current_user) do
       %li.mypage-nav-head
         マイページ
         .arrow-right.icon-black
@@ -10,7 +10,7 @@
     %li.mypage-nav-list
       やることリスト
       .arrow-right.icon
-    = link_to "#" do
+    = link_to like_users_path do
       %li.mypage-nav-list
         お気に入りリスト
         .arrow-right.icon

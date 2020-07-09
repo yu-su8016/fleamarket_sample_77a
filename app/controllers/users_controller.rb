@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @user.build_destinations
-   
   end
 
 
@@ -20,14 +19,18 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    
   end
 
   def show
+    @category_parent = Category.roots
   end
 
   def logout
+    @category_parent = Category.roots
   end
 
+  def like
+    @items = Item.includes(:likes).where(likes: {user_id: current_user})    
+  end
 
 end

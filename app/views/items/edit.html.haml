@@ -23,38 +23,7 @@
                 = image.file_field :image, class: 'js-file'
                 %span.js-remove
                   削除
-                -# %span.js-remove
-                -#   = link_to image_delete_item_path do
-                -#     削除
 
-
-
-          -# = form.fields_for :images do |image| 
-          -#   = image.file_field :image, class: 'hidden-destroy'
-          
-          -#   - if @item.persisted?
-          -#     = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-          -# - if @item.persisted?
-          -#   .js-file_group{data:{index: "@item.images.count"}} 
-          -#     = file_field_tag :src, name: "item[images_attributes][#{@item.images.count}][src]", class: 'js-file'
-          -#     %span.js-remove 削除
-
-
-
-        -# = form.fields_for :images do |image|
-        -#   %br
-          -# = image.object.image
-          -# %br
-        -#   = image.file_field :image, class: 'input-image__file-field'
-        -#   %p.js-remove 削除
-  
-          -# - if @item.images
-            -# - @item.images.each do |img|i
-            -# - @item.images.each_with_index do |image, i|
-            -#   = image.file_field :image, class: 'input-image__file-field'
-            -#   = image_tag image.image.url, data:{ index: i }, width: '100px', height: '100px'
-            -# = image_tag @item.images[image.index].image.url, width: '100px', height: '100px'
-              
       .input-name
         .input-name__headline
           = form.label :name, "商品名", class: 'input-name__headline--label'
@@ -74,12 +43,49 @@
       %p.new-item-details__category-name 商品の詳細
 
       .input-category
-        .input-category__headline
-          = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
-          %span.input-category__headline--required 必須
-          = render "error_form", culumn: :category
-        = form.select :category_id, [ ["レディース", 1], ["メンズ", 2], ["ベビー・キッズ", 3], ["インテリア・住まい・小物", 4] ], {prompt: "選択してください"}, {class: 'input-category__select'}
+        - if @category.root?
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
+          
+          .input-category__headline
+            %select#edit-children-category.input-category__select
+              %option ---
+          
+          .input-category__headline
+            %select#edit-grandchild-category.input-category__select
+              %option ---
 
+        - elsif @category.ancestors? && @category.children?
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
+          
+          .input-category__headline
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+          
+          .input-category__headline
+            %select#edit-grandchild-category.input-category__select
+              %option ---
+
+        - else
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_categry}, {class: 'input-category__select', id: 'edit-parent-category'}
+         
+          .input-category__headline
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+         
+          .input-category__headline
+            = form.collection_select :category_id, @grandchildren_category_array,:id,:name, {salected: @grandchild_category}, {class: 'input-category__select', id: 'edit-grandchild-category'}
+          
+         
       .input-brand
         .input-brand__headline
           = form.label :brand, "ブランド", class: 'input-brand__headline--label'
@@ -94,10 +100,15 @@
 
       .input-condition
         .input-condition__headline
+
           = form.label :condition, "商品の状態", class: 'input-condition__headline--label'
           %span.input-condition__headline--required 必須
         -# = from.collection_select(:condition, @conditions, :name, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
         = form.select :condition, [ "新品、未使用", "未使用品に近い", "目立った傷や汚れなし", "やや傷や汚れあり", "傷や汚れあり", "全体的に状態が悪い" ], {prompt: "選択してください"}, {class: 'input-condition__select'}
+          = form.label :condition_id, "商品の状態", class: 'input-condition__headline--label'
+          %span.input-condition__headline--required 必須
+          = render "error_form", culumn: :condition_id
+        = form.collection_select(:condition_id, @conditions, :id, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
 
 
     .delivery
@@ -109,7 +120,7 @@
           %span.input-delivery-fee__headline--required 必須
           = render "error_form", culumn: :delivery_fee_id
         = form.collection_select(:delivery_fee_id, @delivery_fees, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-fee__select'})
-      
+
       .input-delivery-method
         .input-delivery-method__headline
           = form.label :delivery_method_id, "配送の方法", class: 'input-delivery-method__headline--label'
@@ -126,22 +137,23 @@
 
       .input-delivery-days
         .input-delivery-days__headline
+
           = form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
           %span.input-delivery-days__headline--required 必須
           = render "error_form", culumn: :day_id
         = form.collection_select(:day_id, @days, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
 
     .price
-      %p.price__category-name 価格 (¥300 〜 9,999,999)
-
+      %p.price__category-name 価格  (¥300 〜 9,999,999)
       .input-price
         .input-price__headline
           = form.label :price, "販売価格", class: 'input-price__headline--label'
           %span.input-price__headline--required 必須
+          = render "error_form", culumn: :price
         = form.text_field :price, class: 'input-price__text-field'
-
+        
     .submit
-      %div
-        = form.submit "出品する",class: "submit__btn"
+      = form.submit "出品する", class: 'submit__btn'
+
 
 = render "users/footer"
