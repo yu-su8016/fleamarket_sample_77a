@@ -34,7 +34,7 @@
       %p.new-item-details__category-name 商品の詳細
 
       .input-category
-        .input-category__headline
+        .input-category__headline.new-input-category__headline
           = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
           %span.input-category__headline--required 必須
           = render "error_form", culumn: :category 
