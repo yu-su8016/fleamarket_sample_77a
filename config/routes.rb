@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     collection do
       get :purchase
     end
+    member do
+      get :image_delete
+    end
   end
 
   resources :cards do

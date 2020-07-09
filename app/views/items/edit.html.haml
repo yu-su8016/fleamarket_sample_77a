@@ -15,21 +15,34 @@
         #image-box
           = form.fields_for :images do |image| 
             .js-file_group{data:{index: "image.index"}}
-              = image.file_field :image, class: 'js-file'
-              %span.js-remove 削除
-            - if @item.persisted?
-              = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-          - if @item.persisted?
-            .js-file_group{data:{index: "@item.images.count"}} 
-              = file_field_tag :src, name: "item[images_attributes][#{@item.images.count}][src]", class: 'js-file'
-              .js-remove 削除
+              .object-image
+                = image.object.image
+              .object-fild
+                = image.file_field :image, class: 'js-file'
+                %span.js-remove
+                  削除
+                -# %span.js-remove
+                -#   = link_to image_delete_item_path do
+                -#     削除
+
+
+
+          -# = form.fields_for :images do |image| 
+          -#   = image.file_field :image, class: 'hidden-destroy'
+          
+          -#   - if @item.persisted?
+          -#     = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+          -# - if @item.persisted?
+          -#   .js-file_group{data:{index: "@item.images.count"}} 
+          -#     = file_field_tag :src, name: "item[images_attributes][#{@item.images.count}][src]", class: 'js-file'
+          -#     %span.js-remove 削除
 
 
 
         -# = form.fields_for :images do |image|
         -#   %br
-        -#   = image.object.image
-        -#   %br
+          -# = image.object.image
+          -# %br
         -#   = image.file_field :image, class: 'input-image__file-field'
         -#   %p.js-remove 削除
   

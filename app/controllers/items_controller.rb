@@ -22,12 +22,16 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    binding.pry
     if @item.save
       redirect_to root_path
     else
       render :new
     end
+  end
+
+  def image_delete
+    binding.pry
+    redirect_to edit_item_path
   end
 
   def show
@@ -48,10 +52,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    # binding.pry
     @item = Item.find(params[:id])
-    binding.pry
-    # 9.times { @item.images.build }
+    9.times { @item.images.build }
   end
 
 

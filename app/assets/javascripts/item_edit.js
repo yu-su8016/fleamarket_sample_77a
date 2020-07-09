@@ -1,3 +1,46 @@
+$(document).on('turbolinks:load', function() {
+  $(".js-remove").on("click", function(e) {
+    // var parent = '#' + $(this).prev().attr('id')
+    // console.log(parent)
+    // $(parent).remove();
+
+
+    var parent = $(this).prev().attr('name')
+    var number = parent.replace(/[^0-9]/g, '');
+    var pathname = location.pathname.slice( 0, -4 ) ;;
+    var path = pathname + 'image_delete';
+
+    console.log(number)
+    
+    $.ajax( {
+      type: 'get',
+      url: path,
+      data: {image_id: number},
+      dataType: 'json'
+    });
+
+    
+    // .done(function(like) {
+    //   $(".like__click").remove();
+    //   likeNoneAdd(like);
+    // });
+  });
+  // $('.like').on("click", '.like__click--none', function(){
+  //   var pathname = location.pathname;
+  //   var path = pathname + '/likes';
+  //   $.ajax( {
+  //     type: 'delete',
+  //     url: path,
+  //     dataType: 'json'
+  //   })
+  //   .done(function(like) {
+  //     $(".like__click--none").remove();
+  //     likeAdd(like);
+  //   });
+  // });
+});
+
+
 // $(document).on('turbolinks:load', ()=> {
 //   // 画像用のinputを生成する関数
 //   const buildFileField = (index)=> {
@@ -31,12 +74,12 @@
 //   });
 // });
 
-$(document).on('turbolinks:load', ()=> {
-  $('item_images_attributes_0_image').on('click', '.js-remove',function(){
-    console.log('Hello')
-  });
+// $(document).on('turbolinks:load', ()=> {
+//   $('item_images_attributes_0_image').on('click', '.js-remove',function(){
+//     console.log('Hello')
+//   });
 
-});
+// });
 
 // $(document).on('turbolinks:load', ()=>{
 //   const buildFileField = (num)=>{
