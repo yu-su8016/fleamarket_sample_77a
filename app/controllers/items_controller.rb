@@ -45,7 +45,6 @@ class ItemsController < ApplicationController
       @category_grandchildren_array << grandchildren
     end
 
-
   end
 
   def update
@@ -84,12 +83,13 @@ class ItemsController < ApplicationController
   end
 
   def category_children
-    @category_children = Category.find(params[:parent_name] ).children
+    @category_children = Category.find(params[:parent_id] ).children
   end
 
   def category_grandchildren
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
+
 
   private
   
