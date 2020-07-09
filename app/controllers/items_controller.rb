@@ -17,10 +17,12 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
+    9.times { @item.images.build }
   end
 
   def create
     @item = Item.new(item_params)
+    binding.pry
     if @item.save
       redirect_to root_path
     else
@@ -46,12 +48,16 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # binding.pry
     @item = Item.find(params[:id])
+    binding.pry
+    # 9.times { @item.images.build }
   end
 
 
   def update
     @item = Item.find(params[:id])
+    
     if @item.update(item_params)
       redirect_to root_path
     else
@@ -73,7 +79,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :explanation, :brand, :price, :size, :category_id, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, images_attributes: [:image, :_destroy, :id]).merge(seller_id: current_user.id)
+    params.require(:item).permit(:name, :explanation, :brand, :price, :size, :category_id, :condition_id, :delivery_fee_id, :prefecture_id, :day_id, :delivery_method_id, images_attributes: [:image, :_destroy,:id]).merge(seller_id: current_user.id)
   end
 
   def item_find_params
