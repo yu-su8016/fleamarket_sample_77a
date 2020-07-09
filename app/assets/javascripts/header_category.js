@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
 
   $(".topheader-category").hover(function() {
     $(".category-list__parent").removeClass("hide");
