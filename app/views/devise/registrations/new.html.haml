@@ -90,7 +90,7 @@
 
           .form__main__destination-name
             %label.form__main__destination-name__title
-              送付先氏名
+              送付先氏名（全角）
             %span.form__main__destination-name__required
               必須
             = render "devise/registrations/error_destination", culumn: :family_name
@@ -102,7 +102,7 @@
 
           .form__main__destination-kana
             %label.form__main__destination-kana__title
-              送付先氏名かな
+              送付先氏名かな（全角）
             %span.form__main__destination-kana__required
               必須
             = render "devise/registrations/error_destination", culumn: :family_name_kana
