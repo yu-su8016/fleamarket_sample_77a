@@ -68,14 +68,6 @@ body {
         .input-image__file-field {
           height: 45px;
         }
-        // 画像添付
-        // .image-box{
-        //   height: 50px;
-        //   &--previews{
-        //     height: 100%;
-            
-        //   }
-        // }
       }
                   
       //  商品名
@@ -114,8 +106,6 @@ body {
         &__text-area {
           @include input-field(130px);
           padding: 16px;
-          // width: 100%;
-          // height: 130px;
         }
       }
     }
