@@ -2,19 +2,20 @@
 
 .contents
   = form_with model: @item, local: true do |form|
-
+    .new-item-title
+      %p 商品の情報を入力
     .new-item-outline
-
       .input-image
         .input-image__headline
           = form.label :image, "出品画像", class: 'input-image__headline--label'
           %span.input-image__headline--required 必須
-          = render "error_form", culumn: :image
-        .input-image__comment
-          10枚までアップロードできます。
+
+          = render "error_form", culumn: :images
+        .input-image__comment 
+          ファイルを選択をクリックするとアップロードできます
         = form.fields_for :images do |image|
           = image.file_field :image, class: 'input-image__file-field'
-
+          
       .input-name
         .input-name__headline
           = form.label :name, "商品名", class: 'input-name__headline--label'
@@ -86,7 +87,7 @@
 
       .input-delivery-days
         .input-delivery-days__headline
-          =form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
+          = form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
           %span.input-delivery-days__headline--required 必須
           = render "error_form", culumn: :day_id
         = form.collection_select(:day_id, @days, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})

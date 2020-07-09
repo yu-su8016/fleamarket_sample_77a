@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_074858) do
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image", null: false
     t.index ["item_id"], name: "index_images_on_item_id"
   end
 

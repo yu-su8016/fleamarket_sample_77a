@@ -81,12 +81,11 @@ gem 'font-awesome-sass'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
+gem 'jquery-rails'
 gem 'active_hash'
 gem 'rails-i18n'
 gem 'ancestry'
-gem 'jquery-rails'
 gem 'payjp'
-
 group :production do
   gem 'unicorn'
 end

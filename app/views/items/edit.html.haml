@@ -2,18 +2,27 @@
 
 .contents
   = form_with model: @item, local: true do |form|
-
+    .new-item-title
+      %p 商品の情報を入力
     .new-item-outline
-
       .input-image
         .input-image__headline
           = form.label :images, "出品画像", class: 'input-image__headline--label'
           %span.input-image__headline--required 必須
           = render "error_form", culumn: :images
-        .input-image__comment
-          10枚までアップロードできます。
-        = form.fields_for :images do |image|
-          = image.file_field :images, class: 'input-image__file-field'
+        .input-image__comment 
+          ファイル選択をクリックするとアップロードできます
+        #image-box
+          = form.fields_for :images do |image| 
+            .js-file_group{data:{index: "image.index"}}
+              .object-image
+                - image_object = image.object.image.to_s
+                - image_str = ( image_object.rindex("/").to_i + 1 )
+                = image_object[image_str ... -1]
+              .object-fild{data:{index: image.object.id}}
+                = image.file_field :image, class: 'js-file'
+                %span.js-remove
+                  削除
 
       .input-name
         .input-name__headline
@@ -91,6 +100,11 @@
 
       .input-condition
         .input-condition__headline
+
+          = form.label :condition, "商品の状態", class: 'input-condition__headline--label'
+          %span.input-condition__headline--required 必須
+        -# = from.collection_select(:condition, @conditions, :name, :name, {prompt: "選択してください"}, {class: 'input-condition__select'})
+        = form.select :condition, [ "新品、未使用", "未使用品に近い", "目立った傷や汚れなし", "やや傷や汚れあり", "傷や汚れあり", "全体的に状態が悪い" ], {prompt: "選択してください"}, {class: 'input-condition__select'}
           = form.label :condition_id, "商品の状態", class: 'input-condition__headline--label'
           %span.input-condition__headline--required 必須
           = render "error_form", culumn: :condition_id
@@ -123,24 +137,23 @@
 
       .input-delivery-days
         .input-delivery-days__headline
-          =form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
+
+          = form.label :day_id, "発送までの日数", class: 'input-delivery-days__headline--label'
           %span.input-delivery-days__headline--required 必須
           = render "error_form", culumn: :day_id
         = form.collection_select(:day_id, @days, :id, :name, {prompt: "選択してください"}, {class: 'input-delivery-days__select'})
 
-
     .price
       %p.price__category-name 価格  (¥300 〜 9,999,999)
-
       .input-price
         .input-price__headline
           = form.label :price, "販売価格", class: 'input-price__headline--label'
           %span.input-price__headline--required 必須
           = render "error_form", culumn: :price
         = form.text_field :price, class: 'input-price__text-field'
-
-
+        
     .submit
       = form.submit "出品する", class: 'submit__btn'
+
 
 = render "users/footer"
