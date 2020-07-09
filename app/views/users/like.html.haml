@@ -12,7 +12,7 @@
             = link_to item_path(item) do
               .like-main__contents5__category__lists__list
                 .like-main__contents5__category__lists__list__image
-                  = image_tag item.images[0].images.to_s, size: '220x150'
+                  = image_tag item.images[0].image.to_s, size: '220x150'
                   -if item.buyer_id.present? 
                     .like-main__contents5__category__lists__list__image__sold
                       .like-main__contents5__category__lists__list__image__sold__inner

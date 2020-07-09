@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def like
+    @category_parent = Category.roots
     @items = Item.includes(:likes).where(likes: {user_id: current_user})    
   end
 
