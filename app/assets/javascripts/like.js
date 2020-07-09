@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function() {
+  var cancelFlag = 0;
   function likeNoneAdd(like) {
     var html =
     ` <a class="like__click--none" data-remote="true" href="/items/1">
@@ -25,30 +26,38 @@ $(document).on('turbolinks:load', function() {
       $(".like").prepend(html);
   }
   $(".like").on("click", '.like__click', function(e) {
-    var pathname = location.pathname;
-    var path = pathname + '/likes'
-    
-    $.ajax( {
-      type: 'post',
-      url: path,
-      dataType: 'json'
-    })
-    .done(function(like) {
-      $(".like__click").remove();
-      likeNoneAdd(like);
-    });
+    if( cancelFlag == 0 ){
+      cancelFlag = 1; 
+      var pathname = location.pathname;
+      var path = pathname + '/likes'
+      
+      $.ajax( {
+        type: 'post',
+        url: path,
+        dataType: 'json'
+      })
+      .done(function(like) {
+        $(".like__click").remove();
+        likeNoneAdd(like);
+        cancelFlag = 0;
+      });
+    }
   });
   $('.like').on("click", '.like__click--none', function(){
-    var pathname = location.pathname;
-    var path = pathname + '/likes';
-    $.ajax( {
-      type: 'delete',
-      url: path,
-      dataType: 'json'
-    })
-    .done(function(like) {
-      $(".like__click--none").remove();
-      likeAdd(like);
-    });
+    if( cancelFlag == 0 ){
+      cancelFlag = 1; 
+      var pathname = location.pathname;
+      var path = pathname + '/likes';
+      $.ajax( {
+        type: 'delete',
+        url: path,
+        dataType: 'json'
+      })
+      .done(function(like) {
+        $(".like__click--none").remove();
+        likeAdd(like);
+        cancelFlag = 0;
+      });
+    }
   });
 });

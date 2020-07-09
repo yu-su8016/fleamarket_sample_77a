@@ -100,7 +100,10 @@ class ItemsController < ApplicationController
 
     destinations = Destination.includes(:user).where(users: {id: current_user})
     @destination = destinations[0]
-    @like = Like.find_by(user_id: current_user.id, item_id: params[:id])
+    if user_signed_in?
+      @like = Like.find_by(user_id: current_user.id, item_id: params[:id])
+      
+    end
   end
   
   def destroy
