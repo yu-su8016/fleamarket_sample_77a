@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :header_category_parent, only: [:show, :logout, :like]
+  
   def index
     
   end
@@ -22,11 +24,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @category_parent = Category.roots
+
   end
 
   def logout
-    @category_parent = Category.roots
+
   end
 
   def like
@@ -34,4 +36,7 @@ class UsersController < ApplicationController
     @items = Item.includes(:likes).where(likes: {user_id: current_user})    
   end
 
+  def header_category_parent
+    @header_category_parent = Category.roots
+  end
 end
