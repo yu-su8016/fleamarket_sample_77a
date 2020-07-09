@@ -7,16 +7,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order("created_at DESC").limit(4)
-    @category_parent = Category.roots
   end
 
-  def purchase
-  end
-
-  def show
-  end
-
- 
   def new
     @item = Item.new
     @item.images.new
@@ -63,6 +55,28 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    @category = Category.find(@item.category_id)
+    if @category.root?
+      @parent_category = @category
+      @parent_category_array = @parent_category.siblings
+
+    elsif @category.ancestors? && @category.children?
+      @child_category = @category
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent
+      @parent_category_array = @parent_category.siblings
+
+    else
+      @grandchild_category = @category
+      @grandchildren_category_array = @grandchild_category.siblings
+
+      @child_category = @grandchild_category.parent
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent      
+      @parent_category_array = @parent_category.siblings
+    end
     if @item.update(item_params)
       redirect_to root_path
     else

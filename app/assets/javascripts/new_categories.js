@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function() {
     let childSelectHtml = '';
     childSelectHtml = `<div class='input-category' id= 'children_wrapper'>
                         <div class='input-category__headline new-input-category__headline' id="input_child_category">
-                          <select class="input-category__select" id="item_child_category_id" "name=item[category_id]" >
+                          <select class="input-category__select" id="item_child_category_id" name"=item[category_id]" >
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           <select>
@@ -22,7 +22,7 @@ $(document).on('turbolinks:load', function() {
     let grandchildSelectHtml = '';
     grandchildSelectHtml = `<div class='input-category' id= 'grandchildren_wrapper'>
                               <div class='input-category__headline new-input-category__headline' id="input_grandchild_category">
-                                <select class="input-category__select" id="item_grandchild_category" name="category_id" >
+                                <select class="input-category__select" id="item_grandchild_category" name="item[category_id]" >
                                   <option value="---" data-category="---">---</option>
                                   ${insertHTML}
                                 </select>
