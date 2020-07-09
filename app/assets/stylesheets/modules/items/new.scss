@@ -65,6 +65,9 @@ body {
           font-size: 14px;
           margin-bottom: 16px;
         }
+        .input-image__file-field {
+          height: 45px;
+        }
         // 画像添付
         // .image-box{
         //   height: 50px;
@@ -329,10 +332,9 @@ body {
     }
   }
 }
-
 .js-file_group{
-  // display: flex;
-  height: 65px;
+  margin-top: 17px;
+
   .js-file_label{
     .js-add{
       font-size: 15px;
@@ -360,5 +362,4 @@ body {
     border-bottom: solid 6px #aac5de;
     border-radius: 9px;
   }
-  
 }

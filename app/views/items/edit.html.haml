@@ -16,8 +16,10 @@
           = form.fields_for :images do |image| 
             .js-file_group{data:{index: "image.index"}}
               .object-image
-                = image.object.image
-              .object-fild
+                - image_object = image.object.image.to_s
+                - image_str = ( image_object.rindex("/").to_i + 1 )
+                = image_object[image_str ... -1]
+              .object-fild{data:{index: image.object.id}}
                 = image.file_field :image, class: 'js-file'
                 %span.js-remove
                   削除

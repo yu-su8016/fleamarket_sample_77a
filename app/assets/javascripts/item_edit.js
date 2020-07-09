@@ -5,20 +5,25 @@ $(document).on('turbolinks:load', function() {
     // $(parent).remove();
 
 
-    var parent = $(this).prev().attr('name')
-    var number = parent.replace(/[^0-9]/g, '');
-    var pathname = location.pathname.slice( 0, -4 ) ;;
+    var image_id = $(this).parent().attr('data-index')
+    // var number = parent.replace(/[^0-9]/g, '');
+    var pathname = location.pathname.slice( 0, -4 );
     var path = pathname + 'image_delete';
 
-    console.log(number)
+    console.log(image_id)
     
     $.ajax( {
       type: 'get',
       url: path,
-      data: {image_id: number},
+      data: {image_id: image_id},
       dataType: 'json'
+    })
+    .done(function() {
+      console.log('ok');
+      document.location.reload();
     });
-
+ 
+    
     
     // .done(function(like) {
     //   $(".like__click").remove();

@@ -29,10 +29,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def image_delete
-    binding.pry
-    redirect_to edit_item_path
-  end
 
   def show
     @category = Category.find(@item.category_id)
@@ -67,7 +63,10 @@ class ItemsController < ApplicationController
     end
   end
 
-
+  def image_delete
+    image = Image.find(params[:image_id])
+    image.destroy
+  end
 
 
 
