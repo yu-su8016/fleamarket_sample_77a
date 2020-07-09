@@ -51,7 +51,7 @@
           %tr.details__table__line
             %td.title カテゴリー
             %td.name 
-              - @category_parent.each do |parent|
+              - @category_parent_show.each do |parent|
                 -if @item.category_id == parent.id
                   = link_to "#" do
                     = parent.name
@@ -218,8 +218,11 @@
                     .item-content__tax
                       （税込）
 
-.exhibit
-  %p.exhibit--text 出品する
-  = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
-
 = render "footer"
+
+= link_to new_item_path do
+  .exhibit
+    %p.exhibit--text 出品する
+    = image_tag "icon/icon_camera.png",class: 'exhibit--image', width: "55px";
+
+

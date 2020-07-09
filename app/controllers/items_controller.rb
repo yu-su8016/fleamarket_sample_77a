@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_hash, only: [:new, :create, :edit, :update]
   before_action :item_find_params, only: [:show, :destroy, :edit, :update]
   skip_before_action :authenticate_user!, only: :header_category
+  before_action :header_category_parent, only: [:index, :show, :search,]
 
   def index
     @items = Item.all.order("created_at DESC").limit(4)
@@ -75,7 +76,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @category_parent = Category.where(ancestry:nil)
+    @category_parent_show = Category.where(ancestry:nil)
     @category = Category.find(@item.category_id)
     @conditions = Condition.find(@item.condition_id)
     @delivery_fees = DeliveryFee.find(@item.delivery_fee_id)
@@ -98,12 +99,11 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.search(params[:search])
-    @category_parent = Category.roots
   end
  
   def header_category
-    @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
-    render json: @category_children
+    @header_category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
+    render json: @header_category_children
   end
 
   def category_children
@@ -113,7 +113,10 @@ class ItemsController < ApplicationController
   def category_grandchildren
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
-
+  
+  def header_category_parent
+    @header_category_parent = Category.roots
+  end
   private
   
   def set_hash
