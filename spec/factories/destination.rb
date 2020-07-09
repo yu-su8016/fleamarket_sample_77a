@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :destination do
     association :user
-    family_name           {"山田"}
-    first_name            {"太郎"}
-    family_name_kana      {"やまだ"}
-    first_name_kana       {"たろう"}
+    family_name           { Gimei.last.kanji }
+    first_name            { Gimei.first.kanji }
+    family_name_kana      { Gimei.last.hiragana }
+    first_name_kana       { Gimei.first.hiragana }
     postal_code           {"0000000"}
     prefecture_id         {"愛知県"}
     city                  {"名古屋市"}

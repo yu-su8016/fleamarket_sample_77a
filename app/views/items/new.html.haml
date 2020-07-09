@@ -7,20 +7,14 @@
     .new-item-outline
       .input-image
         .input-image__headline
-          = form.label :images, "出品画像", class: 'input-image__headline--label'
+          = form.label :image, "出品画像", class: 'input-image__headline--label'
           %span.input-image__headline--required 必須
+
           = render "error_form", culumn: :images
         .input-image__comment 
           ファイルを選択をクリックするとアップロードできます
-        -# #image-box
-        -#   = form.fields_for :images do |image| 
-        -#     .js-file_group{data:{index: "image.index"}}
-        -#       = image.file_field :image, class: 'js-file'
-        -#       %span.js-remove 削除
         = form.fields_for :images do |image|
           = image.file_field :image, class: 'input-image__file-field'
-          -# %span.js-remove 削除
-
           
       .input-name
         .input-name__headline
@@ -41,11 +35,11 @@
       %p.new-item-details__category-name 商品の詳細
 
       .input-category
-        .input-category__headline
+        .input-category__headline.new-input-category__headline
           = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
           %span.input-category__headline--required 必須
-          = render "error_form", culumn: :category
-        = form.select :category_id, [ ["レディース", 1], ["メンズ", 2], ["ベビー・キッズ", 3], ["インテリア・住まい・小物", 4] ], {prompt: "選択してください"}, {class: 'input-category__select'}
+          = render "error_form", culumn: :category_id
+          = form.collection_select :category_id, @category_parent_array,:id,:name, {prompt: "---"}, {class: 'input-category__select', id: 'item_category_id'}
 
       .input-brand
         .input-brand__headline

@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   has_many :likes
   has_many :comments
-
   has_many :images, dependent: :destroy
   belongs_to :user, foreign_key: "seller_id"
   belongs_to :category, foreign_key: "category_id"
+
 
   accepts_nested_attributes_for :images, allow_destroy: true
   validates_associated :images
@@ -29,6 +29,10 @@ class Item < ApplicationRecord
 
   def next
     Item.where("id > ?", self.id).order("id ASC").first
+  end
+
+  def self.search(search)
+    Item.where(['name LIKE ?', "%#{search}%"])
   end
 
 end
