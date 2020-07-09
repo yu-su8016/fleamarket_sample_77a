@@ -7,13 +7,13 @@
 
       .input-image
         .input-image__headline
-          = form.label :image, "出品画像", class: 'input-image__headline--label'
+          = form.label :images, "出品画像", class: 'input-image__headline--label'
           %span.input-image__headline--required 必須
-          = render "error_form", culumn: :image
+          = render "error_form", culumn: :images
         .input-image__comment
           10枚までアップロードできます。
         = form.fields_for :images do |image|
-          = image.file_field :image, class: 'input-image__file-field'
+          = image.file_field :images, class: 'input-image__file-field'
 
       .input-name
         .input-name__headline
@@ -34,12 +34,49 @@
       %p.new-item-details__category-name 商品の詳細
 
       .input-category
-        .input-category__headline.new-input-category__headline
-          = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
-          %span.input-category__headline--required 必須
-          = render "error_form", culumn: :category_id
-          = form.collection_select :category_id, @category_parent_array,:id,:name, {prompt: "---"}, {class: 'input-category__select', id: 'item_category_id'}
+        - if @category.root?
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
+          
+          .input-category__headline
+            %select#edit-children-category.input-category__select
+              %option ---
+          
+          .input-category__headline
+            %select#edit-grandchild-category.input-category__select
+              %option ---
 
+        - elsif @category.ancestors? && @category.children?
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
+          
+          .input-category__headline
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+          
+          .input-category__headline
+            %select#edit-grandchild-category.input-category__select
+              %option ---
+
+        - else
+          .input-category__headline
+            = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
+            %span.input-category__headline--required 必須
+            = render "error_form", culumn: :category 
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_categry}, {class: 'input-category__select', id: 'edit-parent-category'}
+         
+          .input-category__headline
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+         
+          .input-category__headline
+            = form.collection_select :category_id, @grandchildren_category_array,:id,:name, {salected: @grandchild_category}, {class: 'input-category__select', id: 'edit-grandchild-category'}
+          
+         
       .input-brand
         .input-brand__headline
           = form.label :brand, "ブランド", class: 'input-brand__headline--label'

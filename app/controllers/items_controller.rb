@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_hash, only: [:new, :create]
-  before_action :item_find_params, only: [:show, :destroy]
+  before_action :set_hash, only: [:new, :create, :edit, :update]
+  before_action :item_find_params, only: [:show, :destroy, :edit, :update]
   skip_before_action :authenticate_user!, only: :header_category
 
   def index
@@ -18,14 +18,6 @@ class ItemsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
   end
 
-  def category_children
-    @category_children = Category.find(params[:parent_name] ).children
-  end
-
-  def category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
-  end
-
   def create
     @item = Item.new(item_params)
     @category_parent_array = Category.where(ancestry: nil)
@@ -36,6 +28,37 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @category = Category.find(@item.category_id)
+
+    if @category.root?
+      @parent_category = @category
+      @parent_category_array = @parent_category.siblings
+
+    elsif @category.ancestors? && @category.children?
+      @child_category = @category
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent
+      @parent_category_array = @parent_category.siblings
+
+    else
+      @grandchild_category = @category
+      @grandchildren_category_array = @grandchild_category.siblings
+
+      @child_category = @grandchild_category.parent
+      @childern_category_array = @child_category.siblings
+
+      @parent_category = @child_category.parent      
+      @parent_category_array = @parent_category.siblings
+    end
+    
+  end
+
+  def update
+  end
+
 
   def show
     @category_parent = Category.where(ancestry:nil)
@@ -68,6 +91,15 @@ class ItemsController < ApplicationController
     @category_children = Category.find_by(id: params[:category_id]).children.map { |category| [category[:id], category[:name]] }.to_h
     render json: @category_children
   end
+
+  def category_children
+    @category_children = Category.find(params[:parent_id] ).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
 
   private
   

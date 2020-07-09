@@ -7,20 +7,20 @@ $(function(){
   function appendChidrenBox(insertHTML){
     let childSelectHtml = '';
     childSelectHtml = `<div class='input-category' id= 'children_wrapper'>
-                        <div class='input-category__headline' id="input_child_category">
+                        <div class='input-category__headline new-input-category__headline' id="input_child_category">
                           <select class="input-category__select" id="item_child_category_id" "name=item[category_id]" >
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           <select>
                         </div>
                       </div>`;
-    $('.input-category__headline').append(childSelectHtml);
+    $('.new-input-category__headline').append(childSelectHtml);
   }
   // 孫
   function appendGrandchidrenBox(insertHTML){
     let grandchildSelectHtml = '';
     grandchildSelectHtml = `<div class='input-category' id= 'grandchildren_wrapper'>
-                              <div class='input-category__headline' id="input_grandchild_category">
+                              <div class='input-category__headline new-input-category__headline' id="input_grandchild_category">
                                 <select class="input-category__select" id="item_grandchild_category" name="category_id" >
                                   <option value="---" data-category="---">---</option>
                                   ${insertHTML}
@@ -35,7 +35,7 @@ $(function(){
       $.ajax({
         url: '/items/category_children',
         type: 'GET',
-        data: { parent_name: parentCategory },
+        data: { parent_id: parentCategory },
         dataType: 'json'
       })
       .done(function(children){
@@ -55,7 +55,7 @@ $(function(){
       $('#grandchildren_wrapper').remove();
     }
   });
-  $('.input-category__headline').on('change', '#item_child_category_id', function(){
+  $('.new-input-category__headline').on('change', '#item_child_category_id', function(){
     let childId = $('#item_child_category_id option:selected').data('category');
     if (childId != "---"){
       $.ajax({
