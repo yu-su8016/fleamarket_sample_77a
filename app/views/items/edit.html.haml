@@ -66,7 +66,7 @@
             = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
           
           .input-category__headline
-            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category.id}, {class: 'input-category__select', id: 'edit-children-category'}
           
           .input-category__headline
             %select#edit-grandchild-category.input-category__select
@@ -77,13 +77,13 @@
             = form.label :category_id, "カテゴリー", class: 'input-category__headline--label'
             %span.input-category__headline--required 必須
             = render "error_form", culumn: :category 
-            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_categry}, {class: 'input-category__select', id: 'edit-parent-category'}
+            = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
          
           .input-category__headline
-            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category}, {class: 'input-category__select', id: 'edit-children-category'}
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category.id}, {class: 'input-category__select', id: 'edit-children-category'}
          
           .input-category__headline
-            = form.collection_select :category_id, @grandchildren_category_array,:id,:name, {salected: @grandchild_category}, {class: 'input-category__select', id: 'edit-grandchild-category'}
+            = form.collection_select :category_id, @grandchildren_category_array,:id,:name, {selected: @grandchild_category.id}, {class: 'input-category__select', id: 'edit-grandchild-category'}
           
          
       .input-brand
