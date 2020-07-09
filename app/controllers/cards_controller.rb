@@ -1,6 +1,7 @@
 class CardsController < ApplicationController
   before_action :payjp_key
   before_action :set_user
+  before_action :header_category_parent, only: :index
 
   def index
     @category_parent = Category.roots
@@ -56,6 +57,9 @@ class CardsController < ApplicationController
     flash[:alert] = '削除しました'
   end
 
+  def header_category_parent
+    @header_category_parent = Category.roots
+  end
   private
 
   def payjp_key
