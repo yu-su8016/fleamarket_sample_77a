@@ -51,7 +51,7 @@
           %tr.details__table__line
             %td.title カテゴリー
             %td.name 
-              - @category_parent.each do |parent|
+              - @category_parent_show.each do |parent|
                 -if @item.category_id == parent.id
                   = link_to "#" do
                     = parent.name

@@ -18,7 +18,7 @@
           = link_to "カテゴリー", class: "topheader-category__tab"
           .category-list
             %ul.category-list__parent.hide
-              - @category_parent.each do |category|
+              - @header_category_parent.each do |category|
                 %li.category-list__parent--name{id: "#{category[:id]}"}
                   = category[:name]
             %ul.category-list__children
