@@ -111,7 +111,9 @@
                   %li 
                     = item.price 
                     円
-                  %li.like ★ 0
+                  %li.like
+                    ★
+                    = item.likes.count
                 %p.main__contents5__category__lists__list__detail__tax (税込)
 
   .main__contents5
@@ -137,7 +139,9 @@
                   %li 
                     = item.price
                     円
-                  %li.like ★ 0
+                  %li.like
+                    ★
+                    = item.likes.count
                 %p.main__contents5__category__image__detail__tax (税込)
 
   .main__contents7
