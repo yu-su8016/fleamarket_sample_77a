@@ -51,8 +51,7 @@
             = form.collection_select :category_id, @parent_category_array,:id,:name, {selected: @parent_category.id}, {class: 'input-category__select', id: 'edit-parent-category'}
           
           .input-category__headline
-            %select#edit-children-category.input-category__select
-              %option ---
+            = form.collection_select :category_id, @childern_category_array,:id,:name, {include_blank: '---'}, {class: 'input-category__select', id: 'edit-children-category'}
           
           .input-category__headline
             %select#edit-grandchild-category.input-category__select
@@ -69,8 +68,7 @@
             = form.collection_select :category_id, @childern_category_array,:id,:name, {selected: @child_category.id}, {class: 'input-category__select', id: 'edit-children-category'}
           
           .input-category__headline
-            %select#edit-grandchild-category.input-category__select
-              %option ---
+            = form.collection_select :category_id, @grandchildren_category_array,:id,:name, {include_blank: '---'}, {class: 'input-category__select', id: 'edit-grandchild-category'}
 
         - else
           .input-category__headline

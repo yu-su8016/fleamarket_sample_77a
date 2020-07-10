@@ -34,12 +34,16 @@ class ItemsController < ApplicationController
       @parent_category = @category
       @parent_category_array = @parent_category.siblings
 
+      @childern_category_array = @category.children
+
     elsif @category.ancestors? && @category.children?
       @child_category = @category
       @childern_category_array = @child_category.siblings
 
       @parent_category = @child_category.parent
       @parent_category_array = @parent_category.siblings
+
+      @grandchildren_category_array = @child_category.children
 
     else
       @grandchild_category = @category
@@ -80,6 +84,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to root_path
     else
+      @category = Category.find(@item.category_id)
       render :edit
     end
   end
