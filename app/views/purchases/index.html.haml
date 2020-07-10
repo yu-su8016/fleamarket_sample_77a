@@ -11,7 +11,7 @@
       購入内容の確認
     .purchase__contents__product
       .purchase__contents__product__image
-
+        = image_tag @item.images[0].image.to_s, size: '80x80'
       .purchase__contents__product__detail
         .purchase__contents__product__detail__name
           = @item.brand
